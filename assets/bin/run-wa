@@ -1,0 +1,9 @@
+#!/bin/bash
+# Run configuration without authentication
+
+#gollum --port 8080 --template-dir /home/rezasa/git/gollum-custom/templates --config config.rb --adapter rugged --allow-uploads page --collapse-tree
+export http_proxy=
+export https_proxy=
+export RACK_ENV=production
+gollum --port 8080 --template-dir ../gollum-costum-templates/templates --config assets/rb/config-wa.rb --allow-uploads page --collapse-tree
+# gollum --port 8080 --template-dir /home/rezasa/git/gollum-custom/templates --css --live-preview --emoji --collapse-tree

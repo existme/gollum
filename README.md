@@ -1,3 +1,30 @@
+gollum - ready template
+=======================
+This is a ready made template for gollum. Further documentation will be added as soon as tests are done.
+
+## Environmental Variables
+- `PLANTUML_SRV`    :   if this variable is not set the default plant-uml server url `http://www.plantuml.com/plantuml/png/` will be picked up.
+- `GOLLUM_AUTH`     :   if equals to `ldap` the following settings would be used to use ldap authentication
+- `GLDAP_TITLE`     :   Title for ldap login form
+- `GLDAP_HOST`      :   LDAP host address ex `ldap.example.com`
+- `GLDAP_PORT`      :   LDAP port ex `3269`
+- `GLDAP_BASE`      :   LDAP BASE DN ex `DC\=MyCompany,DC\=com`
+- `GLDAP_UID`       :   LDAP User Idenitifier ex `sAMAccountName`
+- `GLDAP_FILTER`    :   LDAP Filter to select user ex: `"(&(objectClass\=organizationalPerson)(sAMAccountName\=%{username}))"`
+- `GLDAP_BIND_DN`   :   LDAP Admin bind DN ex: `"cn\=ADMIN_USER,ou\=MY_SERVICE,ou\=MY_OU,ou\=MY_COMPANY,dc\=MY_COMPANY,dc\=com"`
+- `GLDAP_PASSWORD`  :   LDAP Admin password
+
+## Building and running
+
+``` bash
+npm install
+npm run build:dev # for dev environment, for production: npm run build:prod 
+gem build gollum.gemspec
+sudo gem install gollum-4.1.3.gem --no-document
+
+gollum <WIKI_FOLDER> --port 8080 --config assets/rb/config-wa.rb --allow-uploads page --collapse-tree 
+```
+
 gollum -- A git-based Wiki
 ====================================
 

@@ -6,3 +6,7 @@ Gemfile.lock
 *.gem
 *.swp
 .*
+node_modules
+/lib/gollum/public/gollum/assets/scripts/editor-bundle.js
+/lib/gollum/public/gollum/assets/scripts/viewer-bundle.js
+*/**/.gitkeep

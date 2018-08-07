@@ -8,6 +8,10 @@ module Precious
 
       attr_reader :name, :path
 
+      def plantuml_url
+        Gollum::Filter::PlantUML.configuration.url
+      end
+
       def escaped_name
         CGI.escape(@name)
       end

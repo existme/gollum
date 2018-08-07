@@ -1,67 +1,89 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta http-equiv="Content-type" content="text/html;charset=utf-8">
-  <meta name="MobileOptimized" content="width">
-  <meta name="HandheldFriendly" content="true">
-  <meta name="viewport" content="width=device-width">
-  <link rel="stylesheet" type="text/css" href="{{base_url}}/css/gollum.css" media="all">
-  <link rel="stylesheet" type="text/css" href="{{base_url}}/css/editor.css" media="all">
-  <link rel="stylesheet" type="text/css" href="{{base_url}}/css/dialog.css" media="all">
-  <link rel="stylesheet" type="text/css" href="{{base_url}}/css/template.css" media="all">
-  <link rel="stylesheet" type="text/css" href="{{base_url}}/css/print.css" media="print">
-  {{#css}}<link rel="stylesheet" type="text/css" href="{{custom_path}}/custom.css" media="all">{{/css}}
-  {{#noindex}}<meta name="robots" content="noindex, nofollow" />{{/noindex}}
+    <meta http-equiv="Content-type" content="text/html;charset=utf-8">
+    <meta name="MobileOptimized" content="width">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" type="text/css" href="{{base_url}}/css/gollum.css" media="all">
+    <link rel="stylesheet" type="text/css" href="{{base_url}}/css/editor.css" media="all">
+    <link rel="stylesheet" type="text/css" href="{{base_url}}/css/dialog.css" media="all">
+    <link rel="stylesheet" type="text/css" href="{{base_url}}/css/template.css" media="all">
+    <link rel="stylesheet" type="text/css" href="{{base_url}}/css/print.css" media="print">
+    <link rel="stylesheet" type="text/css" href="{{base_url}}/assets/scripts/custom.css" media="all">
+    <link rel='shortcut icon' type='image/x-icon' href='/img/wiki.ico'/>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/jquery-contextmenu@2.6.4/dist/jquery.contextMenu.min.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    {{#css}}
+        <link rel="stylesheet" type="text/css" href="{{custom_path}}/custom.css" media="all">{{/css}}
+    {{#noindex}}
+        <meta name="robots" content="noindex, nofollow"/>{{/noindex}}
 
-  <!--[if IE 7]>
-  <link rel="stylesheet" type="text/css" href="{{base_url}}/css/ie7.css" media="all">
-  <![endif]-->
+    <!--[if IE 7]>
+    <link rel="stylesheet" type="text/css" href="{{base_url}}/css/ie7.css" media="all">
+    <![endif]-->
 
-  <script>
-      var baseUrl = '{{base_url}}';
-      var uploadDest   = '{{upload_dest}}';
-      {{#page}}
-      var pageFullPath = '{{url_path_display}}';
-      {{/page}}
-  </script>
-  <script type="text/javascript" src="{{base_url}}/javascript/jquery-1.7.2.min.js"></script>
-  <script type="text/javascript" src="{{base_url}}/javascript/mousetrap.min.js"></script>
-  <script type="text/javascript" src="{{base_url}}/javascript/gollum.js"></script>
-  <script type="text/javascript" src="{{base_url}}/javascript/gollum.dialog.js"></script>
-  <script type="text/javascript" src="{{base_url}}/javascript/gollum.placeholder.js"></script>
-  <script type="text/javascript" src="{{base_url}}/javascript/editor/gollum.editor.js"></script>
-  {{#use_identicon}}
-  <script type="text/javascript" src="{{base_url}}/javascript/identicon_canvas.js"></script>
-  {{/use_identicon}}
-  {{#mathjax}}
-  {{^mathjax_config}}
-  <script type="text/javascript">
-  window.MathJax = {
-    tex2jax: {
-      inlineMath:  [ ['$','$'], ['\\(','\\)'] ],
-      displayMath: [ ['$$','$$'], ['\\[','\\]'] ],
-      processEscapes: true
-    },
-    TeX: { extensions: ["autoload-all.js"] }
-  };
-  </script>
-  {{/mathjax_config}}
-  {{#mathjax_config}}
-  <script type="text/javascript" src="{{base_url}}/{{mathjax_config}}"></script>
-  {{/mathjax_config}}
-  <script>(function(d,j){
-  j = d.createElement('script');
-  j.src = '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
-  (d.head || d.getElementsByTagName('head')[0]).appendChild(j);
-  }(document));
-  </script>{{/mathjax}}
-  {{#js}}<script type="text/javascript" src="{{custom_path}}/custom.js"></script>{{/js}}
+    <script type="text/javascript" src="{{base_url}}/javascript/jquery-1.7.2.min.js"></script>
+    <script>
+        var baseUrl = '{{base_url}}';
+        var uploadDest = '{{upload_dest}}';
+            {{#page}}
+            var pageFullPath = '{{url_path_display}}';
+            {{/page}}
 
-  <title>{{title}}</title>
+        const jq172 = $;
+    </script>
+
+    <!--<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>-->
+    <!--<script src="https://code.jquery.com/jquery-migrate-3.0.1.js"></script>-->
+    <script type="text/javascript" src="{{base_url}}/javascript/mousetrap.min.js"></script>
+    <script type="text/javascript" src="{{base_url}}/javascript/gollum.js"></script>
+    <script type="text/javascript" src="{{base_url}}/javascript/gollum.dialog.js"></script>
+    <script type="text/javascript" src="{{base_url}}/javascript/gollum.placeholder.js"></script>
+    <script type="text/javascript" src="{{base_url}}/javascript/editor/gollum.editor.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery-contextmenu@2.6.4/dist/jquery.contextMenu.min.js"></script>
+    {{#use_identicon}}
+        <script type="text/javascript" src="{{base_url}}/javascript/identicon_canvas.js"></script>
+    {{/use_identicon}}
+    {{#mathjax}}
+        {{^mathjax_config}}
+            <script type="text/javascript">
+                window.MathJax = {
+                    tex2jax: {
+                        inlineMath: [['$', '$'], ['\\(', '\\)']],
+                        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                        processEscapes: true
+                    },
+                    TeX: {extensions: ["autoload-all.js"]}
+                };
+            </script>
+        {{/mathjax_config}}
+        {{#mathjax_config}}
+            <script type="text/javascript" src="{{base_url}}/{{mathjax_config}}"></script>
+        {{/mathjax_config}}
+        <script>(function (d, j) {
+            j = d.createElement('script');
+            j.src = '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+            (d.head || d.getElementsByTagName('head')[0]).appendChild(j);
+        }(document));
+        </script>{{/mathjax}}
+
+    {{#js}}
+        <script type="text/javascript" src="{{custom_path}}/custom.js"></script>{{/js}}
+
+    <title>{{title}}</title>
 </head>
 <body>
-
 {{{yield}}}
-
+<script type="text/javascript">
+    let activeNode = '{{path}}';
+    var jOld = $.noConflict(true);
+</script>
+<script type="text/javascript" src="/assets/scripts/viewer-bundle.js"></script>
+<script type="text/javascript">
+    // $ = jOld;
+    // window.jQuery = jOld;
+    // window.$ = jOld;
+</script>
 </body>
 </html>

@@ -1,0 +1,5 @@
+#/bin/zsh
+echo "\n-------------\n"
+echo "Post Commit\n"
+
+git push origin master

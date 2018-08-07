@@ -31,6 +31,11 @@ Gem::Specification.new do |s|
   s.add_dependency 'useragent', '~> 0.16.2'
   s.add_dependency 'gemojione', '~> 3.2'
 
+  s.add_dependency 'github-markdown'
+  s.add_dependency 'gollum-rugged_adapter'
+  s.add_dependency 'omniauth-ldap'
+  # s.add_dependency 'omnigollum'
+
   s.add_development_dependency 'rack-test', '~> 0.6.2'
   s.add_development_dependency 'shoulda', '~> 3.5.0'
   s.add_development_dependency 'minitest-reporters', '~> 0.14.16'
@@ -1083,6 +1088,7 @@ Gem::Specification.new do |s|
     licenses/licenses.txt
     licenses/unity_asset_pool/COPYRIGHT
   ]
+  s.files= s.files + Dir['{assets,lib/gollum/public/gollum/fonts,lib/gollum/public/gollum/images/ui,lib/gollum/public/gollum/assets}/**/*']
   # = MANIFEST =
 
   s.test_files = s.files.select { |path| path =~ /^test\/test_.*\.rb/ }

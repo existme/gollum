@@ -7,14 +7,14 @@ window.jQuery = currentJ;
 window.$ = currentJ;
 
 const fancytree = require('jquery.fancytree');
+import 'jquery.fancytree/dist/modules/jquery.fancytree.filter.js'
 
-currentJ.getScript("//cdn.jsdelivr.net/npm/jquery-contextmenu@2.6.4/dist/jquery.contextMenu.min.js");
+require('jquery-contextmenu');
+require('./splitor.js');
+
 var tree_cm = require('./tree-contextmenu.js');
 tree_cm.setJQuery(currentJ);
 var commands = require('./contextmenu-commands.js');
-console.log("fancytree.version", fancytree.version);
-// (function (currentJ, document) {
-//   "use strict";
 
 $.ui.fancytree.registerExtension({
   name: "contextMenu",
@@ -33,13 +33,11 @@ $.ui.fancytree.registerExtension({
   }
 });
 
-// }(jQuery, document));
-
 /**
  * Requires variable 'activeNode' to be set and contain the node which should be activated on load
  */
 $("#tree").fancytree({
-  extensions: ["contextMenu"],
+  extensions: ["contextMenu", "filter"],
   icon: true,
   minExpandLevel: 1,
   expandParents: true,
@@ -52,7 +50,18 @@ $("#tree").fancytree({
   // source: {
   //   url: "/folder.json"
   // },
-
+  filter: {
+    autoApply: true,   // Re-apply last filter if lazy data is loaded
+    autoExpand: false, // Expand all branches that contain matches while filtered
+    counter: true,     // Show a badge with number of matching child nodes near parent icons
+    fuzzy: false,      // Match single characters in order, e.g. 'fb' will match 'FooBar'
+    hideExpandedCounter: true,  // Hide counter badge if parent is expanded
+    hideExpanders: false,       // Hide expanders if all child nodes are hidden by filter
+    highlight: true,   // Highlight matches by wrapping inside <mark> tags
+    leavesOnly: false, // Match end nodes only
+    nodata: true,      // Display a 'no data' status node if result is empty
+    mode: "dimm"       // Grayout unmatched nodes (pass "hide" to remove unmatched node instead)
+  },
   click: function (event, data) {
     if (data.node.folder != true) {
       window.location.href = "/" + data.node.data.href;
@@ -65,7 +74,8 @@ $("#tree").fancytree({
 
   loadChildren: function () {
     let t = $("#tree").fancytree("getTree");
-    t.options.scrollParent = $('#wiki-sidebar');
+    // t.options.scrollParent = $('#wiki-sidebar');
+    t.options.scrollParent = $('#sidebar-content');
     let n = t.getNodeByKey(activeNode);
     if (n != null) {
       n.setActive();
@@ -126,6 +136,7 @@ $("#tree").fancytree({
     }
   },
 });
+let tree = $.ui.fancytree.getTree();
 
 $(".fancytree-container").addClass("fancytree-connectors");
 
@@ -135,3 +146,39 @@ if (UML_SRV === "http://www.plantuml.com/plantuml/png" && sessionStorage.Alert !
 }
 // window.jQuery = prevJ;
 // window.$ = prevJ;
+
+$("input[name=treeFilter]").keyup(function (e) {
+  var n,
+    tree = $.ui.fancytree.getTree(),
+    opts = {},
+    filterFunc = tree.filterNodes,
+    match = $(this).val();
+
+  match = match.replace(/ /g, ".*");
+  opts.mode = "hide";
+  opts.autoExpand = true;
+  opts.hideExpandedCounter = false;
+  opts.counter = true;
+  opts.fuzzy = false;
+  opts.nodata = false;
+
+  if (e && e.which === $.ui.keyCode.ESCAPE || $.trim(match) === "") {
+    $("button#btnResetSearch").click();
+    return;
+  }
+  // n = filterFunc.call(tree, match, opts);
+  n = filterFunc.call(tree, function (node) {
+    if(node.data.href.startsWith("img/"))
+      return false;
+    return new RegExp(match, "i").test(node.data.href);
+  }, opts);
+  $("button#btnResetSearch").attr("disabled", false);
+  $("span#matches").text("(" + n + " matches)");
+}).focus();
+
+$("button#btnResetSearch").click(function (e) {
+  $("input[name=search]").val("");
+  $("span#matches").text("");
+  tree.clearFilter();
+}).attr("disabled", true);
+tree.options.filter['hideExpandedCounter'] = false;

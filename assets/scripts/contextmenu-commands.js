@@ -25,7 +25,7 @@ const commands = {
         let renameFrom = dest + title;
         let renameTo = common.combineRootPath(dest, name);
         var currentUrl = window.location.href;
-        common.post('/rcc/renameFolder?from=' + renameFrom + '&to=' + renameTo + '&current=' + currentUrl, {
+        common.post('/rcc/rename-folder?from=' + renameFrom + '&to=' + renameTo + '&current=' + currentUrl, {
           rename: renameTo,
           message: "Renaming " + renameFrom + " to " + renameTo
         });

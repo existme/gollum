@@ -1,4 +1,3 @@
-<script src="https://unpkg.com/split.js/split.min.js"></script>
 <script>
     Mousetrap.bind(['e'], function (e) {
         e.preventDefault();
@@ -63,6 +62,12 @@
             <div class="split">
                 {{#has_sidebar}}
                     <div id="wiki-sidebar" class="gollum-{{sidebar_format}}-content split split-horizontal">
+                        <div id="sidebar-filter">
+                            <label><i class="fas fa-filter"></i></label>
+                            <input id="treeFilter" name="treeFilter" placeholder="Fuzzy node filter..." autocomplete="off">
+                            <button id="btnResetSearch"><i class="fas fa-eraser"></i></button>
+                            <span id="matches"></span>
+                        </div>
                         <div id="sidebar-content">
                             {{{sidebar_content}}}
                         </div>
@@ -105,43 +110,4 @@
         <input type="hidden" name="rename"/>
         <input type="hidden" name="message"/>
     </form>
-
-    <script type="text/javascript">
-        var sizes = localStorage.getItem('split-sizes');
-
-        if (sizes) {
-            sizes = JSON.parse(sizes);
-        } else {
-            sizes = [25, 75]  // default sizes
-        }
-
-
-        function splitWidthConfig() {
-            let sizes = split.getSizes();
-            if (sizes[0] < 5) {
-                console.log("Size less than 5!", sizes[0]);
-                $("#wiki-sidebar").hide();
-                $("#cc1").width("calc(100% - 10px)");
-            } else {
-                $("#wiki-sidebar").show();
-            }
-        }
-
-        var split = Split(['#wiki-sidebar', '#cc1'], {
-            direction: 'horizontal',
-            sizes: sizes,
-            minSize: [0,500],
-            gutterSize: 10,
-            cursor: 'col-resize',
-            onDragEnd: function () {
-                localStorage.setItem('split-sizes', JSON.stringify(split.getSizes()));
-                splitWidthConfig();
-            },
-            onDragStart: function () {
-                $("#wiki-sidebar").show();
-            }
-        });
-        splitWidthConfig();
-        $('body').removeClass('fade-out');
-    </script>
 </div>

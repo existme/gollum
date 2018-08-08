@@ -5,8 +5,12 @@
   "private": true,
   "main": "custom.js",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.2.0",
+    "font-awesome": "^4.7.0",
+    "jquery-contextmenu": "^2.7.0",
     "jquery-ui": "^1.12.1",
     "jquery.fancytree": "^2.29.1",
+    "split.js": "^1.3.5",
     "tui-editor": "^1.2.6"
   },
   "devDependencies": {
@@ -25,8 +29,10 @@
     "build:js-prod": "webpack --env prod --progress --profile --colors",
     "build:css-tui": "node-sass --output-style compressed assets/src/scss/tui-override.scss > lib/gollum/public/gollum/assets/scripts/tui-override.css",
     "build:css-custom": "node-sass --output-style compressed assets/src/scss/custom.scss > lib/gollum/public/gollum/assets/scripts/custom.css",
-    "build:dev": "npm run build:css-tui && npm run build:css-custom && npm run build:js-dev",
-    "build:prod": "npm run build:css-tui && npm run build:css-custom && npm run build:js-prod"
+    "build:css-bundle": "node-sass --output-style compressed assets/src/scss/bundle.scss > lib/gollum/public/gollum/assets/scripts/bundle.css",
+    "build:copy-files": "cp node_modules/@fortawesome/fontawesome-free/webfonts/* lib/gollum/public/gollum/assets/webfonts",
+    "build:dev": "npm run build:copy-files && npm run build:css-tui && npm run build:css-custom && npm run build:css-bundle && npm run build:js-dev",
+    "build:prod": "npm run build:copy-files && npm run build:css-tui && npm run build:css-custom && npm run build:css-bundle && npm run build:js-prod"
   },
   "repository": {
     "type": "git"

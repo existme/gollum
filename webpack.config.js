@@ -39,7 +39,7 @@ module.exports = (env) => {
           test: /\.scss$/,
           use: [
             {
-              loader: "style-loader"
+              loader: "style-loader",
             }, {
               loader: "css-loader", options: {
                 sourceMap: true
@@ -47,6 +47,11 @@ module.exports = (env) => {
             },
             {
               loader: 'sass-loader',
+              options: {
+                paths: [
+                  path.resolve(__dirname, 'node_modules')
+                ]
+              }
             }
           ]
         }

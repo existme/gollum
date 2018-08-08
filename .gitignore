@@ -10,3 +10,5 @@ node_modules
 /lib/gollum/public/gollum/assets/scripts/editor-bundle.js
 /lib/gollum/public/gollum/assets/scripts/viewer-bundle.js
 */**/.gitkeep
+lib/gollum/public/gollum/assets/scripts/custom.css
+package-lock.json

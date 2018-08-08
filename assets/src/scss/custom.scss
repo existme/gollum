@@ -447,10 +447,10 @@ img[src *= '/plantuml/'] {
 }
 
 img[src *= '/plantuml/']:hover {
-  border: black 1px dashed;
-  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.9);
-  filter: contrast(100%);
-  transform: rotateX(0deg) rotateZ(-1deg) translateZ(0px) translateY(-6px);
+  //border: black 1px dashed;
+  //box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.9);
+  //filter: contrast(100%);
+  //transform: rotateX(0deg) rotateZ(-1deg) translateZ(0px) translateY(-6px);
 }
 
 img[src*='#flip'] {

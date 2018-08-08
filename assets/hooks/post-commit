@@ -1,5 +1,5 @@
-#/bin/zsh
-echo "\n-------------\n"
-echo "Post Commit\n"
+#!/bin/zsh
 
+repo=$1
+cd $repo
 git push origin master

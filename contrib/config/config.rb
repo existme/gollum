@@ -39,14 +39,16 @@ Precious::App.set(:environment, :production)
 #     :universal_toc => true,
 # }
 
-# Precious::App.set
-# Gollum::Hook.register(:post_commit, :hook_id) do |committer, sha1|
-#            system('assets/hooks/post-commit')
-# end
 
 Gollum::Filter::PlantUML.configure do |config|
   config.url = plantuml_srv
   config.verify_ssl = false
+end
+
+if ENV['GOLLUM_AUTOPUSH'] == "true"
+  Gollum::Hook.register(:post_commit, :hook_id) do |committer, sha1|
+    system('assets/hooks/post-commit "'+Precious::App.settings.gollum_path+'"')
+  end
 end
 
 if ENV['GOLLUM_AUTH'] == "ldap"

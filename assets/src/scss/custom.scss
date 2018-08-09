@@ -115,13 +115,13 @@ $fontsizeCode: 18;
 }
 
 #sidebar-content {
-  top: 101px;
+  top: 103px;
   left: 0px;
   bottom: 0px;
   overflow: scroll;
   overflow-x: hidden;
   position: fixed;
-  padding: 10px;
+  padding: 0 10px;
 }
 
 #wiki-sidebar li {
@@ -634,7 +634,6 @@ button .mini-icon {
   padding-bottom: 5px;
   min-width: 300px;
   background-color: #c1c1c1;
-  box-shadow: -10px 3px 20px 1px rgba(0, 0, 0, 0.9);
   width: 100%;
 }
 
@@ -644,4 +643,9 @@ button .mini-icon {
 
 #treeFilter {
   width: 150px;
+}
+
+#filter-divider{
+  height: 1px;
+  background-color: black;
 }

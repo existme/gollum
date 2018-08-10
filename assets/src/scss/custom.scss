@@ -734,19 +734,30 @@ img[src*='#3dt']:hover {
   0px 1px 1px rgba(0, 0, 0, 0.75);
 }
 
-.mini-button {
-  height: 2.1em;
-  background-color: #f7f7f7;
+.minibutton a {
+  height: 20px;
+  padding: 5px 6px 1px 6px;
+
+  //box-shadow: 0px 0px 17px -2px black;
+}
+.minibutton button{
   border: 1px solid #d4d4d4;
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
+  display: block;
   color: #333;
+  background-color: #f7f7f7;
+}
+.minibutton button span{
+  //height: 1.4em;
+  height: 20px;
+  display: block;
+  //padding: 0.4em 1em;
+  padding: 5px 6px 1px 6px;
+  text-shadow: 0 1px 0 #fff;
   font-weight: bold;
   margin: 0;
-  padding: 0.35em 1em;
-  text-shadow: 0 1px 0 #fff;
-  //box-shadow: 0px 0px 17px -2px black;
 }
 
 .mini-button:hover {

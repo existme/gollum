@@ -9,7 +9,7 @@ $fnh1: 24;
   font-family: "Roboto Mono", monospace;
 }
 .tui-editor-defaultUI {
-  font-family: "Lato"
+  font-family: "LatoWeb"
 }
 
 .te-md-container .CodeMirror,
@@ -48,10 +48,12 @@ $fnh1: 24;
 {
   font-size: #{$fn10}px;
 }
+
 .cm-header {
   font-weight: 900;
   //box-shadow: -4px 4px 20px 4px rgba(0, 0, 0, 0.5);
   //border: darkred 2px dashed;
+  color: black !important;
   text-shadow: -1px 1px white;
   padding-left: 5px;
   padding-right: 5px;

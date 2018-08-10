@@ -14,7 +14,6 @@ class Gollum::Filter::PlantUML2 < Gollum::Filter
 
   def replace_plantuml_tags(language, code, indent = '')
     language = language.to_s.empty? ? nil : language
-    p "@startuml\n#{code}\n@enduml\n"
     "@startuml\n#{code}\n@enduml\n"
   end
 

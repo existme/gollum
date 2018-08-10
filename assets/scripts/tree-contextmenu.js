@@ -1,4 +1,5 @@
 var currentJ;
+const $ = require('jquery');
 module.exports = {
   setJQuery: function (jq) {
     currentJ = jq;

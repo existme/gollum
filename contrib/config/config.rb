@@ -43,6 +43,8 @@ Precious::App.set(:environment, :production)
 Gollum::Filter::PlantUML.configure do |config|
   config.url = plantuml_srv
   config.verify_ssl = false
+  # Skip testing plantuml server
+  config.test = true
 end
 
 if ENV['GOLLUM_AUTOPUSH'] == "true"

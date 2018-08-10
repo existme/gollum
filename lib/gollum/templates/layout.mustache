@@ -71,11 +71,12 @@
     <title>{{title}}</title>
 </head>
 <body>
-{{{yield}}}
 <script type="text/javascript">
     let activeNode = '{{path}}';
+</script>
+{{{yield}}}
+<script type="text/javascript">
     var jOld = $.noConflict(true);
 </script>
-<script type="text/javascript" src="/assets/scripts/viewer-bundle.js"></script>
 </body>
 </html>

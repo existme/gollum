@@ -1,10 +1,10 @@
 <div id="gollum-editor" data-escaped-name="{{escaped_name}}"
      class="{{#is_create_page}}create{{/is_create_page}}{{#is_edit_page}}edit{{/is_edit_page}} {{#allow_uploads}}uploads-allowed{{/allow_uploads}}">
     {{#is_create_page}}
-    <form name="gollum-editor" action="{{base_url}}/create" method="post">
+    <form id="gollum-editor-form" name="gollum-editor" action="{{base_url}}/create" method="post">
     {{/is_create_page}}
     {{#is_edit_page}}
-    <form name="gollum-editor" action="{{base_url}}/edit/{{escaped_name}}" method="post">
+    <form id="gollum-editor-form" name="gollum-editor" action="{{base_url}}/edit/{{escaped_name}}" method="post">
     {{/is_edit_page}}
     <fieldset id="gollum-editor-fields">
         {{#is_create_page}}
@@ -39,8 +39,8 @@
 
 
         <div id="gollum-editor-edit-summary">
-            <button type="submit" class="minibutton mini-button" id="gollum-editor-submit" title="Save current changes">
-                <i class="far fa-save mini-icon"></i> Save
+            <button type="submit" class="minibutton mini-button" id="gollum-editor-submit" title="Save current changes and exit edit mode">
+                <i class="far fa-save mini-icon"></i> Save & Exit
             </button>
 
             <label for="message" class="jaws">Edit message:</label>
@@ -59,15 +59,7 @@
     </form>
 
     <script src="/assets/scripts/editor-bundle.js"></script>
-
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.39.2/codemirror.min.css"
-          />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"
-          integrity="sha256-3YM6A3pH4QFCl9WbSU8oXF5N6W/2ylvW0o2g+Z6TmLQ=" crossorigin="anonymous"/>
-
-    <link rel="stylesheet" href="//cdn.rawgit.com/nhnent/tui.editor/v1.2.5/dist/tui-editor.min.css">
-    <link rel="stylesheet" href="//cdn.rawgit.com/nhnent/tui.editor/v1.2.5/dist/tui-editor-contents.min.css">
-    <link rel="stylesheet" href="//cdn.rawgit.com/nhnent/tui.color-picker/v2.2.0/dist/tui-color-picker.min.css">
+    <link rel="stylesheet" type="text/css" href="{{base_url}}/assets/scripts/editor-bundle.css" media="all">
     <link rel="stylesheet" href="/assets/scripts/tui-override.css">
 
 </div>

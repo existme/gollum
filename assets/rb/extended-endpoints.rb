@@ -40,6 +40,23 @@ module Precious
       wiki = wiki_new
       repo = wiki.path
       case request.path_info
+      when "/rcc/quicksave"
+          forbid unless @allow_editing
+
+          path      = '/' + clean_url(sanitize_empty_params(params[:path])).to_s
+          page_name = CGI.unescape(params[:page])
+          wiki      = wiki_new
+          page      = wiki.paged(page_name, path, exact = true)
+          return if page.nil?
+          committer = Gollum::Committer.new(wiki, commit_message)
+          commit    = { :committer => committer }
+
+          update_wiki_page(wiki, page, params[:content], commit, page.name, params[:format])
+          update_wiki_page(wiki, page.header, params[:header], commit) if params[:header]
+          update_wiki_page(wiki, page.footer, params[:footer], commit) if params[:footer]
+          update_wiki_page(wiki, page.sidebar, params[:sidebar], commit) if params[:sidebar]
+          committer.commit
+          halt 200, {'Content-Type' => 'text/plain'}, "page saved"
       when "/rcc/delete"
         folder = URI.decode(request["folder"])
         current = request["current"]

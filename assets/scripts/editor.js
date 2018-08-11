@@ -1,8 +1,8 @@
 const Editor = require('tui-editor');
-require('tui-editor/dist/tui-editor-extColorSyntax.min')
-require('tui-editor/dist/tui-editor-extScrollSync.min')
-require('tui-editor/dist/tui-editor-extTable.min')
-require('tui-editor/dist/tui-editor-extUML.min')
+require('tui-editor/dist/tui-editor-extColorSyntax.min');
+require('tui-editor/dist/tui-editor-extScrollSync.min');
+require('tui-editor/dist/tui-editor-extTable.min');
+require('tui-editor/dist/tui-editor-extUML.min');
 const common = require("./common");
 
 const content = document.querySelector('#mdContent').value;
@@ -60,72 +60,19 @@ function resizeEditor() {
   $('#editSection').css('height', $(window).height() - heightOfSibblings);
 }
 
+editButtons = require("./editor-buttons.js");
+editButtons.init(editor);
+
+
+
 $(window).resize(function () {
   resizeEditor();
 });
 
-const cntCodeBlock = [
-  'Keyboard shortcuts:',
-  '----------------------------------------',
-  'CTRL+s                   Strike',
-  'CTRL+b                   Bold',
-  'CTRL+q                   BlockQuote',
-  'CTRL+Shift+p        CodeBlock',
-  'CTRL+Shift+c        Code',
-].join('\n');
-
-const toolbar = editor.getUI().getToolbar();
-
-editor.eventManager.addEventType('evtHelp');
-editor.eventManager.addEventType('evtMode');
-editor.eventManager.listen('evtHelp', () => {
-  alert(cntCodeBlock)
-});
-
-
-function togglePreviewStyle() {
-  let mode = editor.getCurrentPreviewStyle();
-  console.log(mode);
-  if (mode === 'vertical') {
-    mode = 'tab';
-  } else {
-    mode = 'vertical';
-  }
-  localStorage.setItem('previewStyle', mode);
-  editor.changePreviewStyle(mode)
-}
-
-function setStoredPreviewStyle() {
-  let mode = localStorage.getItem('previewStyle');
-  if (mode === 'vertical' || mode === 'tab') {
-    editor.changePreviewStyle(mode);
-  }
-}
-
-editor.eventManager.listen('evtMode', () => {
-  togglePreviewStyle();
-});
-
-
-toolbar.addButton({
-  name: 'Help',
-  className: 'fab fa-info-circle',
-  event: 'evtHelp',
-  tooltip: '     Help',
-  $el: $('<div class="editor-button" style="color:navy"><i class="fa fa-info-circle"></i></div>')
-}, 1);
-
-toolbar.addButton({
-  name: 'Mode',
-  className: 'fa fa-modx',
-  event: 'evtMode',
-  tooltip: '     Toggle Preview Style',
-  $el: $('<div class="editor-button" style="color:#ffc132"><i class="fa fa-clone"></i></div>')
-}, 1);
-
-setStoredPreviewStyle();
-
 var timeout;
+/**
+ * QuickSave implementation
+ */
 $("#gollum-editor-quicksave").click(function () {
   // alert("Quick Save not implemented yet!\n Use Save instead");
   let form = jq172("#gollum-editor-form")[0];

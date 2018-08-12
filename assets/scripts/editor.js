@@ -2,13 +2,14 @@ import templatePickerExtension from "./popupPickTemplate";
 
 const Editor = require('tui-editor');
 require("./popupPickTemplate");
-require('tui-editor/dist/tui-editor-extColorSyntax.min');
-require('tui-editor/dist/tui-editor-extScrollSync.min');
-require('tui-editor/dist/tui-editor-extTable.min');
-require('tui-editor/dist/tui-editor-extUML.min');
+require('tui-editor/dist/tui-editor-extColorSyntax');
+require('tui-editor/dist/tui-editor-extScrollSync');
+require('tui-editor/dist/tui-editor-extTable');
+require('tui-editor/dist/tui-editor-extUML');
 const common = require("./common");
 const content = document.querySelector('#mdContent').value;
 const rendererUrl = UML_SRV + "/";
+const commands = require('./editor-commands');
 const $ = require('jquery');
 
 const editor = new Editor({
@@ -55,12 +56,8 @@ const editor = new Editor({
   ]
 });
 
-
-
 resizeEditor();
-// $( window ).on( "load", function() {
-//   resizeEditor();
-// });
+
 function resizeEditor() {
   let isCreateMode = window.location.toString().indexOf("/create/") > 0;
   let heightOfSibblings = 130 + (isCreateMode ? 90 : 0);
@@ -69,47 +66,17 @@ function resizeEditor() {
 
 let editButtons = require("./editor-buttons.js");
 editButtons.init(editor);
-
+console.log("Editor initialized");
 
 
 $(window).resize(function () {
   resizeEditor();
 });
 
-var timeout;
+
 /**
  * QuickSave implementation
  */
 $("#gollum-editor-quicksave").click(function () {
-  // alert("Quick Save not implemented yet!\n Use Save instead");
-  let form = jq172("#gollum-editor-form")[0];
-  let title = jq172("#gollum-editor-page-title")[0].value;
-  let pagepath = jq172("#gollum-editor-page-path")[0].value;
-  let mdtext = jq172('#mdContent')[0].value;
-  let commitMessage = jq172("#gollum-editor-message-field")[0].value;
-
-  let fd = new FormData();
-  fd.append('path', pagepath);
-  fd.append('page', title);
-  fd.append('content', mdtext);
-  fd.append('message', commitMessage + " (QuickSave)");
-
-
-  jq172.ajax({
-    type: 'POST',
-    url: '/rcc/quicksave',
-    data: fd,
-    processData: false,
-    contentType: false
-  }).done(function (data) {
-    let status = jq172("#gollum-editor-status");
-    status.css({'display':'inline'});
-    status[0].innerHTML="<i class=\"fas fa-save mini-icon\"></i> SAVED";
-    clearTimeout(timeout);
-    timeout = setTimeout(function() {
-      status[0].innerText="";
-      status.css({'display':'none'});
-    }, 2000);
-  });
-
+  commands.runQuickSave();
 });

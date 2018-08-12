@@ -1,3 +1,5 @@
+const commands = require('./editor-commands');
+
 const editorButtonService = {
   editor: null,
   toolbar: null,
@@ -25,12 +27,15 @@ const editorButtonService = {
 
     const cntCodeBlock = [
       'Keyboard shortcuts:',
-      '----------------------------------------',
-      'CTRL+s                   Strike',
-      'CTRL+b                   Bold',
-      'CTRL+q                   BlockQuote',
-      'CTRL+Shift+p        CodeBlock',
-      'CTRL+Shift+c        Code',
+      '===============================================',
+      'CTRL+S ___________________ Quick Save',
+      'CTRL+Q ___________________ Quit to view mode',
+      'CTRL+. ____________________ Insert template dialog',
+      'CTRL+SPACE ______________ Toggle WYSIWYG/Markdown',
+      'CTRL+B ___________________ Bold',
+      'CTRL+D ___________________ Duplicate line/selection',
+      'CTRL+Shift+P ______________ CodeBlock',
+      'CTRL+Shift+C ______________ Code',
     ].join('\n');
 
     this.editor.eventManager.addEventType('evtHelp');
@@ -43,6 +48,11 @@ const editorButtonService = {
     });
 
     editorButtonService.setStoredPreviewStyle();
+    editor.commandManager.addCommand(commands.insertTemplate);
+    editor.commandManager.addCommand(commands.quickSave);
+    editor.commandManager.addCommand(commands.duplicate);
+    editor.commandManager.addCommand(commands.quit);
+    editor.commandManager.addCommand(commands.toggleWysiwyg);
   },
   togglePreviewStyle: function () {
     let mode = this.editor.getCurrentPreviewStyle();
@@ -62,6 +72,7 @@ const editorButtonService = {
       this.editor.changePreviewStyle(mode);
     }
   }
+
 };
 
 module.exports = editorButtonService;

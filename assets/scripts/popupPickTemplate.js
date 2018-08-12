@@ -22,8 +22,8 @@ function initUI(editor) {
   const buttonIndex = toolbar.indexOfItem(extensionName);
   const {$el: $button} = toolbar.getItem(buttonIndex);
 
-  const $templateContainer = $('<div id="template-selector-container"><select id="template-selector" size="10">\n' +
-    '  <option value="codeblock">Code Block</option>\n' +
+  const $templateContainer = $('<div id="template-selector-container"><select id="template-selector" size="10" tabindex="1">\n' +
+    '  <option value="codeblock" selected>Code Block</option>\n' +
     '  <option value="uml">UML Block</option>\n' +
     '  <option value="sh">Bash Block</option>\n' +
     '  <option value="java">Java Block</option>\n' +
@@ -55,21 +55,23 @@ function initUI(editor) {
     popup.hide();
   });
 
+  let listBox = popup.$el.find('#template-selector');
+
   editor.eventManager.listen('evtTemplate', () => {
     // set the x,y offset of the popup
     const {offsetTop, offsetLeft} = $button.get(0);
     popup.$el.css({top: offsetTop + $button.outerHeight(), left: offsetLeft});
     editor.eventManager.emit('closeAllPopup');
     popup.show();
+    listBox.focus();
   });
 
-  let listBox = popup.$el.find('#template-selector');
-  listBox.on('click', () => {
+  function handleSelect(){
     let text;
     let lMove = 0, cStart = 0, cEnd = 0;
     switch (listBox.val()) {
       case "author":
-        text = ` _Reza Shams_ `;
+        text = ` _Not Implemented yet_ `;
         break;
       case "uml":
       case "sh":
@@ -91,12 +93,23 @@ function initUI(editor) {
         cEnd = -1;
         break;
       default:
-        text = `<< ${listBox.val()} >>`;
+        text = `<< ${listBox.val()} - not implemented >>`;
     }
     common.editorReplace(editor, text, lMove, cStart, cEnd);
     popup.hide();
     // alert(listBox.val());
+  };
 
+  listBox.keypress(function (e) {
+    if(e.which===13){
+      e.preventDefault();
+      handleSelect();
+      // alert("reza");
+    }
+  });
+
+  listBox.on('click', () => {
+    handleSelect();
   });
 }
 

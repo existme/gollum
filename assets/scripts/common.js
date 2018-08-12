@@ -88,7 +88,7 @@ const service = {
   editorReplace: function (editor, text, lMove, cStart, cEnd) {
     const mde = editor.getCurrentModeEditor();
     const cm = mde.getEditor();
-    if (cm.constructor.name.startsWith("CodeMirror")) {
+    if (!editor.isWysiwygMode()) {
       // Markdown mode
       const doc = cm.getDoc();
       const range = mde.getCurrentRange();

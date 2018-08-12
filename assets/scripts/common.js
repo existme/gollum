@@ -36,9 +36,9 @@ const service = {
    * @param url
    * @returns {string}
    */
-  removeFirstLastPathComponent: function (url){
+  removeFirstLastPathComponent: function (url) {
     var arr = url.split('/');
-    arr.splice(1,1);  // Remove first component
+    arr.splice(1, 1);  // Remove first component
     arr.pop();        // Remove last component
     return (arr.join('/'));
   },
@@ -84,5 +84,55 @@ const service = {
     }
     return dest;
   },
-}
+
+  editorReplace: function (editor, text, lMove, cStart, cEnd) {
+    const mde = editor.getCurrentModeEditor();
+    const cm = mde.getEditor();
+    if (cm.constructor.name.startsWith("CodeMirror")) {
+      // Markdown mode
+      const doc = cm.getDoc();
+      const range = mde.getCurrentRange();
+
+      let from = {
+        line: range.from.line,
+        ch: range.from.ch
+      };
+
+      let to = {
+        line: range.to.line,
+        ch: range.to.ch
+      };
+      doc.replaceRange(text, from, to);
+      const cursor = doc.getCursor();
+      doc.setCursor(cursor.line + lMove, cursor.ch + cStart);
+      from = {
+        line: cursor.line + lMove,
+        ch: cursor.ch + cStart
+      };
+      to = {
+        line: cursor.line + lMove,
+        ch: cursor.ch + cEnd
+      };
+      doc.setSelection(from, to);
+    }
+    else {
+      // wysiwyg mode
+      const range = cm.getSelection().cloneRange();
+      // let attr = `${CODEBLOCK_ATTR_NAME} class = "${CODEBLOCK_CLASS_PREFIX}${codeBlockID}"`;
+      // if (type) {
+      //   attr += ` data-language="${type}"`;
+      // }
+      // const codeBlockBody = getCodeBlockBody(range, wwe);
+      // const link = cm.createElement('A', {href: url});
+      // $(link).text(linkText);
+      // cm.insertElement(link);
+      // cm.insertHTML(text);
+      cm.insertPlainText(text, false);
+
+      // focusToFirstCode(wwe.get$Body().find(`.${CODEBLOCK_CLASS_PREFIX}${codeBlockID}`), wwe);
+    }
+    cm.focus();
+  }
+};
+
 module.exports = service;

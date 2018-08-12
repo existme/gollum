@@ -1,12 +1,15 @@
+import templatePickerExtension from "./popupPickTemplate";
+
 const Editor = require('tui-editor');
+require("./popupPickTemplate");
 require('tui-editor/dist/tui-editor-extColorSyntax.min');
 require('tui-editor/dist/tui-editor-extScrollSync.min');
 require('tui-editor/dist/tui-editor-extTable.min');
 require('tui-editor/dist/tui-editor-extUML.min');
 const common = require("./common");
-
 const content = document.querySelector('#mdContent').value;
 const rendererUrl = UML_SRV + "/";
+const $ = require('jquery');
 
 const editor = new Editor({
   el: document.querySelector('#editSection'),
@@ -43,6 +46,7 @@ const editor = new Editor({
   exts: [
     'chart',
     'colorSyntax',
+    'templatePicker',
     'scrollSync',
     {
       'name': 'uml',
@@ -50,6 +54,9 @@ const editor = new Editor({
     }
   ]
 });
+
+
+
 resizeEditor();
 // $( window ).on( "load", function() {
 //   resizeEditor();
@@ -60,7 +67,7 @@ function resizeEditor() {
   $('#editSection').css('height', $(window).height() - heightOfSibblings);
 }
 
-editButtons = require("./editor-buttons.js");
+let editButtons = require("./editor-buttons.js");
 editButtons.init(editor);
 
 

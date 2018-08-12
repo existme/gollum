@@ -897,3 +897,29 @@ button .mini-icon {
   align-content: center;
   display: none;
 }
+
+
+#template-selector-container {
+  background-color: transparent;
+  margin: -10px -11px -13px -11px;
+}
+
+#template-selector {
+  font-family: LatoWeb;
+  border: 1px solid black;
+  overflow: hidden;
+  padding: 5px;
+}
+
+#template-selector option:hover {
+  background-color: #f3f3f3;
+  border: 1px dotted black;
+  border-radius: 4px
+}
+
+#template-selector option {
+  text-shadow: -1px -1px 4px #a2a09c;
+  font-weight: 900;
+  padding: 2px;
+  border: 1px solid white
+}

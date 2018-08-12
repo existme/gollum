@@ -22,13 +22,6 @@ const editorButtonService = {
       $el: $('<div class="editor-button" style="color:#ffc132"><i class="fa fa-clone"></i></div>')
     }, 1);
 
-    this.toolbar.addButton({
-      name: 'Mode',
-      className: 'fas fa-stamp',
-      event: 'evtTemplate',
-      tooltip: '     Insert a template',
-      $el: $('<div class="editor-button" style="color:#00c132"><i class="fas fa-stamp"></i></div>')
-    }, 1);
 
     const cntCodeBlock = [
       'Keyboard shortcuts:',

@@ -80,3 +80,7 @@ $(window).resize(function () {
 $("#gollum-editor-quicksave").click(function () {
   commands.runQuickSave();
 });
+
+$(document).ready(function () {
+  editor.focus();
+});

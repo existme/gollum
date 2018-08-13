@@ -12,6 +12,7 @@ import 'jquery.fancytree/dist/modules/jquery.fancytree.filter.js'
 require('jquery-contextmenu');
 require('./splitor.js');
 
+
 var tree_cm = require('./tree-contextmenu.js');
 tree_cm.setJQuery(currentJ);
 var commands = require('./contextmenu-commands.js');
@@ -32,6 +33,18 @@ $.ui.fancytree.registerExtension({
       ctx.options.contextMenu.actions);
   }
 });
+
+function scrollToNode(activeNode) {
+  let t = $("#tree").fancytree("getTree");
+  // t.options.scrollParent = $('#wiki-sidebar');
+  t.options.scrollParent = $('#sidebar-content');
+  let n = t.getNodeByKey(activeNode);
+  if (n != null) {
+    n.setActive();
+    n.selected = true;
+    n.scrollIntoView(false);
+  }
+}
 
 /**
  * Requires variable 'activeNode' to be set and contain the node which should be activated on load
@@ -73,19 +86,21 @@ $("#tree").fancytree({
   },
 
   loadChildren: function () {
-    let t = $("#tree").fancytree("getTree");
-    // t.options.scrollParent = $('#wiki-sidebar');
-    t.options.scrollParent = $('#sidebar-content');
-    let n = t.getNodeByKey(activeNode);
-    if (n != null) {
-      n.setActive();
-      n.selected = true;
-      n.scrollIntoView(false);
-    }
+    scrollToNode(activeNode);
   },
   init: function () {
-
-    // console.log("current node: ", n);
+  },
+  keydown: function (event, data) {
+    switch (event.which) {
+      case 13:
+        let href = data.tree.activeNode.data.href;
+        window.location = "/" + href;
+        return false;
+      case 32:
+        let flag = data.tree.activeNode.isExpanded();
+        data.tree.activeNode.setExpanded(!flag);
+        return false;
+    }
   },
   contextMenu: {
     menu: {
@@ -147,12 +162,12 @@ if (UML_SRV === "http://www.plantuml.com/plantuml/png" && sessionStorage.Alert !
 // window.jQuery = prevJ;
 // window.$ = prevJ;
 
-$("input[name=treeFilter]").keyup(function (e) {
-  var n,
+function filterTree(control, e) {
+  let n,
     tree = $.ui.fancytree.getTree(),
     opts = {},
     filterFunc = tree.filterNodes,
-    match = $(this).val();
+    match = control.val();
 
   match = match.replace(/ /g, ".*");
   opts.mode = "hide";
@@ -168,12 +183,16 @@ $("input[name=treeFilter]").keyup(function (e) {
   }
   // n = filterFunc.call(tree, match, opts);
   n = filterFunc.call(tree, function (node) {
-    if(node.data.href.startsWith("img/"))
+    if (node.data.href.startsWith("img/"))
       return false;
     return new RegExp(match, "i").test(node.data.href);
   }, opts);
   $("button#btnResetSearch").attr("disabled", false);
   $("span#matches").text("(" + n + " matches)");
+}
+
+$("input[name=treeFilter]").keyup(function (e) {
+  filterTree($(this), e);
 }).focus();
 
 $("button#btnResetSearch").click(function (e) {
@@ -181,4 +200,24 @@ $("button#btnResetSearch").click(function (e) {
   $("span#matches").text("");
   tree.clearFilter();
 }).attr("disabled", true);
-tree.options.filter['hideExpandedCounter'] = false;
+
+function init() {
+  tree.options.filter['hideExpandedCounter'] = false;
+
+  // Load filter settings
+  let qData = localStorage.getItem('filter');
+  if (qData) {
+    qData = JSON.parse(qData);
+    let diffSec = (Date.now() - qData.time) / 1000;
+    if (diffSec < 60) {
+      let filterControl = $("#treeFilter");
+      filterControl.val(qData.query);
+      filterTree(filterControl, null);
+      scrollToNode(activeNode);
+    }
+  }
+  $('body').removeClass('fade-out');
+}
+
+require('./global-shortcut');
+init();

@@ -43,4 +43,3 @@ var split = Splitor(['#wiki-sidebar', '#cc1'], {
 });
 splitWidthConfig();
 
-$('body').removeClass('fade-out');

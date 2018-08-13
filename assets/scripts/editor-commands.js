@@ -43,7 +43,11 @@ const customCommands = {
       name: 'quit',
       keyMap: ['CTRL+Q', 'META+Q'],
       exec(mde) {
-        window.location = $(".action-view-page")[0].href;
+        let createBtn = $(".action-view-page")[0];
+        if (createBtn)
+          window.location = $(".action-view-page")[0].href;
+        else
+          window.location = window.location.origin;
       }
     }
   ),
@@ -62,7 +66,7 @@ const customCommands = {
       keyMap: ['CTRL+SPACE', 'META+SPACE'],
       exec(mde) {
         // customCommands.runQuickSave();
-        if(mde.isWysiwygMode()){
+        if (mde.isWysiwygMode()) {
           mde.changeMode('markdown', false);
         }
         else {

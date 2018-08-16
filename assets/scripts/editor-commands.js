@@ -18,18 +18,18 @@ const customCommands = {
           editor.eventManager.emit('previewNeedsRefresh');
           editor.eventManager.emit('changePreviewTabPreview');
           editor.getUI()._markdownTab.activate('Preview');
-          editor.eventManager.emit('scroll',{source:"markdown"});
+          editor.eventManager.emit('scroll', {source: "markdown"});
 
           // tabindex is required for element to get the focus see https://stackoverflow.com/a/17042452/161312 !!!
-          let preview=$(".te-preview");
-          preview.attr('tabindex',-1);
+          let preview = $(".te-preview");
+          preview.attr('tabindex', -1);
 
           // get the visible part of preview
           preview = preview.filter(':visible').get(0);
           preview.focus();
 
           // do focus again after the queue is processed
-          setTimeout(function(){
+          setTimeout(function () {
             preview.focus();
           });
         }
@@ -102,36 +102,42 @@ const customCommands = {
     }
   ),
   duplicate: TuiEditor.CommandManager.command(
-    'markdown', { //wysiwyg
+    'global', { //wysiwyg
       name: 'duplicate',
       keyMap: ['CTRL+D', 'META+D'],
-      exec(mde) {
-        const cm = mde.getEditor();
-        const doc = cm.getDoc();
-        const range = mde.getCurrentRange();
-
-        let from = {
-          line: range.from.line,
-          ch: range.from.ch
-        };
-
-        let to = {
-          line: range.to.line,
-          ch: range.to.ch
-        };
-        let text = cm.getSelection();
-        const cursor = doc.getCursor();
-        if (text === "") {
-          // if nothing is selected, duplicate current line
-          let line = doc.getLine(cursor.line);
-          doc.setCursor(cursor.line, line.length);
-          cm.replaceSelection('\n' + line);
-          doc.setCursor(cursor.line + 1, cursor.ch);
+      exec(mde,wwRange) {
+        if (mde.currentMode === 'wysiwyg') {
+          const cm = mde.getCurrentModeEditor();
+          console.log(cm);
         }
         else {
-          // otherwise duplicate the selection
-          doc.setCursor(cursor.line, cursor.ch);
-          cm.replaceSelection(text);
+          const cm = mde.getCurrentModeEditor().getEditor();
+          const doc = cm.getDoc();
+          const range = mde.getRange();
+
+          let from = {
+            line: range.start.line,
+            ch: range.start.ch
+          };
+
+          let to = {
+            line: range.end.line,
+            ch: range.end.ch
+          };
+          let text = cm.getSelection();
+          const cursor = doc.getCursor();
+          if (text === "") {
+            // if nothing is selected, duplicate current line
+            let line = doc.getLine(cursor.line);
+            doc.setCursor(cursor.line, line.length);
+            cm.replaceSelection('\n' + line);
+            doc.setCursor(cursor.line + 1, cursor.ch);
+          }
+          else {
+            // otherwise duplicate the selection
+            doc.setCursor(cursor.line, cursor.ch);
+            cm.replaceSelection(text);
+          }
         }
       }
     }

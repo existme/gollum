@@ -52,6 +52,7 @@ const editorButtonService = {
     editor.commandManager.addCommand(commands.quickSave);
     editor.commandManager.addCommand(commands.duplicate);
     editor.commandManager.addCommand(commands.quit);
+    // editor.wwEditor.addKeyEventHandler(['CTRL+D','META+D'],commands.duplicate);
   },
   togglePreviewStyle: function () {
     let mode = this.editor.getCurrentPreviewStyle();

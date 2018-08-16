@@ -6,7 +6,7 @@ def dump(obj)
   # puts [obj.to_s.red,obj.inspect].join(" : ".blue)
   # puts "\n.........................\n"
   obj.instance_variables.map do |var|
-    p [var.to_s, obj.instance_variable_get(var)].join(" : ")
+    p [var.to_s, obj.instance_variable_get(var)].join(' : ')
     p obj.instance_variable_get(var).to_yaml[0..200]
   end
   # p obj.to_yaml
@@ -27,7 +27,7 @@ end
 module Precious
   class App
     get '/' do
-      redirect "http://google.com"
+      redirect 'http://google.com'
     end
     before /^(\/rcc\/)/ do
       # redirect "http://google.com"
@@ -40,61 +40,61 @@ module Precious
       wiki = wiki_new
       repo = wiki.path
       case request.path_info
-      when "/rcc/quicksave"
-          forbid unless @allow_editing
+      when '/rcc/quicksave'
+        forbid unless @allow_editing
 
-          path      = '/' + clean_url(sanitize_empty_params(params[:path])).to_s
-          page_name = CGI.unescape(params[:page])
-          wiki      = wiki_new
-          page      = wiki.paged(page_name, path, exact = true)
-          return if page.nil?
-          committer = Gollum::Committer.new(wiki, commit_message)
-          commit    = { :committer => committer }
+        path = '/' + clean_url(sanitize_empty_params(params[:path])).to_s
+        page_name = CGI.unescape(params[:page])
+        wiki = wiki_new
+        page = wiki.paged(page_name, path, exact = true)
+        return if page.nil?
+        committer = Gollum::Committer.new(wiki, commit_message)
+        commit = {committer: committer}
 
-          update_wiki_page(wiki, page, params[:content], commit, page.name, params[:format])
-          update_wiki_page(wiki, page.header, params[:header], commit) if params[:header]
-          update_wiki_page(wiki, page.footer, params[:footer], commit) if params[:footer]
-          update_wiki_page(wiki, page.sidebar, params[:sidebar], commit) if params[:sidebar]
-          committer.commit
-          halt 200, {'Content-Type' => 'text/plain'}, "page saved"
-      when "/rcc/delete"
-        folder = URI.decode(request["folder"])
-        current = request["current"]
+        update_wiki_page(wiki, page, params[:content], commit, page.name, params[:format])
+        update_wiki_page(wiki, page.header, params[:header], commit) if params[:header]
+        update_wiki_page(wiki, page.footer, params[:footer], commit) if params[:footer]
+        update_wiki_page(wiki, page.sidebar, params[:sidebar], commit) if params[:sidebar]
+        committer.commit
+        halt 200, {'Content-Type' => 'text/plain'}, 'page saved'
+      when '/rcc/delete'
+        folder = URI.decode(request['folder'])
+        current = request['current']
         value = `assets/bin/cmd-delete-folder.sh "#{folder}" "#{repo}"`
         redirect to(current)
         halt 200, {'Content-Type' => 'text/plain'}, "folder deleted [#{value}]"
-      when "/rcc/delete-file"
-        file = URI.decode(request["file"])
-        current = request["current"]
+      when '/rcc/delete-file'
+        file = URI.decode(request['file'])
+        current = request['current']
         value = `assets/bin/cmd-delete-file.sh "#{file}" "#{repo}"`
         p value
         redirect to(current)
         halt 200, {'Content-Type' => 'text/plain'}, "folder deleted [#{value}]"
-      when "/rcc/rename-folder"
-        from = request["from"]
-        to = request["to"]
-        current = request["current"]
+      when '/rcc/rename-folder'
+        from = request['from']
+        to = request['to']
+        current = request['current']
         value = `assets/bin/cmd-rename-folder.sh "#{from}" "#{to}" "#{repo}"`
         puts value
-        redirect to(URI::encode(rename_string(from, to, current)))
+        redirect to(URI.encode(rename_string(from, to, current)))
         halt 200, {'Content-Type' => 'text/plain'}, "renamed\n #{value}"
-      when "/rcc/rename-file"
-        from = request["from"]
+      when '/rcc/rename-file'
+        from = request['from']
 
-        to = request["to"]
-        current = request["current"]
+        to = request['to']
+        current = request['current']
 
 
         value = `assets/bin/cmd-rename-file.sh "#{from}" "#{to}" "#{repo}"`
         puts value
-        redirect to(URI::encode(rename_string(from, to, current)))
+        redirect to(URI.encode(rename_string(from, to, current)))
         # halt 200, {'Content-Type' => 'text/plain'}, "renamed\n #{current.gsub(from, to)}"
         halt 200, {'Content-Type' => 'text/plain'}, "renamed\n #{value}"
-      when "/rcc/upload-file"
+      when '/rcc/upload-file'
         forbid unless @allow_editing
 
         unless wiki.allow_uploads
-          @message = "File uploads are disabled"
+          @message = 'File uploads are disabled'
           mustache :error
           return
         end
@@ -111,22 +111,20 @@ module Precious
         format = ext.split('.').last || 'txt'
         filename = ::File.basename(fullname, ext)
         reponame = filename + '.' + format
+        reponame = reponame.gsub(' ', '_')
 
         author = session['gollum.author']
-        if author.nil?
-          author = "anonymous"
-        else
-          author = author[:name]
-        end
+        author = author.nil? ? 'anonymous' : author[:name]
+
         value = `assets/bin/cmd-create-folder.sh "#{dir}" "#{repo}"`
 
         newfile = dir + '/' + reponame
-        File.open(wiki.path + "/" + newfile, "wb") do |f|
+        File.open(wiki.path + '/' + newfile, 'wb') do |f|
           f.write(tempfile.read)
         end
         p "assets/bin/cmd-commit-file.sh \"#{newfile}\" \"#{author}\" "
         value = `assets/bin/cmd-commit-file.sh "#{newfile}" "#{author}" "#{repo}"`
-        p "file commited! "+value
+        p 'file commited! ' + value
         halt 200, {'Content-Type' => 'text/plain'}, "uploaded\n #{params[:file]}"
       end
       halt 404, {'Content-Type' => 'text/plain'}, request.path + ' not found'

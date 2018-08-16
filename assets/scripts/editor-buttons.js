@@ -52,7 +52,6 @@ const editorButtonService = {
     editor.commandManager.addCommand(commands.quickSave);
     editor.commandManager.addCommand(commands.duplicate);
     editor.commandManager.addCommand(commands.quit);
-    editor.commandManager.addCommand(commands.toggleWysiwyg);
   },
   togglePreviewStyle: function () {
     let mode = this.editor.getCurrentPreviewStyle();

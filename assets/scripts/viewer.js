@@ -33,7 +33,6 @@ $.ui.fancytree.registerExtension({
       ctx.options.contextMenu.actions);
   }
 });
-
 function scrollToNode(activeNode) {
   let t = $("#tree").fancytree("getTree");
   // t.options.scrollParent = $('#wiki-sidebar');

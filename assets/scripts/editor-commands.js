@@ -1,9 +1,41 @@
 const common = require('./common');
 const TuiEditor = require('tui-editor');
 const $ = require('jquery');
-
 var timeout;
 const customCommands = {
+  init: function (editor) {
+    $(window).keydown(function (e) {
+      // Ctrl+enter to switch from markdown to preview
+      if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
+        let active = editor.getUI()._markdownTab._$activeButton.text();
+        if (active === "Preview") {
+          $(".te-preview").removeAttr('tabindex');
+          editor.getUI()._markdownTab.activate('Write');
+          editor.eventManager.emit('changePreviewTabWrite');
+          editor.focus();
+        } else {
+
+          editor.eventManager.emit('previewNeedsRefresh');
+          editor.eventManager.emit('changePreviewTabPreview');
+          editor.getUI()._markdownTab.activate('Preview');
+          editor.eventManager.emit('scroll',{source:"markdown"});
+
+          // tabindex is required for element to get the focus see https://stackoverflow.com/a/17042452/161312 !!!
+          let preview=$(".te-preview");
+          preview.attr('tabindex',-1);
+
+          // get the visible part of preview
+          preview = preview.filter(':visible').get(0);
+          preview.focus();
+
+          // do focus again after the queue is processed
+          setTimeout(function(){
+            preview.focus();
+          });
+        }
+      }
+    });
+  },
   runQuickSave: function () {
     let form = $("#gollum-editor-form")[0];
     let title = $("#gollum-editor-page-title")[0].value;
@@ -57,21 +89,6 @@ const customCommands = {
       keyMap: ['CTRL+S', 'META+S'],
       exec(mde) {
         customCommands.runQuickSave();
-      }
-    }
-  ),
-  toggleWysiwyg: TuiEditor.CommandManager.command(
-    'global', {
-      name: 'toggleWysiwyg',
-      keyMap: ['CTRL+SPACE', 'META+SPACE'],
-      exec(mde) {
-        // customCommands.runQuickSave();
-        if (mde.isWysiwygMode()) {
-          mde.changeMode('markdown', false);
-        }
-        else {
-          mde.changeMode('wysiwyg', false);
-        }
       }
     }
   ),

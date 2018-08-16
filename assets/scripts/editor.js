@@ -6,6 +6,7 @@ require('tui-editor/dist/tui-editor-extColorSyntax');
 require('tui-editor/dist/tui-editor-extScrollSync');
 require('tui-editor/dist/tui-editor-extTable');
 require('tui-editor/dist/tui-editor-extUML');
+
 const common = require("./common");
 const content = document.querySelector('#mdContent').value;
 const rendererUrl = UML_SRV + "/";
@@ -41,11 +42,14 @@ const editor = new Editor({
       }).done(function (data) {
         console.log(data);
       });
-      callback(uploadedImageFolder + '/' + blob.name, blob.name);
+
+      let filename = blob.name.replace(/ /g, '_');
+      callback(uploadedImageFolder + '/' + filename, filename);
     }
   },
   exts: [
     'chart',
+    'mark',
     'colorSyntax',
     'templatePicker',
     'scrollSync',
@@ -80,7 +84,7 @@ $(window).resize(function () {
 $("#gollum-editor-quicksave").click(function () {
   commands.runQuickSave();
 });
-
+commands.init(editor);
 $(document).ready(function () {
   editor.focus();
 });

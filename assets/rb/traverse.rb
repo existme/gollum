@@ -43,7 +43,7 @@ module Gollum
         elsif path =~ /^.*(\.png|\.jpg|\.gif)$/
           %(<li data-href="#{url}" id="#{path}" data-icon="png">#{name}</li>)
         else
-          %(<li data-href="#{url}" id="#{path}" data-icon="un">#{name}</li>)
+          %()
         end
         # %Q(  <li class="file"><a href="#{url}">xxx#{name}</a>#{valid_page ? "" : delete_file(url, valid_page)}</li>)
       end
@@ -66,29 +66,19 @@ module Gollum
       end
 
       def render_file
-        @pages       = @wiki.pages + @wiki.files
-        html         = ''
-        count        = @pages.size
+        # @wiki.files : any file other than markdown
+        # @wiki.pages : only markdown files
+        @pages = @wiki.pages + @wiki.files
+        html = ''
+        count = @pages.size
         folder_start = -1
+        ignored_list = Regexp.new('.*(assets)\/.*').freeze
+        sorted_folders = []
 
-        # Process all pages until folders start
+        # Process all files
         count.times do |index|
           page = @pages[index]
           path = page.path
-          if path.include? '/'
-            # Folders start at the next index
-            # html += "<p>"+index.inspect+"</p><br>"
-            folder_start = index
-            break # Pages finished, move on to folders
-          else
-            # Page processed (not contained in a folder)
-            html += '<p>' + path + '</p><br>'
-          end
-        end
-        ignored_list = Regexp.new('.*(assets)\/.*').freeze
-        sorted_folders = []
-        folder_start.upto count - 1 do |index|
-          path = @pages[index].path
           unless ignored_list.match(path) || path.start_with?('"') || path.start_with?('.')
             sorted_folders += [[path, index]]
           end
@@ -96,8 +86,8 @@ module Gollum
 
         # http://stackoverflow.com/questions/3482814/sorting-list-of-string-paths-in-vb-net
         sorted_folders.sort! do |first, second|
-          a           = first[0]
-          b           = second[0]
+          a = first[0]
+          b = second[0]
 
           # use :: operator because gollum defines its own conflicting File class
           dir_compare = ::File.dirname(a) <=> ::File.dirname(b)
@@ -107,48 +97,66 @@ module Gollum
           if dir_compare == 0
             ::File.basename(a) <=> ::File.basename(b)
           else
-            dir_compare
+            # if one of them is root page reverse the order
+            if a.include?('/') && b.include?('/')
+              dir_compare
+            else
+              -dir_compare
+            end
           end
         end
 
         # keep track of folder depth, 0 = at root.
-        cwd_array = []
-        changed   = false
+        prev_folders_array = []
+        changed = false
 
         # process rest of folders
         (0...sorted_folders.size).each do |i|
-          page   = @pages[sorted_folders[i][1]]
-          path   = page.path
+          page = @pages[sorted_folders[i][1]]
+          path = page.path
           folder = ::File.dirname path
 
           # Flattern root folder ./Home.md -> Home.md
           folder = '' if folder == '.'
 
-          tmp_array = folder.split '/'
-          cur = ''
-          (0...tmp_array.size).each do |index|
-            cur += '/' unless cur == ''
-            cur += tmp_array[index]
-            if cwd_array[index].nil? || changed
-              html += new_sub_folder(tmp_array[index], cur)
+          # split path by folders
+          current_folders_array = folder.split '/'
+          current_path = ''
+
+          # current path will be the folder path at current depth, we will build
+          # tree nodes for each subfolder
+          (0...current_folders_array.size).each do |index|
+            current_path += '/' unless current_path == ''
+            current_path += current_folders_array[index]
+            if prev_folders_array[index].nil? || changed
+              changed = false
+              html += new_sub_folder(current_folders_array[index], current_path)
               next
             end
 
-            next unless cwd_array[index] != tmp_array[index]
+            next unless prev_folders_array[index] != current_folders_array[index]
             changed = true
-            (cwd_array.size - index).times do
-              html += end_folder tmp_array[index]
+            # based on the depth change we should close previous nodes
+            (prev_folders_array.size - index).times do
+              html += end_folder current_folders_array[index]
             end
-            html += new_sub_folder(tmp_array[index], cur)
+            html += new_sub_folder(current_folders_array[index], current_path)
           end
 
+          # this is fix for root pages after the last folder
+          if !prev_folders_array.empty? && current_folders_array.empty?
+            prev_folders_array.size.times do
+              html += end_folder ''
+            end
+          end
+
+          # now we reached to leaf add the page
           html += new_page page
-          cwd_array = tmp_array
+          prev_folders_array = current_folders_array
           changed = false
         end
 
         result = enclose_tree html
-        # result = '<ul class="folder">' + @wiki.pages.map { |p| "<li><a href=\"/#{p.url_path}\">#{p.url_path_display}</a></li>" }.join + '</ul>'
       end
     end
   end

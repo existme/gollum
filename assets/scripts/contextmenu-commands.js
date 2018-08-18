@@ -31,6 +31,7 @@ const commands = {
         });
       }
     });
+    commands.focus_input();
   },
   renameFile: function (node, action, options) {
     if (node.isFolder())
@@ -62,6 +63,7 @@ const commands = {
         common.post('/rcc/rename-file?from=' + renameFrom + '&to=' + renameTo + '&current=' + currentUrl, {});
       }
     });
+    commands.focus_input();
   },
 
   new_page: function (node, action, options) {
@@ -95,8 +97,23 @@ const commands = {
         window.location = baseUrl + name_encoded.join('/');
       }
     });
+    commands.focus_input();
   },
 
+  focus_input: function () {
+    setTimeout(function () {
+      let txtInput = $('#gollum-dialog-dialog-generated-field-name');
+      txtInput.attr('spellcheck', false);
+      txtInput.get(0).focus();
+      txtInput.get(0).select();
+      // do not select the extention
+      let index = txtInput.val().indexOf('.');
+      if (index !== -1) {
+        txtInput.get(0).selectionStart = 0;
+        txtInput.get(0).selectionEnd = index;
+      }
+    });
+  },
   delete_page: function (node, action, options) {
     var dest = common.getParentPath(node);
     destSpan = dest.replace(/\//g, "<span class='s-sep'>\/</span>");

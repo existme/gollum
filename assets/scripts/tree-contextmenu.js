@@ -23,7 +23,7 @@ module.exports = {
               var node = $.ui.fancytree.getNode(options.$trigger);
               // options.items.delete.disabled = node.isFolder();
               options.items.openn.disabled = node.isFolder();
-              options.items.new.disabled = !node.isFolder();
+              // options.items.new.disabled = !node.isFolder();
               // options.items.rename.visible = !node.isFolder();
               options.items.edit.disabled = node.isFolder();
             },

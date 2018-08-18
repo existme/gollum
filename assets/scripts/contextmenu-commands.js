@@ -68,6 +68,10 @@ const commands = {
 
   new_page: function (node, action, options) {
     var dest = "/" + node.data.href;
+    if(!node.isFolder()){
+      dest = common.getParentPath(node);
+    }
+
     destSpan = dest.replace(/\//g, "<span class='s-sep'>\/</span>");
     var path = dest;
     jq172.GollumDialog.init({
@@ -88,7 +92,11 @@ const commands = {
           name = res['name'];
         }
         var name_encoded = [];
-        var name_parts = abspath(node.data.href, name).join('/').split('/');
+
+        // Remove all leading slashes from destination
+        dest = dest.replace(/^\/+/g,'');
+
+        var name_parts = abspath(dest, name).join('/').split('/');
         // Split and encode each component individually.
         for (var i = 0; i < name_parts.length; i++) {
           name_encoded.push(encodeURIComponent(name_parts[i]));

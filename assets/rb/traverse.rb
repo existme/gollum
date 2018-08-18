@@ -90,7 +90,6 @@ module Gollum
         folder_start.upto count - 1 do |index|
           path = @pages[index].path
           unless ignored_list.match(path) || path.start_with?('"') || path.start_with?('.')
-            p path
             sorted_folders += [[path, index]]
           end
         end

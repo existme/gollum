@@ -61,14 +61,23 @@ module Precious
         folder = URI.decode(request['folder'])
         current = request['current']
         value = `assets/bin/cmd-delete-folder.sh "#{folder}" "#{repo}"`
-        redirect to(current)
+
+        if !current.start_with?("/"+folder)
+          redirect to(current)
+        else
+          redirect to('/')
+        end
         halt 200, {'Content-Type' => 'text/plain'}, "folder deleted [#{value}]"
       when '/rcc/delete-file'
         file = URI.decode(request['file'])
         current = request['current']
         value = `assets/bin/cmd-delete-file.sh "#{file}" "#{repo}"`
         p value
-        redirect to(current)
+        if file != current+'.md'
+          redirect to(current)
+        else
+          redirect to('/')
+        end
         halt 200, {'Content-Type' => 'text/plain'}, "folder deleted [#{value}]"
       when '/rcc/rename-folder'
         from = request['from']

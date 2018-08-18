@@ -109,7 +109,7 @@ const commands = {
         // var loc = baseUrl + '/delete/' + pageFullPath;
         // window.location = loc;
         let fileToDelete = dest + title;
-        common.post('/rcc/delete-file?file=' + fileToDelete + '&current=' + window.location.origin, {});
+        common.post('/rcc/delete-file?file=' + fileToDelete + '&current=' + window.location.pathname, {});
       }
     });
   },
@@ -122,7 +122,7 @@ const commands = {
       title: '<i class="fas fa-trash-alt"></i>&nbsp;-&nbsp;Delete Folder!!&nbsp;&nbsp;&nbsp;<i class="fas fa-folder-open" style="color:red;"></i></h4>Are you sure you want to delete this folder? <br><br> <code class="page-address">' + path + '</code>',
       OK: function (res) {
         var folderToDelete = node.data.href;
-        common.post('/rcc/delete?folder=' + folderToDelete + '&current=' + window.location.origin, {});
+        common.post('/rcc/delete?folder=' + folderToDelete + '&current=' + window.location.pathname, {});
       }
     });
   },

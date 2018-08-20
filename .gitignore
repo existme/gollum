@@ -12,5 +12,6 @@ node_modules
 */**/.gitkeep
 lib/gollum/public/gollum/assets/scripts/custom.css
 lib/gollum/public/gollum/assets/scripts/bundle.css
+lib/gollum/public/gollum/assets/scripts/tui-override.css
 package-lock.json
 lib/gollum/public/gollum/assets/webfonts

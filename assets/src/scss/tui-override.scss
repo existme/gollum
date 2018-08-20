@@ -8,10 +8,27 @@ $fnh1: 24;
   /* Set height, width, borders, and global font properties here */
   font-family: "Roboto Mono", monospace;
 }
+
+.tui-tooltip {
+  padding: 15px 5px 5px 5px;
+  font-size: 14px !important;
+  font-family: "LatoWeb"
+}
+
 .tui-editor-defaultUI {
   font-family: "LatoWeb"
 }
 
+kbd {
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.1em 0.5em;
+  margin: 0 0.2em;
+  box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2), 0 0 0 2px #fff inset;
+  color: black;
+  background-color: #f7f7f7;
+}
 .te-md-container .CodeMirror,
 .tui-editor-defaultUI .te-tab button,
 .tui-popup-header .tui-popup-title,

@@ -16,7 +16,7 @@ function initUI(editor) {
     name: extensionName,
     className: 'tui-template',
     event: 'evtTemplate',
-    tooltip: '     Insert a template',
+    tooltip: '<b>Insert a template</b><br><kbd>Ctrl</kbd>+<kbd>.</kbd>',
     $el: $('<div class="editor-button" style="color:#00c132"><i class="fas fa-stamp"></i></div>')
   }, 3);
   const buttonIndex = toolbar.indexOfItem(extensionName);

@@ -1,9 +1,11 @@
 const common = require('./common');
 const TuiEditor = require('tui-editor');
 const $ = require('jquery');
+let _editor=null;
 var timeout;
 const customCommands = {
   init: function (editor) {
+    _editor=editor;
     $(window).keydown(function (e) {
       // Ctrl+enter to switch from markdown to preview
       if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
@@ -70,6 +72,24 @@ const customCommands = {
   showTemplatePopup: function (editor) {
     editor.eventManager.emit('evtTemplate');
   },
+  togglePreviewStyle: TuiEditor.CommandManager.command(
+    'markdown', {
+      name: 'togglePreviewStyle',
+      keyMap: ['ALT+`'],
+      exec(mde) {
+        const cm = _editor;
+        let mode = cm.getCurrentPreviewStyle();
+        console.log(mode);
+        if (mode === 'vertical') {
+          mode = 'tab';
+        } else {
+          mode = 'vertical';
+        }
+        localStorage.setItem('previewStyle', mode);
+        cm.changePreviewStyle(mode)
+      }
+    }
+  ),
   quit: TuiEditor.CommandManager.command(
     'global', {
       name: 'quit',
@@ -105,7 +125,7 @@ const customCommands = {
     'global', { //wysiwyg
       name: 'duplicate',
       keyMap: ['CTRL+D', 'META+D'],
-      exec(mde,wwRange) {
+      exec(mde, wwRange) {
         if (mde.currentMode === 'wysiwyg') {
           const cm = mde.getCurrentModeEditor();
           console.log(cm);

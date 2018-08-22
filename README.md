@@ -14,6 +14,8 @@ This is a ready made template for gollum. Further documentation will be added as
 - `GLDAP_BIND_DN`   :   LDAP Admin bind DN ex: `"cn\=ADMIN_USER,ou\=MY_SERVICE,ou\=MY_OU,ou\=MY_COMPANY,dc\=MY_COMPANY,dc\=com"`
 - `GLDAP_PASSWORD`  :   LDAP Admin password
 
+- `G_PROXY`         :   Global proxy config ex: `http://myproxy.example.com:3128`
+
 ## Building and running
 
 ``` bash

@@ -195,7 +195,7 @@ $("input[name=treeFilter]").keyup(function (e) {
 }).focus();
 
 $("button#btnResetSearch").click(function (e) {
-  $("input[name=search]").val("");
+  $("#treeFilter").val("");
   $("span#matches").text("");
   tree.clearFilter();
 }).attr("disabled", true);

@@ -155,3 +155,18 @@ kbd {
 .tui-editor-contents {
   font-size: #{$fn13 + 2}px;
 }
+
+#pe-link-text {
+  width: 450px;
+}
+#pe-link-abb {
+  width: 200px;
+  background-color: #8e8e9e;
+  color: white;
+}
+
+#pe-ref-check {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}

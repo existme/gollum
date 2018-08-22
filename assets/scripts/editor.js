@@ -2,6 +2,7 @@ import templatePickerExtension from "./popupPickTemplate";
 
 const Editor = require('tui-editor');
 require("./popupPickTemplate");
+const urlPaste = require("./popupUrlPaste");
 require('tui-editor/dist/tui-editor-extColorSyntax');
 require('tui-editor/dist/tui-editor-extScrollSync');
 require('tui-editor/dist/tui-editor-extTable');
@@ -85,6 +86,8 @@ $("#gollum-editor-quicksave").click(function () {
   commands.runQuickSave();
 });
 commands.init(editor);
+
 $(document).ready(function () {
   editor.focus();
+  urlPaste.initUI(editor);
 });

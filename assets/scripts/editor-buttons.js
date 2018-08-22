@@ -38,6 +38,7 @@ const editorButtonService = {
       'CTRL+SPACE ______________ Toggle WYSIWYG/Markdown',
       'CTRL+B ___________________ Bold',
       'CTRL+D ___________________ Duplicate line/selection',
+      'ALT+` _____________________ Toggle preview style',
       'CTRL+Shift+P ______________ CodeBlock',
       'CTRL+Shift+C ______________ Code',
     ].join('\n');

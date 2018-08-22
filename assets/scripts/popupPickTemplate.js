@@ -98,13 +98,12 @@ function initUI(editor) {
     common.editorReplace(editor, text, lMove, cStart, cEnd);
     popup.hide();
     // alert(listBox.val());
-  };
+  }
 
   listBox.keypress(function (e) {
     if(e.which===13){
       e.preventDefault();
       handleSelect();
-      // alert("reza");
     }
   });
 

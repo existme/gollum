@@ -6,6 +6,7 @@ var timeout;
 const customCommands = {
   init: function (editor) {
     _editor=editor;
+
     $(window).keydown(function (e) {
       // Ctrl+enter to switch from markdown to preview
       if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {

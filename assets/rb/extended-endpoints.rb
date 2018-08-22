@@ -26,9 +26,25 @@ end
 
 module Precious
   class App
-    get '/' do
-      redirect 'http://google.com'
+    CANTLOAD = 'Can not reach the address'.freeze
+    UNDEFINED = 'Undefined title'.freeze
+
+    def fetchWikiPage(url)
+      url = url.gsub('***', '')
+      path = extract_path(url) || '/'
+      name = ::File.basename(url)
+      wiki = wiki_new
+      page = wiki.paged(name, path, exact = true)
+      res = CANTLOAD
+      unless page.nil?
+        body = page.formatted_data
+        doc = Nokogiri::HTML("<body>#{body}</body>")
+        h1 = doc.at_css('h1')
+        res = h1 ? h1.text : UNDEFINED
+      end
+      res
     end
+
     before /^(\/rcc\/)/ do
       # redirect "http://google.com"
       # dump(request)
@@ -49,14 +65,14 @@ module Precious
         page = wiki.paged(page_name, path, exact = true)
         return if page.nil?
         committer = Gollum::Committer.new(wiki, commit_message)
-        commit = {committer: committer}
+        commit = { committer: committer }
 
         update_wiki_page(wiki, page, params[:content], commit, page.name, params[:format])
         update_wiki_page(wiki, page.header, params[:header], commit) if params[:header]
         update_wiki_page(wiki, page.footer, params[:footer], commit) if params[:footer]
         update_wiki_page(wiki, page.sidebar, params[:sidebar], commit) if params[:sidebar]
         committer.commit
-        halt 200, {'Content-Type' => 'text/plain'}, 'page saved'
+        halt 200, { 'Content-Type' => 'text/plain' }, 'page saved'
       when '/rcc/delete'
         folder = URI.decode(request['folder'])
         current = request['current']
@@ -67,7 +83,7 @@ module Precious
         else
           redirect to('/')
         end
-        halt 200, {'Content-Type' => 'text/plain'}, "folder deleted [#{value}]"
+        halt 200, { 'Content-Type' => 'text/plain' }, "folder deleted [#{value}]"
       when '/rcc/delete-file'
         file = URI.decode(request['file'])
         current = request['current']
@@ -78,7 +94,7 @@ module Precious
         else
           redirect to('/')
         end
-        halt 200, {'Content-Type' => 'text/plain'}, "folder deleted [#{value}]"
+        halt 200, { 'Content-Type' => 'text/plain' }, "folder deleted [#{value}]"
       when '/rcc/rename-folder'
         from = request['from']
         to = request['to']
@@ -86,31 +102,46 @@ module Precious
         value = `assets/bin/cmd-rename-folder.sh "#{from}" "#{to}" "#{repo}"`
         puts value
         redirect to(URI.encode(rename_string(from, to, current)))
-        halt 200, {'Content-Type' => 'text/plain'}, "renamed\n #{value}"
+        halt 200, { 'Content-Type' => 'text/plain' }, "renamed\n #{value}"
       when '/rcc/rename-file'
         from = request['from']
 
         to = request['to']
         current = request['current']
 
-
         value = `assets/bin/cmd-rename-file.sh "#{from}" "#{to}" "#{repo}"`
         puts value
         redirect to(URI.encode(rename_string(from, to, current)))
         # halt 200, {'Content-Type' => 'text/plain'}, "renamed\n #{current.gsub(from, to)}"
-        halt 200, {'Content-Type' => 'text/plain'}, "renamed\n #{value}"
+        halt 200, { 'Content-Type' => 'text/plain' }, "renamed\n #{value}"
       when '/rcc/query-page'
         url = request['url']
-
-        res = ''
-
-        open(url, :proxy => ENV['G_PROXY']) do |f|
-          doc = Nokogiri::HTML(f)
-          res = doc.at_css('title').text
+        res = CANTLOAD
+        if url.start_with?('***')
+          res = fetchWikiPage(url)
+        else
+          begin
+            open(url, proxy: ENV['G_PROXY']) do |f|
+              doc = Nokogiri::HTML(f)
+              res = doc.at_css('title').text
+            end
+          rescue Exception
+            res = CANTLOAD
+          end
         end
-        abb = res.gsub(/\b(\w)|./, '\1').upcase()
-        # halt 200, {'Content-Type' => 'text/plain'}, "renamed\n #{current.gsub(from, to)}"
-        halt 200, {'Content-Type' => 'json'}, {title: res, abbrev: abb}.to_json
+        abb_target = res != UNDEFINED && res != CANTLOAD ? res : url
+
+        # This section will take care of exceptions and encodings when converting to json
+        abb_target = abb_target.encode('UTF-16be', :invalid => :replace, :replace => '').encode('UTF-8')
+        abb = abb_target.gsub(/\b(\w)|./, '\1').upcase
+        begin
+          out = { title: res.encode('UTF-8'), abbrev: abb }.to_json
+        rescue Exception
+          res = res.force_encoding("ISO-8859-1").encode("UTF-8")
+          out = {title: res, abbrev: abb}.to_json
+        end
+
+        halt 200, { 'Content-Type' => 'json' }, out
       when '/rcc/upload-file'
         forbid unless @allow_editing
 
@@ -146,9 +177,9 @@ module Precious
         p "assets/bin/cmd-commit-file.sh \"#{newfile}\" \"#{author}\" "
         value = `assets/bin/cmd-commit-file.sh "#{newfile}" "#{author}" "#{repo}"`
         p 'file commited! ' + value
-        halt 200, {'Content-Type' => 'text/plain'}, "uploaded\n #{params[:file]}"
+        halt 200, { 'Content-Type' => 'text/plain' }, "uploaded\n #{params[:file]}"
       end
-      halt 404, {'Content-Type' => 'text/plain'}, request.path + ' not found'
+      halt 404, { 'Content-Type' => 'text/plain' }, request.path + ' not found'
     end
   end
 end

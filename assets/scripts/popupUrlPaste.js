@@ -121,7 +121,8 @@ const PasteEx = {
     PasteEx.vals.editor.focus();
   },
   onPaste: function (event) {
-    var clipText = event.clipboardData.getData('Text');
+    let clipText = event.clipboardData.getData('Text');
+    let cleanedUrl = clipText;
     if (clipText.startsWith('http')) {
       if (PasteEx.vals.editor.isWysiwygMode()) {
         console.log("Wysiwyg url paste is not implemented yet!");
@@ -130,9 +131,15 @@ const PasteEx = {
 
       event.clipboardData.setData('', 'Text');
       event.preventDefault();
+
+      // The endpoint handles own wiki pages in a especial way to bypath authentication
+      if(clipText.startsWith(window.origin)) {
+        cleanedUrl = clipText.replace(window.origin, "***");
+      }
+
       $.ajax({
         type: 'POST',
-        url: '/rcc/query-page?url=' + clipText,
+        url: '/rcc/query-page?url=' + cleanedUrl,
         processData: false,
         contentType: false
       }).done(function (data) {

@@ -9,10 +9,28 @@ require('tui-editor/dist/tui-editor-extTable');
 require('tui-editor/dist/tui-editor-extUML');
 
 const common = require("./common");
-const content = document.querySelector('#mdContent').value;
+let content = document.querySelector('#mdContent').value;
 const rendererUrl = UML_SRV + "/";
 const commands = require('./editor-commands');
 const $ = require('jquery');
+
+if (editMode === 'create') {
+  const title = $("#gollum-editor-page-title").val();
+  const mdc = $('#mdContent');
+  content =
+    `# ${title}\n` +
+    `_Written by: ${author}_\n` +
+    `# ${title}\n` +
+    `\n` +
+    `Start your content here...\n\n` +
+    `\`\`\` sh\n` +
+    `code placeholder\n` +
+    `\`\`\`\n\n`+
+    `* * *\n` +
+    `Creation date: _${common.getDate(new Date())}_\n`;
+  mdc.val(content);
+
+}
 
 const editor = new Editor({
   el: document.querySelector('#editSection'),

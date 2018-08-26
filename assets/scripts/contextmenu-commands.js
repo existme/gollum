@@ -53,7 +53,7 @@ const commands = {
         }
       ],
       OK: function (res) {
-        var name = 'New Page';
+        var name = '';
         if (res['name']) {
           name = res['name'];
         }

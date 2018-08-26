@@ -45,6 +45,13 @@ module Precious
       res
     end
 
+    ['/create/*','/edit/*'].each do |path|
+      before path do
+        wiki = wiki_new
+        session['default_committer_name']=wiki.default_committer_name
+      end
+    end
+
     before /^(\/rcc\/)/ do
       # redirect "http://google.com"
       # dump(request)

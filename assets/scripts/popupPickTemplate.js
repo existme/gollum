@@ -66,12 +66,17 @@ function initUI(editor) {
     listBox.focus();
   });
 
-  function handleSelect(){
+  function handleSelect() {
     let text;
     let lMove = 0, cStart = 0, cEnd = 0;
     switch (listBox.val()) {
       case "author":
-        text = ` _Not Implemented yet_ `;
+        text = `Written by: _${author}_ `;
+        break;
+      case "date":
+        let date = common.getDate(new Date());
+        text = `${date}`;
+        cStart = -text.length;
         break;
       case "uml":
       case "sh":
@@ -100,10 +105,15 @@ function initUI(editor) {
     // alert(listBox.val());
   }
 
-  listBox.keypress(function (e) {
-    if(e.which===13){
+  popup.$el.keydown(function (e) {
+    if (e.which === 13) {
       e.preventDefault();
       handleSelect();
+    }
+    else if (e.which === 27){
+      e.preventDefault();
+      popup.hide();
+      editor.focus();
     }
   });
 

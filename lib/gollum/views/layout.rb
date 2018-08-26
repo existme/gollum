@@ -12,6 +12,10 @@ module Precious
         Gollum::Filter::PlantUML.configuration.url
       end
 
+      def author
+        @request.session['default_committer_name']
+      end
+
       def escaped_name
         CGI.escape(@name)
       end

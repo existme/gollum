@@ -54,6 +54,7 @@ Gem::Specification.new do |s|
     Rakefile
     bin/gollum
     config.rb
+    wiki-config.rb
     config.ru
     contrib/openrc/conf.d/gollum
     contrib/openrc/init.d/gollum

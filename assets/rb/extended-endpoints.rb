@@ -55,6 +55,7 @@ module Precious
       # p request.query_string
       wiki = wiki_new
       repo = wiki.path
+      gpath = File.expand_path('../../..', __FILE__)+'/'.freeze
       case request.path_info
       when '/rcc/quicksave'
         forbid unless @allow_editing
@@ -76,7 +77,7 @@ module Precious
       when '/rcc/delete'
         folder = URI.decode(request['folder'])
         current = request['current']
-        value = `assets/bin/cmd-delete-folder.sh "#{folder}" "#{repo}"`
+        value = `#{gpath}assets/bin/cmd-delete-folder.sh "#{folder}" "#{repo}"`
 
         if !current.start_with?('/' + folder)
           redirect to(current)
@@ -87,7 +88,7 @@ module Precious
       when '/rcc/delete-file'
         file = URI.decode(request['file'])
         current = request['current']
-        value = `assets/bin/cmd-delete-file.sh "#{file}" "#{repo}"`
+        value = `#{gpath}assets/bin/cmd-delete-file.sh "#{file}" "#{repo}"`
         p value
         if file != current + '.md'
           redirect to(current)
@@ -99,7 +100,7 @@ module Precious
         from = request['from']
         to = request['to']
         current = request['current']
-        value = `assets/bin/cmd-rename-folder.sh "#{from}" "#{to}" "#{repo}"`
+        value = `#{gpath}assets/bin/cmd-rename-folder.sh "#{from}" "#{to}" "#{repo}"`
         puts value
         redirect to(URI.encode(rename_string(from, to, current)))
         halt 200, { 'Content-Type' => 'text/plain' }, "renamed\n #{value}"
@@ -109,7 +110,7 @@ module Precious
         to = request['to']
         current = request['current']
 
-        value = `assets/bin/cmd-rename-file.sh "#{from}" "#{to}" "#{repo}"`
+        value = `#{gpath}assets/bin/cmd-rename-file.sh "#{from}" "#{to}" "#{repo}"`
         puts value
         redirect to(URI.encode(rename_string(from, to, current)))
         # halt 200, {'Content-Type' => 'text/plain'}, "renamed\n #{current.gsub(from, to)}"
@@ -168,14 +169,14 @@ module Precious
         author = session['gollum.author']
         author = author.nil? ? 'anonymous' : author[:name]
 
-        value = `assets/bin/cmd-create-folder.sh "#{dir}" "#{repo}"`
+        value = `#{gpath}assets/bin/cmd-create-folder.sh "#{dir}" "#{repo}"`
 
         newfile = dir + '/' + reponame
         File.open(wiki.path + '/' + newfile, 'wb') do |f|
           f.write(tempfile.read)
         end
         p "assets/bin/cmd-commit-file.sh \"#{newfile}\" \"#{author}\" "
-        value = `assets/bin/cmd-commit-file.sh "#{newfile}" "#{author}" "#{repo}"`
+        value = `#{gpath}assets/bin/cmd-commit-file.sh "#{newfile}" "#{author}" "#{repo}"`
         p 'file commited! ' + value
         halt 200, { 'Content-Type' => 'text/plain' }, "uploaded\n #{params[:file]}"
       end

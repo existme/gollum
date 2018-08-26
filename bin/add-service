@@ -1,0 +1,126 @@
+#!/bin/zsh
+
+
+autopush=false
+function usage() {
+    echo "Usage:"
+    echo "add-service
+        ${bY}-n/--name$ ${bB}<service name>
+        ${bY}-r/--repo$ ${bB}<abs repo path>
+        ${bY}-u/--serviceuser ${bB}<service user>
+        ${bY}-au/--autopush$ ${bB}<aut push true/false>${cZ}
+    "
+    echo "\nSample:\n"
+    echo "${bW}bin/add-service -n wiki-notes -r /home/existme/notes -p 8081 -au true -u existme${cz}"
+}
+
+while [ $# -gt 0 ]; do
+# Until you run out of parameters . . .
+    case "$1" in
+        -d | --debug) # "-d" or "--debug" parameter?
+            DEBUG=1
+        ;;
+        -n | --name)
+            name="$2"
+            echo "${bG}--name:${cZ} $2"
+            shift
+        ;;
+        -p | --port)
+            port="$2"
+            echo "${bG}--port:${cZ} $2"
+            shift
+        ;;
+        -pu | --plantuml)
+            plantuml="$2"
+            echo "${bG}--plantuml:${cZ} $2"
+            shift
+        ;;
+        -au | --autopush)
+            autopush="$2"
+            echo "${bG}--autopush:${cZ} $2"
+            shift
+        ;;
+        -u | --serviceuser)
+            user="$2"
+            echo "${bG}--serviceuser:${cZ} $2"
+            shift
+        ;;
+        -r | --repo)
+            repo="$2"
+            echo "${bG}--repo:${cZ} $2"
+            shift
+            if [ ! -d "$repo" ]; then
+                echo "Error: Supplied repo doesn't exist!"
+                usage;
+                exit 1
+            fi
+        ;;
+    esac
+    shift # Check next set of parameters.
+done
+
+if [ ! $name ]; then
+    echo "Missing ${bR}--name/-n${cZ}: service name not specified";
+    usage;
+    exit 1;
+elif [ ! $repo ]; then
+    echo "Missing ${bR}--repo/-r${cZ}: wiki repo not specified";
+    usage;
+    exit 1;
+elif [ ! $user ]; then
+    echo "Missing ${bR}--serviceuser/-u${cZ}: service user not specified";
+    usage;
+    exit 1;
+elif [ ! $port ]; then
+    echo "Missing ${bR}--port/-p${cZ}: wiki port not specified";
+    usage;
+    exit 1;
+fi
+./build.sh
+[ ! $plantuml ] &&  plantuml="https://www.plantuml.com/plantuml/svg"
+
+service=$name.service
+gemroot="${$(gem which gollum)/\/lib\/gollum.rb/}"
+echo "${bG}Gollum installation:${cZ} $gemroot"
+echo "${bG}PlantUml Server:${cZ} $plantuml"
+echo "Adding service $service"
+
+# sudo cp contrib/config/config.rb /etc/default/wiki-config.rb
+sudo systemctl stop $service
+
+sudo bash -c "cat > /etc/systemd/system/$service << EOF
+[Unit]
+Description=Gollum $service hosting $repo
+
+[Service]
+Environment=PLANTUML_SRV=$plantuml
+Environment=GOLLUM_AUTH=$useldap
+Environment=GLDAP_TITLE=\"Gollum Authentication USE YOUR WINDOWS CREDENTIALS e.g. aduser\"
+Environment=GLDAP_HOST="$ldaphost"
+Environment=GLDAP_PORT=$ldapport
+Environment=GLDAP_BASE="$ldapbase"
+Environment=GLDAP_UID="$ldapuid"
+Environment=GLDAP_FILTER="$ldapfilter"
+Environment=GLDAP_BIND_DN="$binddn"
+Environment=GLDAP_PASSWORD=$ldappass
+Environment=G_PROXY=$gproxy
+Environment=GOLLUM_AUTOPUSH=$autopush
+User=$user
+ExecStart=/usr/local/bin/gollum $repo --config ${gemroot}/wiki-config.rb --port $port --allow-uploads page --collapse-tree
+
+[Install]
+WantedBy=multi-user.target
+
+EOF"
+
+#cat /etc/systemd/system/$service
+#cat /etc/default/wiki-config.rb
+
+sudo systemctl daemon-reload
+sudo systemctl enable $service
+sudo systemctl restart $service
+sudo systemctl status $service
+#sudo journalctl -u $service
+#sudo journalctl -f $service
+
+#/usr/local/bin/gollum /home/existme/notes --config ${gemroot}/contrib/config/config.rb --port 8080 --allow-uploads page --collapse-tree

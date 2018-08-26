@@ -1,0 +1,29 @@
+#!/usr/bin/env zsh
+
+name=$1
+if [ ! $1 ]; then
+    echo "Service name is required, sample:"
+    echo "remove-service wiki-notes"
+    exit 1
+fi
+service=$name.service
+
+if [ ! -f /etc/systemd/system/$service ]; then
+    echo "/etc/systemd/system/${bR}$service${cZ} doesnot exists!"
+    exit 1
+fi
+
+
+read -k 1 -r "pr?Are you sure that you want to remove the service: ${bY}$service${cZ}? (y/N)"
+echo
+if [[ $pr =~ ^[Yy]$ ]]; then
+    echo "Removing ${bY}$service${cZ}..."
+else
+    echo "Nothing removed"
+    exit 0
+fi
+
+sudo systemctl stop $service
+sudo systemctl disable $service
+ls -la "/etc/systemd/system/$service"
+sudo /bin/rm "/etc/systemd/system/$service"

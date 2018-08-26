@@ -1,4 +1,6 @@
 # Configuration without authentication
+gpath = File.expand_path('..', __FILE__)
+$LOAD_PATH.unshift gpath
 require 'gollum/app'
 require 'sinatra/base'
 load 'assets/rb/plant-filter.rb'
@@ -7,7 +9,7 @@ load 'assets/rb/extended-endpoints.rb'
 
 plantuml_srv = ENV['PLANTUML_SRV']
 
-if(plantuml_srv==nil)
+if (plantuml_srv == nil)
   plantuml_srv = "http://www.plantuml.com/plantuml/png"
 end
 
@@ -16,7 +18,7 @@ p "=================================="
 p "Using PlantUML server [PLANTUML_SRV]: #{plantuml_srv}"
 
 wiki_options = {
-  :allow_uploads => true,
+    :allow_uploads => true,
     :per_page_uploads => true,
     :allow_editing => true,
     :css => false,
@@ -49,7 +51,7 @@ end
 
 if ENV['GOLLUM_AUTOPUSH'] == "true"
   Gollum::Hook.register(:post_commit, :hook_id) do |committer, sha1|
-    system('assets/hooks/post-commit "'+Precious::App.settings.gollum_path+'"')
+    system(gpath+'/assets/hooks/post-commit "' + Precious::App.settings.gollum_path + '"')
   end
 end
 
@@ -67,22 +69,22 @@ if ENV['GOLLUM_AUTH'] == "ldap"
   p ENV['GLDAP_BIND_DN']
   p ENV['GLDAP_PASSWORD']
   options = {
-    :providers => Proc.new do
-      provider :ldap,
-               :title => ENV['GLDAP_TITLE'],
-               :host => ENV['GLDAP_HOST'],
-               :port => ENV['GLDAP_PORT'],
-               :method => :ssl,
-               :base => ENV['GLDAP_BASE'],
-               :uid => ENV['GLDAP_UID'],
-               :filter => ENV['GLDAP_FILTER'],
-               :bind_dn => ENV['GLDAP_BIND_DN'],
-               :password => ENV['GLDAP_PASSWORD']
-    end,
+      :providers => Proc.new do
+        provider :ldap,
+                 :title => ENV['GLDAP_TITLE'],
+                 :host => ENV['GLDAP_HOST'],
+                 :port => ENV['GLDAP_PORT'],
+                 :method => :ssl,
+                 :base => ENV['GLDAP_BASE'],
+                 :uid => ENV['GLDAP_UID'],
+                 :filter => ENV['GLDAP_FILTER'],
+                 :bind_dn => ENV['GLDAP_BIND_DN'],
+                 :password => ENV['GLDAP_PASSWORD']
+      end,
       :dummy_auth => false,
       :protected_routes => ['/*'],
       # :author_format => Proc.new { |user| raise user.inspect },
-      :author_email => Proc.new { |user| user.email },
+      :author_email => Proc.new {|user| user.email},
       :authorized_users => nil
   }
 

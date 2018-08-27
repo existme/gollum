@@ -123,7 +123,7 @@ module Precious
         # halt 200, {'Content-Type' => 'text/plain'}, "renamed\n #{current.gsub(from, to)}"
         halt 200, { 'Content-Type' => 'text/plain' }, "renamed\n #{value}"
       when '/rcc/query-page'
-        url = request['url']
+        url = Base64.decode64(request['url'])
         res = CANTLOAD
         if url.start_with?('***')
           res = fetchWikiPage(url)

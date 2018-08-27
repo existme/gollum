@@ -92,7 +92,7 @@ const PasteEx = {
 
     let text = null;
     let reftext = null;
-    if(url.startsWith(window.origin)) {
+    if (url.startsWith(window.origin)) {
       url = url.replace(window.origin, "");
     }
     if (!chkRef) {
@@ -110,7 +110,7 @@ const PasteEx = {
       doc.replaceRange(`\n${reftext}`, to, to);
     }
 
-    localStorage.setItem('useReferencedLinks',chkRef);
+    localStorage.setItem('useReferencedLinks', chkRef);
     PasteEx.vals.editor.eventManager.emit('closeAllPopup');
     PasteEx.vals.popUp.hide();
     PasteEx.vals.editor.focus();
@@ -133,13 +133,16 @@ const PasteEx = {
       event.preventDefault();
 
       // The endpoint handles own wiki pages in a especial way to bypath authentication
-      if(clipText.startsWith(window.origin)) {
-        cleanedUrl = clipText.replace(window.origin, "***");
+      if (clipText.startsWith(window.origin)) {
+        cleanedUrl = btoa(clipText.replace(window.origin, "***"));
+      }
+      else {
+        cleanedUrl = btoa(clipText);
       }
 
       $.ajax({
         type: 'POST',
-        url: '/rcc/query-page?url=' + cleanedUrl,
+        url: `/rcc/query-page?url=${cleanedUrl}`,
         processData: false,
         contentType: false
       }).done(function (data) {

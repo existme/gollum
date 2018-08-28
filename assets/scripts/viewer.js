@@ -190,7 +190,7 @@ function filterTree(control, e) {
 
 $("input[name=treeFilter]").keyup(function (e) {
   filterTree($(this), e);
-}).focus();
+});
 
 $("button#btnResetSearch").click(function (e) {
   $("#treeFilter").val("");

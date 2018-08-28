@@ -1,10 +1,15 @@
 const $ = require('jquery');
-// Mousetrap.bind(['e'], function (e) {
-//   e.preventDefault();
-//   window.location = "/edit" + window.location.pathname;
-//   return false;
-// });
-// $('#treefilter').
+Mousetrap.bind(['e'], function (e) {
+  e.preventDefault();
+  window.location = "/edit" + window.location.pathname;
+  return false;
+});
+
+Mousetrap.bind('/', e => {
+  e.preventDefault();
+  $("input[name=treeFilter]").focus();
+  return false;
+});
 
 $('#treeFilter').bind('keydown', function (e) {
   let qData = {
@@ -12,7 +17,7 @@ $('#treeFilter').bind('keydown', function (e) {
     query: $('#treeFilter').val()
   };
   localStorage.setItem('filter', JSON.stringify(qData));
-  if (e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key==='Tab') {
+  if (e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'Tab') {
     let tree = $("#tree").fancytree("getTree");
 
     if (tree.activeNode)

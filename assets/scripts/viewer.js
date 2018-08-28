@@ -1,6 +1,5 @@
 import 'jquery.fancytree/dist/skin-win8/ui.fancytree.min.css'
 
-let prevJ = window.jQuery;
 const $ = require('jquery');
 var currentJ = $.noConflict(true);
 window.jQuery = currentJ;
@@ -33,6 +32,7 @@ $.ui.fancytree.registerExtension({
       ctx.options.contextMenu.actions);
   }
 });
+
 function scrollToNode(activeNode) {
   let t = $("#tree").fancytree("getTree");
   // t.options.scrollParent = $('#wiki-sidebar');
@@ -158,8 +158,6 @@ if (UML_SRV === "http://www.plantuml.com/plantuml/png" && sessionStorage.Alert !
   alert("Warning using: " + UML_SRV + "\nConsider changing it or remove this alert from viewer.js");
   sessionStorage.Alert = "Confirmed";
 }
-// window.jQuery = prevJ;
-// window.$ = prevJ;
 
 function filterTree(control, e) {
   let n,
@@ -198,6 +196,7 @@ $("button#btnResetSearch").click(function (e) {
   $("#treeFilter").val("");
   $("span#matches").text("");
   tree.clearFilter();
+  localStorage.removeItem('filter');
 }).attr("disabled", true);
 
 function init() {
@@ -205,7 +204,7 @@ function init() {
 
   // Load filter settings
   let qData = localStorage.getItem('filter');
-  if (qData) {
+  if (qData && qData != null) {
     qData = JSON.parse(qData);
     let diffSec = (Date.now() - qData.time) / 1000;
     if (diffSec < 60) {

@@ -33,6 +33,7 @@ const editorButtonService = {
       'Keyboard shortcuts:',
       '===============================================',
       'CTRL+S ___________________ Quick Save',
+      'CTRL+Shift+S _____________ Save and Quit to view mode (chrome://extensions/shortcuts)',
       'CTRL+Q ___________________ Quit to view mode',
       'CTRL+. ____________________ Insert template dialog',
       'CTRL+SPACE ______________ Toggle WYSIWYG/Markdown',
@@ -63,6 +64,7 @@ const editorButtonService = {
     editor.commandManager.addCommand(commands.duplicate);
     editor.commandManager.addCommand(commands.togglePreviewStyle);
     editor.commandManager.addCommand(commands.quit);
+    editor.commandManager.addCommand(commands.savequit);
     // editor.wwEditor.addKeyEventHandler(['CTRL+D','META+D'],commands.duplicate);
   },
 

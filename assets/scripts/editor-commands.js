@@ -1,11 +1,11 @@
 const common = require('./common');
 const TuiEditor = require('tui-editor');
 const $ = require('jquery');
-let _editor=null;
+let _editor = null;
 var timeout;
 const customCommands = {
   init: function (editor) {
-    _editor=editor;
+    _editor = editor;
 
     $(window).keydown(function (e) {
       // Ctrl+enter to switch from markdown to preview
@@ -37,9 +37,14 @@ const customCommands = {
           });
         }
       }
+      else if (e.key === "S" && (e.ctrlKey || e.metaKey) && e.shiftKey) {
+        // for some reason Control+Shift+S is not captured by the command so we handle it here
+        customCommands.savequit.exec(editor.getCurrentModeEditor());
+        e.preventDefault();
+      }
     });
   },
-  runQuickSave: function () {
+  runQuickSave: function (callback) {
     let form = $("#gollum-editor-form")[0];
     let title = $("#gollum-editor-page-title")[0].value;
     let pagepath = $("#gollum-editor-page-path")[0].value;
@@ -63,6 +68,7 @@ const customCommands = {
       let status = $("#gollum-editor-status");
       status.css({'display': 'inline'});
       status[0].innerHTML = "<i class=\"fas fa-save mini-icon\"></i> SAVED";
+      if(callback!=null) callback();
       clearTimeout(timeout);
       timeout = setTimeout(function () {
         status[0].innerText = "";
@@ -101,6 +107,20 @@ const customCommands = {
           window.location = $(".action-view-page")[0].href;
         else
           window.location = window.location.origin;
+      }
+    }
+  ),
+  savequit: TuiEditor.CommandManager.command(
+    'global', {
+      name: 'savequit',
+      keyMap: ['CTRL+SHIFT+S', 'META+SHIFT+S'],
+      exec(mde) {
+        let createBtn = $(".action-view-page")[0];
+        if (createBtn) {
+          customCommands.runQuickSave(function(){window.location = $(".action-view-page")[0].href;});
+        } else {
+          customCommands.runQuickSave(function(){window.location = window.location.origin;});
+        }
       }
     }
   ),

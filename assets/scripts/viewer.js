@@ -215,6 +215,9 @@ function init() {
     }
   }
   $('body').removeClass('fade-out');
+  $('input[name=treeFilter]').attr('tabindex',3);
+  $('ui-fancytree fancytree-container fancytree-plain').attr('tabindex',4);
+  $('#cc1').focus();
 }
 
 require('./global-shortcut');

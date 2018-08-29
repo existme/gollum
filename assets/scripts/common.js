@@ -1,4 +1,9 @@
 const service = {
+  endsWithAny: function(suffixes,string){
+    return suffixes.some(function (suffix) {
+      return string.endsWith(suffix);
+    });
+  },
   getDate: function (date) {
     let dd = date.getDate();
     let mm = date.getMonth() + 1; //January is 0!

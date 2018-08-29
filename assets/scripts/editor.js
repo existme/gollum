@@ -59,11 +59,9 @@ const editor = new Editor({
         processData: false,
         contentType: false
       }).done(function (data) {
-        console.log(data);
+        let filename = blob.name.replace(/ /g, '_');
+        callback(uploadedImageFolder + '/' + filename, filename);
       });
-
-      let filename = blob.name.replace(/ /g, '_');
-      callback(uploadedImageFolder + '/' + filename, filename);
     }
   },
   exts: [

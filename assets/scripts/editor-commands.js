@@ -43,6 +43,33 @@ const customCommands = {
         e.preventDefault();
       }
     });
+
+    // Listen to drop event for handling documents other than images such as pdfs, zip files, and etc.
+    editor.eventManager.listen('drop', ev => {
+      const items = ev.data.dataTransfer && ev.data.dataTransfer.files;
+
+      for (let file of items) {
+        if (common.endsWithAny(['.pdf', '.doc', '.docx', '.txt', '.zip'], file.name)) {
+          console.log(file);
+          let evData = ev.data;
+          evData.preventDefault();
+          evData.stopPropagation();
+          evData.codemirrorIgnore = true;
+          const blob = file.name ? file : file.getAsFile();
+
+          editor.eventManager.emit('addImageBlobHook', blob, (docUrl, linkText) => {
+            editor.eventManager.emit('command', 'AddLink', {
+              url: docUrl,
+              linkText: linkText || blob.name || file.type
+            });
+          }, file.type);
+
+          return false;
+        }
+        return true;
+      }
+    });
+
   },
   runQuickSave: function (callback) {
     let form = $("#gollum-editor-form")[0];
@@ -68,7 +95,7 @@ const customCommands = {
       let status = $("#gollum-editor-status");
       status.css({'display': 'inline'});
       status[0].innerHTML = "<i class=\"fas fa-save mini-icon\"></i> SAVED";
-      if(callback!=null) callback();
+      if (callback != null) callback();
       clearTimeout(timeout);
       timeout = setTimeout(function () {
         status[0].innerText = "";
@@ -117,9 +144,13 @@ const customCommands = {
       exec(mde) {
         let createBtn = $(".action-view-page")[0];
         if (createBtn) {
-          customCommands.runQuickSave(function(){window.location = $(".action-view-page")[0].href;});
+          customCommands.runQuickSave(function () {
+            window.location = $(".action-view-page")[0].href;
+          });
         } else {
-          customCommands.runQuickSave(function(){window.location = window.location.origin;});
+          customCommands.runQuickSave(function () {
+            window.location = window.location.origin;
+          });
         }
       }
     }

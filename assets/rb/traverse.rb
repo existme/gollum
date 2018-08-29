@@ -40,8 +40,20 @@ module Gollum
         path = page.path
         if path.end_with?('.md')
           %(<li data-href="#{url}" id="#{path}" data-icon="md">#{name}</li>)
-        elsif path =~ /^.*(\.png|\.jpg|\.gif)$/
+        elsif path.end_with?('.doc', '.docx')
+          %(<li data-href="#{url}" id="#{path}" data-icon="doc">#{name}</li>)
+        elsif path.end_with?('.png')
           %(<li data-href="#{url}" id="#{path}" data-icon="png">#{name}</li>)
+        elsif path.end_with?('.jpg')
+          %(<li data-href="#{url}" id="#{path}" data-icon="jpg">#{name}</li>)
+        elsif path.end_with?('.gif')
+          %(<li data-href="#{url}" id="#{path}" data-icon="gif">#{name}</li>)
+        elsif path.end_with?('.pdf')
+          %(<li data-href="#{url}" id="#{path}" data-icon="pdf">#{name}</li>)
+        elsif path.end_with?('.txt')
+          %(<li data-href="#{url}" id="#{path}" data-icon="txt">#{name}</li>)
+        elsif path.end_with?('.zip')
+          %(<li data-href="#{url}" id="#{path}" data-icon="zip">#{name}</li>)
         else
           %()
         end

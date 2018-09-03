@@ -30,7 +30,7 @@ wiki_options = {
     :ref => "master",
     :universal_toc => true,
     :show_all => true,
-    :latest_changes_count => 1000,
+    :latest_changes_count => 500,
     # :filter_chain => [ :PlantUML2, :Metadata, :PlainText, :TOC, :RemoteCode, :Code, :Macro, :Emoji, :Sanitize, :WSD, :PlantUML, :Tags, :Render ]
     :filter_chain => [:Metadata, :PlainText, :TOC, :PlantUML2, :Code, :Macro, :Emoji, :PlantUML, :Render]
 }

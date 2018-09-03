@@ -106,7 +106,7 @@ Environment=GLDAP_PASSWORD=$ldappass
 Environment=G_PROXY=$gproxy
 Environment=GOLLUM_AUTOPUSH=$autopush
 User=$user
-ExecStart=/usr/local/bin/gollum $repo --config ${gemroot}/wiki-config.rb --port $port --allow-uploads page --collapse-tree
+ExecStart=/usr/local/bin/gollum $repo --config ${gemroot}/wiki-config.rb --port $port  --adapter rugged
 
 [Install]
 WantedBy=multi-user.target

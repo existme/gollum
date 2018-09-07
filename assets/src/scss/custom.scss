@@ -971,3 +971,14 @@ kbd {
   text-transform: uppercase;
   vertical-align: top;
 }
+
+
+#user p {
+  position: absolute;
+  right: 5px;
+  top: 0px;
+  font-size: 13px;
+  z-index: 1000;
+  color: #b3b2b2;
+  font-family: "Roboto mono";
+}

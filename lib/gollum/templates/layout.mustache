@@ -67,13 +67,14 @@
 
     {{#js}}
         <script type="text/javascript" src="{{custom_path}}/custom.js"></script>{{/js}}
-
+    {{< user}}
     <title>{{title}}</title>
 </head>
 <body>
 <script type="text/javascript">
     let activeNode = '{{path}}';
 </script>
+
 {{{yield}}}
 <script type="text/javascript">
     var jOld = $.noConflict(true);

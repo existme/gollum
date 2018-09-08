@@ -146,6 +146,19 @@ $fnh1: 24;
   font-size: #{$fn13 + 2}px;
 }
 
+.tui-editor-contents dir,.tui-editor-contents menu,.tui-editor-contents ol,.tui-editor-contents ul{
+  padding-left: 20px;
+}
+
+.tui-editor-contents ol > li {
+  text-indent: -2.5em;
+  margin-left: 17px;
+}
+
+.tui-editor-contents ul li {
+  text-indent: -0.3em;
+}
+
 #pe-link-text {
   width: 450px;
 }

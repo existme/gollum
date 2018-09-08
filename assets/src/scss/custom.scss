@@ -770,7 +770,8 @@ img[src*='#3dt']:hover {
 
   //box-shadow: 0px 0px 17px -2px black;
 }
-.minibutton button{
+
+.minibutton button {
   border: 1px solid #d4d4d4;
   border-radius: 3px;
   -moz-border-radius: 3px;
@@ -779,7 +780,8 @@ img[src*='#3dt']:hover {
   color: #333;
   background-color: #f7f7f7;
 }
-.minibutton button span{
+
+.minibutton button span {
   //height: 1.4em;
   height: 20px;
   display: block;
@@ -917,7 +919,7 @@ button .mini-icon {
   background-color: black;
 }
 
-#gollum-editor-status{
+#gollum-editor-status {
   color: black;
   font-size: 18px;
   background-color: yellow;
@@ -927,7 +929,6 @@ button .mini-icon {
   align-content: center;
   display: none;
 }
-
 
 #template-selector-container {
   background-color: transparent;
@@ -964,14 +965,13 @@ kbd {
   border-radius: 4px;
   padding: 0px 0.5em;
   margin: 0.1em 0.3em;
-  box-shadow: 0 1px 0px rgba(0,0,0,0.2), 0 0 0 2px #fff inset, black -1px 1px 3px 0px;
+  box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2), 0 0 0 2px #fff inset, black -1px 1px 3px 0px;
   color: black;
   background-color: #f7f7f7;
   font-size: small;
   text-transform: uppercase;
   vertical-align: top;
 }
-
 
 #user p {
   position: absolute;
@@ -982,7 +982,6 @@ kbd {
   color: #b3b2b2;
   font-family: "Roboto mono";
 }
-
 
 ol > li:before {
   font-weight: 900;
@@ -999,8 +998,7 @@ ol > li:before {
 
 ol > li {
   list-style-type: none;
-  counter-increment:item;
-
+  counter-increment: item;
 }
 
 ol > li > ol > li:before {
@@ -1008,17 +1006,50 @@ ol > li > ol > li:before {
   background: url("/images/ui/bullet-gray.png");
   background-repeat: no-repeat;
   background-position: right;
-  content:counter(item) "." counter(item2);
+  content: counter(item) "." counter(item2);
 }
 
 ol > li > ol > li {
-  counter-increment:item2;
+  counter-increment: item2;
 }
 
 ol > li > ol > li > ol > li:before {
   width: 2.5em;
-  content:counter(item) "." counter(item2) "." counter(item3);
+  content: counter(item) "." counter(item2) "." counter(item3, lower-alpha);
 }
+
 ol > li > ol > li > ol > li {
-  counter-increment:item3;
+  counter-increment: item3;
+}
+
+ol > li > ol > li > ol > li > ol > li:before {
+  width: 2.5em;
+  content: counter(item3, lower-alpha) "." counter(item4);
+}
+
+ol > li > ol > li > ol > li ol > li {
+  counter-increment: item4;
+}
+
+ol > li > ol > li > ol > li > ol > li > ol > li:before {
+  width: 2.5em;
+  content: counter(item3, lower-alpha) "." counter(item4) "." counter(item5);
+}
+
+ol > li > ol > li > ol > li > ol > li > ol > li {
+  counter-increment: item5;
+}
+
+.markdown-body ol > li {
+  text-indent: -2.5em;
+  margin-left: 17px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.markdown-body ul li {
+  text-indent: -0.3em;
 }

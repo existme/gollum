@@ -58,7 +58,7 @@ module Precious
       end
 
       def user_name
-        @user.name
+        !@user.nil? ? @user.name : author
       end
     end
   end

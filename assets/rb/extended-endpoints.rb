@@ -125,15 +125,19 @@ module Precious
       when '/rcc/query-page'
         url = Base64.decode64(request['url'])
         res = CANTLOAD
+        proxy = ENV['G_PROXY']
+        proxy = nil if proxy == ''
+        p proxy.inspect
         if url.start_with?('***')
           res = fetchWikiPage(url)
         else
           begin
-            open(url, proxy: ENV['G_PROXY']) do |f|
+            open(url, proxy: proxy ) do |f|
               doc = Nokogiri::HTML(f)
               res = doc.at_css('title').text
             end
-          rescue Exception
+          rescue Exception => ex
+            p "Exception while fetching #{url} via proxy [#{proxy}]: #{ex.message}"
             res = CANTLOAD
           end
         end
@@ -145,7 +149,7 @@ module Precious
         begin
           out = { title: res.encode('UTF-8'), abbrev: abb }.to_json
         rescue Exception
-          res = res.force_encoding("ISO-8859-1").encode("UTF-8")
+          res = res.force_encoding('ISO-8859-1').encode('UTF-8')
           out = {title: res, abbrev: abb}.to_json
         end
 

@@ -1,5 +1,5 @@
 const service = {
-  endsWithAny: function(suffixes,string){
+  endsWithAny: function (suffixes, string) {
     return suffixes.some(function (suffix) {
       return string.endsWith(suffix);
     });
@@ -10,8 +10,8 @@ const service = {
 
     let yyyy = date.getFullYear();
 
-    if (dd < 10)  dd = '0' + dd;
-    if (mm < 10)  mm = '0' + mm;
+    if (dd < 10) dd = '0' + dd;
+    if (mm < 10) mm = '0' + mm;
 
     return yyyy + '/' + mm + '/' + dd;
   },
@@ -100,7 +100,22 @@ const service = {
     }
     return dest;
   },
+  editorGetSelection: function (editor) {
+    const mde = editor.getCurrentModeEditor();
+    const cm = mde.getEditor();
+    if (!editor.isWysiwygMode()) {
+      const doc = cm.getDoc();
 
+      let enter = "";
+      let cursor=doc.getCursor();
+      let line=doc.getLine(cursor.line);
+      if(line.length!==0 && cursor.ch!==0){
+        enter = "\n";
+      }
+      return doc.getSelection()+enter;
+    }
+    return "not implemented"
+  },
   editorReplace: function (editor, text, lMove, cStart, cEnd) {
     const mde = editor.getCurrentModeEditor();
     const cm = mde.getEditor();

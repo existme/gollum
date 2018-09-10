@@ -69,7 +69,8 @@ function initUI(editor) {
   function handleSelect() {
     let text;
     let lMove = 0, cStart = 0, cEnd = 0;
-    switch (listBox.val()) {
+    let val = listBox.val();
+    switch (val) {
       case "author":
         text = `Written by: _${author}_ `;
         break;
@@ -78,12 +79,15 @@ function initUI(editor) {
         text = `${date}`;
         cStart = -text.length;
         break;
+      case "codeblock":
+        val = "";
       case "uml":
       case "sh":
       case "json":
       case "java":
-        text = "``` " + listBox.val() + "\n" +
-          "\n" +
+        let selection = common.editorGetSelection(editor);
+        text = "``` " + val + "\n" +
+          selection +
           "```\n";
         lMove = -2;
         break;
@@ -98,7 +102,7 @@ function initUI(editor) {
         cEnd = -1;
         break;
       default:
-        text = `<< ${listBox.val()} - not implemented >>`;
+        text = `<< ${val} - not implemented >>`;
     }
     common.editorReplace(editor, text, lMove, cStart, cEnd);
     popup.hide();
@@ -110,7 +114,7 @@ function initUI(editor) {
       e.preventDefault();
       handleSelect();
     }
-    else if (e.which === 27){
+    else if (e.which === 27) {
       e.preventDefault();
       popup.hide();
       editor.focus();

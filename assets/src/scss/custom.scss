@@ -1053,3 +1053,8 @@ ol > li > ol > li > ol > li > ol > li > ol > li {
 .markdown-body ul li {
   text-indent: -0.3em;
 }
+
+li > p {
+  margin: 0;
+  display: inline;
+}

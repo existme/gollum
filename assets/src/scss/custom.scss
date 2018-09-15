@@ -983,6 +983,7 @@ kbd {
   font-family: "Roboto mono";
 }
 
+// styling ordered lists
 ol > li:before {
   font-weight: 900;
   content: counter(item);
@@ -1040,6 +1041,7 @@ ol > li > ol > li > ol > li > ol > li > ol > li {
   counter-increment: item5;
 }
 
+.tui-editor-contents ol > li,
 .markdown-body ol > li {
   text-indent: -2.5em;
   margin-left: 17px;
@@ -1050,6 +1052,7 @@ ol > li > ol > li > ol > li > ol > li > ol > li {
   margin-bottom: 0px;
 }
 
+.tui-editor-contents ul li,
 .markdown-body ul li {
   text-indent: -0.3em;
 }
@@ -1061,4 +1064,20 @@ li > p {
 
 ol li pre {
   padding-left: 50px !important;
+}
+
+// Restyling Links
+.markdown-body a:link, .tui-editor-contents a:link{
+  border-bottom: #4183c4 1px dotted;
+}
+
+.markdown-body a:hover,.markdown-body  a:visited,
+.tui-editor-contents a:hover,.tui-editor-contents  a:visited, .tui-editor-contents a
+{
+  text-decoration: none !important;
+  border-bottom: #06529c 1px solid;
+}
+
+.markdown-body a.anchor {
+  border-bottom: none;
 }

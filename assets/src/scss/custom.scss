@@ -1081,3 +1081,44 @@ ol li pre {
 .markdown-body a.anchor {
   border-bottom: none;
 }
+
+// table restyling
+
+.markdown-body table tr,
+.tui-editor table tr {
+  border:0 !important;
+  background-color: inherit;
+}
+
+.markdown-body tr th,
+.tui-editor tr th {
+  border-bottom-color: black !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  border-top: 0 !important;
+  color:black !important;
+  background-color: #e0e0e0 !important;
+  font-weight: bold !important;
+}
+
+.markdown-body td,
+.tui-editor td {
+  border-left: 0 !important;
+  border-bottom: 0 !important;
+}
+
+.markdown-body td:last-child,
+.tui-editor td:last-child {
+  border-right: 0 !important;
+}
+
+.markdown-body table,
+.tui-editor table {
+  box-shadow: 0px 0px 30px 1px rgba(0,0,0,0.5);
+  background-color: #ffffff;
+}
+
+.markdown-body table tr:nth-child(2n),
+.tui-editor table tr:nth-child(2n) {
+  background-color: #fdfdfd;
+}

@@ -27,6 +27,7 @@ function initUI(editor) {
     '  <option value="uml">UML Block</option>\n' +
     '  <option value="sh">Bash Block</option>\n' +
     '  <option value="java">Java Block</option>\n' +
+    '  <option value="js">JavaScript Block</option>\n' +
     '  <option value="json">json Block</option>\n' +
     '  <option value="picture">Picture Template</option>\n' +
     '  <option value="link">Link Template</option>\n' +
@@ -84,6 +85,7 @@ function initUI(editor) {
       case "uml":
       case "sh":
       case "json":
+      case "js":
       case "java":
         let selection = common.editorGetSelection(editor);
         text = "``` " + val + "\n" +

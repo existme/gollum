@@ -1062,8 +1062,13 @@ li > p {
   display: inline;
 }
 
-ol li pre {
-  padding-left: 50px !important;
+.markdown-body ol li pre,
+.tui-editor-contents ol li pre
+{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 15px;
+  text-indent: 0;
 }
 
 // Restyling Links

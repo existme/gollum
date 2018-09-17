@@ -134,7 +134,8 @@ module Precious
           begin
             open(url, proxy: proxy ) do |f|
               doc = Nokogiri::HTML(f)
-              res = doc.at_css('title').text
+              title = doc.at_css('title')
+              res = title==nil ? "Title not extractable":title.text
             end
           rescue Exception => ex
             p "Exception while fetching #{url} via proxy [#{proxy}]: #{ex.message}"

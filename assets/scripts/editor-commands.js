@@ -9,6 +9,8 @@ const customCommands = {
 
     $(window).keydown(function (e) {
       // Ctrl+enter to switch from markdown to preview
+      window.shiftPressed = e.shiftKey;
+
       if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
         let active = editor.getUI()._markdownTab._$activeButton.text();
         if (active === "Preview") {

@@ -121,6 +121,10 @@ const PasteEx = {
     PasteEx.vals.editor.focus();
   },
   onPaste: function (event) {
+    // if shift key is pressed just paste the URL
+    if (window.shiftPressed){
+      return false;
+    }
     let clipText = event.clipboardData.getData('Text');
     let cleanedUrl = clipText;
     if (clipText.startsWith('http')) {
@@ -147,6 +151,12 @@ const PasteEx = {
         contentType: false
       }).done(function (data) {
         data.url = clipText;
+
+        const editor = PasteEx.vals.editor;
+        let selection = common.editorGetSelection(editor);
+        if (selection && selection.trim().length !== 0) {
+          data.title = selection;
+        }
         PasteEx.showPopup(data);
         // console.log(data);
       });

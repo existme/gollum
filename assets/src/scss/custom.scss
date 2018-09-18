@@ -14,6 +14,7 @@ $fontsizeTree: 16;
 $fontsizeContent: 18;
 $fontsizeCode: 18;
 
+$darkbg: #333333;
 /* Webfont: Lato-Black */
 @font-face {
   font-family: 'LatoWebBlack';
@@ -262,6 +263,16 @@ $fontsizeCode: 18;
   src: url('/fonts/RobotoMono-Bold.woff') format('woff');
 }
 
+body{
+  font-smoothing: subpixel-antialiased !important;
+  -webkit-font-smoothing: subpixel-antialiased !important;
+  -moz-osx-font-smoothing: auto !important;
+  text-shadow: 0 0 1em transparent, 1px 1px 1.2px rgba(0, 0, 0, 0.004);
+  /*text-rendering: optimizeLegibility;*/
+  -webkit-overflow-scrolling: touch;
+  //letter-spacing: 0.025em;
+}
+
 .markdown-body code, .markdown-body pre, .markdown-body tt {
   font-family: #{$fontfaceCode};
   font-size: #{$fontsizeCode}px;
@@ -277,7 +288,7 @@ $fontsizeCode: 18;
   padding-bottom: 0px;
   min-width: 1200px;
   position: relative;
-  background-color: #111;
+  background-color: $darkbg;
   color: #FFF !important;
   font-family: #{$fontfaceHead}, 'Open Sans', arial, san-serif;
   width: 100%;
@@ -460,7 +471,7 @@ $fontsizeCode: 18;
 }
 
 .results h1 strong, .edit h1 strong, .history h1 strong {
-  color: #FF0;
+  color: #eee;
 }
 
 #gollum-dialog-dialog-inner {
@@ -478,7 +489,7 @@ $fontsizeCode: 18;
   position: absolute;
   top: 10px;
   right: 15px;
-  background-color: #111;
+  background-color: $darkbg;
 }
 
 #wiki-wrapper {
@@ -743,9 +754,9 @@ img[src*='#3dt']:hover {
 }
 
 .mini-icon, .mini-icon-2 {
-  font-size: 23px;
+  font-size: 16px;
   vertical-align: middle;
-  margin-top: -2px;
+  margin-top: -1px;
   margin-right: 10px;
   color: #7c0000;
 }
@@ -809,6 +820,7 @@ button .mini-icon {
   padding-left: 10px;
   padding-top: 10px;
   padding-bottom: 5px;
+  background-color: #333333;
 }
 
 #gollum-editor-edit-summary input {
@@ -1126,4 +1138,12 @@ li > p {
 .markdown-body table tr:nth-child(2n),
 .tui-editor table tr:nth-child(2n) {
   background-color: #fdfdfd;
+}
+
+.night #gollum-editor-form{
+  background-color: #0B0A09;
+}
+
+.night #gollum-editor {
+  background-color: $darkbg;
 }

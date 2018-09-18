@@ -13,6 +13,7 @@ let content = document.querySelector('#mdContent').value;
 const rendererUrl = UML_SRV + "/";
 const commands = require('./editor-commands');
 const $ = require('jquery');
+$('body').addClass('night');
 
 if (editMode === 'create') {
   const title = $("#gollum-editor-page-title").val();
@@ -25,7 +26,7 @@ if (editMode === 'create') {
     `Start your content here...\n\n` +
     `\`\`\` sh\n` +
     `code placeholder\n` +
-    `\`\`\`\n\n`+
+    `\`\`\`\n\n` +
     `* * *\n` +
     `Creation date: _${common.getDate(new Date())}_\n`;
   mdc.val(content);
@@ -101,6 +102,28 @@ $(window).resize(function () {
 $("#gollum-editor-quicksave").click(function () {
   commands.runQuickSave();
 });
+
+function setNightMode(mode) {
+  let button = $('#gollum-editor-toggle-night span');
+  if (mode === "true") {
+    $('body').addClass('night');
+    button.html('<i class="fas fa-sun mini-icon"></i>Light Mode')
+  }
+  else {
+    $('body').removeClass('night');
+    button.html('<i class="fas fa-moon mini-icon"></i>Dark Mode')
+  }
+}
+
+$("#gollum-editor-toggle-night").click(function () {
+  let mode = localStorage.getItem('nightmode');
+  mode= mode==="true"?"false":"true";
+  setNightMode(mode);
+  localStorage.setItem('nightmode', mode);
+});
+
+setNightMode(localStorage.getItem('nightmode') === "true"?"true":"false");
+
 commands.init(editor);
 
 $(document).ready(function () {

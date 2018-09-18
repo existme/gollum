@@ -1,12 +1,17 @@
 $fn10: 10;
 $fn12: 12;
-$fn13: 13;
+$fn13: 16;
 /*fnh1 was 24 (13+11)*/
 $fnh1: 24;
+$fn13h: $fn13;
+$darkbg: #333333;
+$darkestbg: #111111;
+$codebg: #1e2126;
 
 .CodeMirror {
   /* Set height, width, borders, and global font properties here */
-  font-family: "Roboto Mono", monospace;
+  //font-family: "Roboto Mono", monospace;
+  font-family: "Source Code Pro", monospace;
 }
 
 .tui-tooltip {
@@ -22,9 +27,10 @@ $fnh1: 24;
 .te-md-container .CodeMirror,
 .tui-editor-defaultUI .te-tab button,
 .tui-popup-header .tui-popup-title,
-.tui-popup-code-block-editor .CodeMirror-line{
+.tui-popup-code-block-editor .CodeMirror-line {
   font-size: #{$fn13}px;
 }
+
 .tui-editor-defaultUI button,
 .tui-editor-defaultUI .te-mode-switch-section,
 .tui-popup-body,
@@ -32,7 +38,8 @@ $fnh1: 24;
 .te-popup-code-block-languages button {
   font-size: #{$fn12}px;
 }
-.te-preview,.te-ww-container {
+
+.te-preview, .te-ww-container {
   background-color: #f3f3f3;
 }
 
@@ -40,45 +47,46 @@ $fnh1: 24;
   background-color: #f8f8f8;
   border: 1px solid #ccc;
 }
+
 //.CodeMirror pre {
 //  background-color: #f8f8f8;
 //  border: 1px solid #ccc;
 //}
-.CodeMirror-selected{
+.CodeMirror-selected {
   background: #d9d9d9 !important;
 }
 
 .tui-tooltip,
 .te-ww-block-overlay.code-block-header span,
 .te-ww-block-overlay.code-block-header button,
-.te-input-language input
-{
+.te-input-language input {
   font-size: #{$fn10}px;
 }
 
-.cm-header {
+.cm-s-default .cm-header {
   font-weight: 900;
-  //box-shadow: -4px 4px 20px 4px rgba(0, 0, 0, 0.5);
-  //border: darkred 2px dashed;
-  color: black !important;
-  text-shadow: -1px 1px white;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom: 1px solid black;
+  //color: black !important;
+  //text-shadow: -1px 1px white;
+  //padding-left: 5px;
+  //padding-right: 5px;
+  //border-bottom: 1px solid black;
+  font-size: #{$fnh1}px;
+  color: #c90303;
 }
 
-.te-heading-add h1
-{
+span.cm-strong {
+  font-weight: bolder;
+}
+
+.te-heading-add h1 {
   font-size: #{$fnh1}px;
 }
 
-.te-heading-add h2
-{
+.te-heading-add h2 {
   font-size: #{$fnh1 - 2}px;
 }
 
-.te-heading-add h3
-{
+.te-heading-add h3 {
   font-size: #{$fnh1 - 4}px;
 }
 
@@ -95,64 +103,65 @@ $fnh1: 24;
 }
 
 .CodeMirror .cm-header-1 {
-  font-size: #{$fnh1}px;
-  background: rgba(0,0,0,0.3)
+  font-size: #{$fn13h}px;
 }
 
 .CodeMirror .cm-header-2 {
-  font-size: #{$fnh1 - 2}px;
-  background: rgba(0,0,0,0.2)
+  font-size: #{$fn13h}px;
 }
 
 .CodeMirror .cm-header-3 {
-  font-size: #{$fnh1 - 4}px;
-  background: rgba(0,0,0,0.1)
+  font-size: #{$fn13h}px;
 }
 
 .CodeMirror .cm-header-4 {
-  font-size: #{$fnh1 - 6}px;
-  background: rgba(0,0,0,0.05)
+  font-size: #{$fn13h}px;
 }
 
 .CodeMirror .cm-header-5 {
-  font-size: #{$fnh1 - 8}px;
-  background: rgba(0,0,0,0.05)
+  font-size: #{$fn13h}px;
 }
 
 .CodeMirror .cm-header-6 {
-  font-size: #{$fnh1 - 10}px;
-  background: rgba(0,0,0,0.05)
+  font-size: #{$fn13h}px;
 }
 
-.tui-editor-contents h1{
+.tui-editor-contents h1 {
   font-size: #{$fnh1}px;
 }
+
 .tui-editor-contents h2 {
   font-size: #{$fnh1 - 2}px;
 }
+
 .tui-editor-contents h3 {
   font-size: #{$fnh1 - 4}px;
 }
+
 .tui-editor-contents h4 {
   font-size: #{$fnh1 - 6}px;
 }
-.tui-editor-contents h5{
+
+.tui-editor-contents h5 {
   font-size: #{$fnh1 - 8}px;
 }
+
 .tui-editor-contents h6 {
   font-size: #{$fnh1 - 10}px;
 }
+
 .tui-editor-contents {
   font-size: #{$fn13 + 2}px;
 }
 
-.tui-editor-contents dir,.tui-editor-contents menu,.tui-editor-contents ol,.tui-editor-contents ul{
+.tui-editor-contents dir, .tui-editor-contents menu, .tui-editor-contents ol, .tui-editor-contents ul {
   padding-left: 20px;
 }
 
 #pe-link-text {
   width: 450px;
 }
+
 #pe-link-abb {
   width: 200px;
   background-color: #8e8e9e;
@@ -163,4 +172,159 @@ $fnh1: 24;
   width: 20px;
   height: 20px;
   vertical-align: middle;
+}
+
+blockquote blockquote {
+  border-left-color: #7b7878 !important;
+}
+
+//dark theme
+
+.night .tui-editor-defaultUI,
+.night .tui-editor-defaultUI .te-markdown-tab-section,
+.night .tui-editor-defaultUI-toolbar {
+  background-color: $darkestbg;
+  border-color: $darkestbg;
+}
+
+body.webkit .night {
+  background-color: $darkbg !important;
+}
+
+.night #gollum-editor-function-bar {
+  display: none;
+}
+
+.night .te-markdown-tab-section .te-tab button.te-tab-active, .te-markdown-tab-section .te-tab button:hover.te-tab-active {
+  background-color: $darkbg;
+  color: white;
+  border-bottom-color: gray;
+}
+
+.night .tui-editor-defaultUI-toolbar button,
+.night .editor-button {
+  background-color: $darkbg;
+  border-color: #555;
+}
+
+.night .tui-editor-defaultUI-toolbar button:hover,
+.night .editor-button:hover {
+  background-color: #888;
+}
+
+.night .tui-editor-defaultUI .te-tab button {
+  background-color: $darkbg;
+}
+
+.night .CodeMirror.cm-s-default.CodeMirror-wrap {
+  background-color: $codebg;
+}
+
+.night .tui-editor-defaultUI .te-mode-switch-section {
+  background-color: #1c1c1e;
+}
+
+.cm-s-default .cm-comment {
+  color: #8b8b8b;
+}
+
+.night .cm-s-default .cm-comment {
+  color: #5c6370;
+}
+
+.night .CodeMirror pre {
+  color: #abb2bf;
+}
+
+.cm-s-default .cm-quote {
+  color: #363331;
+  background-color: #ece9e5
+}
+
+.night .cm-s-default .cm-quote {
+  color: #858585;
+  background-color: #24282e
+}
+
+.cm-s-default .cm-builtin {
+  color: #8250f7;
+}
+
+.cm-s-default .cm-builtin {
+  color: #a892dd;
+}
+
+.cm-s-default .cm-keyword,
+.cm-s-default .cm-variable-3, .cm-s-default .cm-variable-2,
+.cm-s-default .cm-variable-1, .cm-s-default .cm-type {
+  color: #4f505d;
+}
+
+.night .cm-s-default .cm-keyword,
+.night .cm-s-default .cm-variable-3, .night .cm-s-default .cm-variable-2,
+.night .cm-s-default .cm-variable-1, .night .cm-s-default .cm-type {
+  color: #929599;
+}
+
+.cm-s-default .cm-link {
+  color: #427b58;
+  text-decoration-line: none;
+}
+
+.night .cm-s-default .cm-link {
+  color: #98c379;
+}
+
+span.cm-string.cm-url {
+  color: #34699d;
+  text-decoration: none;
+  border-bottom: #34699d 1px dotted;
+}
+
+.night span.cm-string.cm-url {
+  color: #6699cc;
+  text-decoration: none;
+  border-bottom: #6699cc 1px dotted
+}
+
+.CodeMirror-cursor {
+  border-left: 1px solid black;
+}
+
+.night .CodeMirror-cursor {
+  border-left: 1px solid white;
+}
+
+.cm-s-default .cm-header {
+  //color: #c90303;
+  color: #9d0006;
+}
+
+.night .cm-s-default .cm-header {
+  color: #eda35e;
+}
+
+.night .te-toolbar-section, .night .te-mode-switch-section {
+  border-bottom-color: $darkbg;
+  border-top-color: $darkbg;
+}
+
+.night input#gollum-editor-message-field {
+  background-color: #202020;
+  color: #c5c4c4;
+}
+
+body{
+  background-color: $darkbg !important;
+}
+
+.night ul.actions, .night .minibutton, .night .minibutton a, .night .minibutton button span {
+  background: #4d4d4d;
+  text-shadow: none;
+  color: white;
+  border-color: #616161;
+}
+
+.night .mini-icon, .night .mini-icon {
+  color: #ADB367;
 }

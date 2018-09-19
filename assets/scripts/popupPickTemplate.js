@@ -14,10 +14,10 @@ function initUI(editor) {
 
   toolbar.addButton({
     name: extensionName,
-    className: 'tui-template',
+    className: 'fas fa-feather-alt font-button',
     event: 'evtTemplate',
     tooltip: '<b>Insert a template</b><br><kbd>Ctrl</kbd>+<kbd>.</kbd>',
-    $el: $('<div class="editor-button" style="color:#00c132"><i class="fas fa-stamp"></i></div>')
+    $el: $('<div class="editor-button"><i class="fas fa-feather-alt font-button"></i></div>')
   }, 3);
   const buttonIndex = toolbar.indexOfItem(extensionName);
   const {$el: $button} = toolbar.getItem(buttonIndex);

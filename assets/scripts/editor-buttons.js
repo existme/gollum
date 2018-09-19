@@ -14,18 +14,18 @@ const editorButtonService = {
 
     this.toolbar.addButton({
       name: 'Help',
-      className: 'fab fa-info-circle',
+      className: 'fab fa-info-circle font-button',
       event: 'evtHelp',
       tooltip: '     Help',
-      $el: $('<div class="editor-button" style="color:navy"><i class="fa fa-info-circle"></i></div>')
+      $el: $('<div class="editor-button"><i class="fa fa-info-circle font-button"></i></div>')
     }, 1);
 
     this.toolbar.addButton({
       name: 'Mode',
-      className: 'fa fa-modx',
+      className: 'fa fa-columns font-button',
       command: 'togglePreviewStyle',
       tooltip: makeTooltip('Toggle Preview Style','<kbd>Alt</kbd>+<kbd>`</kbd>'),
-      $el: $('<div class="editor-button" style="color:#ffc132"><i class="fa fa-clone"></i></div>')
+      $el: $('<div class="editor-button"><i class="fa fa-columns font-button"></i></div>')
     }, 1);
 
 
@@ -51,13 +51,63 @@ const editorButtonService = {
 
     editorButtonService.setStoredPreviewStyle();
 
-    this.toolbar._items.find(b => b._name === 'bold')._tooltip = makeTooltip('Bold','<kbd>Ctrl</kbd>+<kbd>b</kbd>');
-    this.toolbar._items.find(b => b._name === 'italic')._tooltip = makeTooltip('Italic','<kbd>Ctrl</kbd>+<kbd>i</kbd>');
-    this.toolbar._items.find(b => b._name === 'hr')._tooltip = makeTooltip('Line','<kbd>Ctrl</kbd>+<kbd>l</kbd>');
-    this.toolbar._items.find(b => b._name === 'ul')._tooltip = makeTooltip('Unordered list','<kbd>Ctrl</kbd>+<kbd>u</kbd>');
-    this.toolbar._items.find(b => b._name === 'ol')._tooltip = makeTooltip('Ordered list','<kbd>Ctrl</kbd>+<kbd>o</kbd>');
-    this.toolbar._items.find(b => b._name === 'codeblock')._tooltip = makeTooltip('Insert codeBlock','<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>p</kbd>');
-    this.toolbar._items.find(b => b._name === 'code')._tooltip = makeTooltip('Inline code','<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>c</kbd>');
+    let el=this.toolbar._items.find(b => b._name === 'heading');
+    el.$el.removeClass().addClass('fas fa-heading font-button');
+
+    el = this.toolbar._items.find(b => b._name === 'bold');
+    el._tooltip = makeTooltip('Bold','<kbd>Ctrl</kbd>+<kbd>b</kbd>');
+    el.$el.removeClass().addClass('fas fa-bold font-button');
+
+    el = this.toolbar._items.find(b => b._name === 'italic');
+    el._tooltip = makeTooltip('Italic','<kbd>Ctrl</kbd>+<kbd>i</kbd>');
+    el.$el.removeClass().addClass('fas fa-italic font-button');
+
+    el = this.toolbar._items.find(b => b._name === 'colorSyntax');
+    el.$el.removeClass().addClass('fas fa-brush font-button');
+
+    el = this.toolbar._items.find(b => b._name === 'strike');
+    el.$el.removeClass().addClass('fas fa-strikethrough font-button');
+
+    el = this.toolbar._items.find(b => b._name === 'hr');
+    el._tooltip = makeTooltip('Line','<kbd>Ctrl</kbd>+<kbd>l</kbd>');
+    el.$el.removeClass().addClass('fas fa-ruler-horizontal font-button');
+
+    el=this.toolbar._items.find(b => b._name === 'quote');
+    el.$el.removeClass().addClass('fas fa-angle-double-right font-button');
+
+    el=this.toolbar._items.find(b => b._name === 'ul');
+    el._tooltip = makeTooltip('Unordered list','<kbd>Ctrl</kbd>+<kbd>u</kbd>');
+    el.$el.removeClass().addClass('fas fa-list-ul font-button');
+
+    el = this.toolbar._items.find(b => b._name === 'ol');
+    el._tooltip = makeTooltip('Ordered list','<kbd>Ctrl</kbd>+<kbd>o</kbd>');
+    el.$el.removeClass().addClass('fas fa-list-ol font-button');
+
+    el = this.toolbar._items.find(b => b._name === 'task');
+    el.$el.removeClass().addClass('fas fa-tasks font-button');
+
+    el = this.toolbar._items.find(b => b._name === 'indent');
+    el.$el.removeClass().addClass('fas fa-indent font-button');
+
+    el = this.toolbar._items.find(b => b._name === 'outdent');
+    el.$el.removeClass().addClass('fas fa-outdent font-button');
+
+    el = this.toolbar._items.find(b => b._name === 'table');
+    el.$el.removeClass().addClass('fas fa-table font-button');
+
+    el = this.toolbar._items.find(b => b._name === 'image');
+    el.$el.removeClass().addClass('fas fa-image font-button');
+
+    el = this.toolbar._items.find(b => b._name === 'link');
+    el.$el.removeClass().addClass('fas fa-link font-button');
+
+    el = this.toolbar._items.find(b => b._name === 'code');
+    el._tooltip = makeTooltip('Inline code','<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>c</kbd>');
+    el.$el.removeClass().addClass('fas fa-code font-button');
+
+    el = this.toolbar._items.find(b => b._name === 'codeblock');
+    el._tooltip = makeTooltip('Insert codeBlock','<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>p</kbd>');
+    el.$el.removeClass().addClass('fas fa-keyboard font-button');
 
     editor.commandManager.addCommand(commands.insertTemplate);
     editor.commandManager.addCommand(commands.quickSave);

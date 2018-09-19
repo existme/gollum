@@ -179,13 +179,15 @@ blockquote blockquote {
   border-left-color: #7b7878 !important;
 }
 
-.tui-editor-defaultUI button.tui-scrollsync{
+.tui-editor-defaultUI button.tui-scrollsync {
   padding-right: 5px;
   padding-left: 5px;
 }
+
 #gollum-editor {
   padding-bottom: 0 !important;
 }
+
 #gollum-editor-submit {
   padding: 3px 10px;
 }
@@ -215,8 +217,8 @@ body.webkit .night {
 
 .night .tui-editor-defaultUI-toolbar button,
 .night .editor-button {
-  background-color: $darkbg;
-  border-color: #555;
+  background-color: $darkestbg;
+  border-color: $darkestbg;
 }
 
 .night .tui-editor-defaultUI-toolbar button:hover,
@@ -326,7 +328,7 @@ span.cm-string.cm-url {
   color: #c5c4c4;
 }
 
-body, #gollum-editor{
+body, #gollum-editor {
   background-color: $darkbg !important;
 }
 
@@ -345,16 +347,26 @@ body, #gollum-editor{
 .night button.te-switch-button.markdown.active {
   background-color: $darkbg;
   color: white;
-  border-color:$darkbg-light;
+  border-color: $darkbg-light;
 }
 
 .night button.te-switch-button.wysiwyg,
 .night button.te-switch-button.markdown {
   background-color: $darkbg;
   color: gray;
-  border-color:$darkbg-light;
+  border-color: $darkbg-light;
 }
 
 .night .tui-editor-defaultUI button.tui-scrollsync.active {
   color: yellow;
+}
+
+.tui-editor-defaultUI button.font-button,
+.editor-button .font-button {
+  color: $darkbg;
+}
+
+.night .tui-editor-defaultUI button.font-button,
+.night .editor-button .font-button {
+  color: white;
 }

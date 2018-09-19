@@ -5,6 +5,7 @@ $fn13: 16;
 $fnh1: 24;
 $fn13h: $fn13;
 $darkbg: #333333;
+$darkbg-light: #555555;
 $darkestbg: #111111;
 $codebg: #1e2126;
 
@@ -178,6 +179,17 @@ blockquote blockquote {
   border-left-color: #7b7878 !important;
 }
 
+.tui-editor-defaultUI button.tui-scrollsync{
+  padding-right: 5px;
+  padding-left: 5px;
+}
+#gollum-editor {
+  padding-bottom: 0 !important;
+}
+#gollum-editor-submit {
+  padding: 3px 10px;
+}
+
 //dark theme
 
 .night .tui-editor-defaultUI,
@@ -314,7 +326,7 @@ span.cm-string.cm-url {
   color: #c5c4c4;
 }
 
-body{
+body, #gollum-editor{
   background-color: $darkbg !important;
 }
 
@@ -327,4 +339,22 @@ body{
 
 .night .mini-icon, .night .mini-icon {
   color: #ADB367;
+}
+
+.night button.te-switch-button.wysiwyg.active,
+.night button.te-switch-button.markdown.active {
+  background-color: $darkbg;
+  color: white;
+  border-color:$darkbg-light;
+}
+
+.night button.te-switch-button.wysiwyg,
+.night button.te-switch-button.markdown {
+  background-color: $darkbg;
+  color: gray;
+  border-color:$darkbg-light;
+}
+
+.night .tui-editor-defaultUI button.tui-scrollsync.active {
+  color: yellow;
 }

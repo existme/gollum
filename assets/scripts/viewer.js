@@ -1,16 +1,17 @@
 import 'jquery.fancytree/dist/skin-win8/ui.fancytree.min.css'
 
 const $ = require('jquery');
+require('jquery-ui');
 var currentJ = $.noConflict(true);
 window.jQuery = currentJ;
 window.$ = currentJ;
 
 const fancytree = require('jquery.fancytree');
+import 'jquery.fancytree/dist/modules/jquery.fancytree'
 import 'jquery.fancytree/dist/modules/jquery.fancytree.filter.js'
 
 require('jquery-contextmenu');
 require('./splitor.js');
-
 
 var tree_cm = require('./tree-contextmenu.js');
 tree_cm.setJQuery(currentJ);

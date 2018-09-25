@@ -50,12 +50,14 @@ module Gollum
           %(<li data-href="#{url}" id="#{path}" data-icon="gif">#{name}</li>)
         elsif path.end_with?('.pdf')
           %(<li data-href="#{url}" id="#{path}" data-icon="pdf">#{name}</li>)
-        elsif path.end_with?('.txt')
+        elsif path.end_with?('.txt', '.xml', '.js', '.java', '.py', 'pl')
           %(<li data-href="#{url}" id="#{path}" data-icon="txt">#{name}</li>)
         elsif path.end_with?('.zip')
           %(<li data-href="#{url}" id="#{path}" data-icon="zip">#{name}</li>)
-        else
+        elsif path.end_with?('.css')
           %()
+        else
+          %(<li data-href="#{url}" id="#{path}" data-icon="uk">#{name}</li>)
         end
         # %Q(  <li class="file"><a href="#{url}">xxx#{name}</a>#{valid_page ? "" : delete_file(url, valid_page)}</li>)
       end

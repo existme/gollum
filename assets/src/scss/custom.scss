@@ -614,7 +614,13 @@ span.fancytree-custom-icon.doc {
 }
 
 span.fancytree-custom-icon.txt {
-  background-image: url("/images/ui/fatcow-e-doc.txt");
+  background-image: url("/images/ui/fatcow-e-txt.png");
+  width: 32px;
+  height: 32px;
+}
+
+span.fancytree-custom-icon.uk {
+  background-image: url("/images/ui/fatcow-doc.png");
   width: 32px;
   height: 32px;
 }

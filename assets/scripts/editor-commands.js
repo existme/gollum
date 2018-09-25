@@ -51,7 +51,7 @@ const customCommands = {
       const items = ev.data.dataTransfer && ev.data.dataTransfer.files;
 
       for (let file of items) {
-        if (common.endsWithAny(['.pdf', '.doc', '.docx', '.txt', '.zip'], file.name)) {
+        if (!common.endsWithAny(['.jpg','.jpeg', '.gif', '.tiff', '.bmp', '.png', '.svg'], file.name)) {
           console.log(file);
           let evData = ev.data;
           evData.preventDefault();

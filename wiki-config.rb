@@ -4,6 +4,8 @@ $LOAD_PATH.unshift gpath
 require 'gollum/app'
 require 'sinatra/base'
 load 'assets/rb/plant-filter.rb'
+load 'assets/rb/attribute-filter.rb'
+load 'assets/rb/tasklist-filter.rb'
 load 'assets/rb/traverse.rb'
 load 'assets/rb/extended-endpoints.rb'
 
@@ -32,7 +34,7 @@ wiki_options = {
     :show_all => true,
     :latest_changes_count => 500,
     # :filter_chain => [ :PlantUML2, :Metadata, :PlainText, :TOC, :RemoteCode, :Code, :Macro, :Emoji, :Sanitize, :WSD, :PlantUML, :Tags, :Render ]
-    :filter_chain => [:Metadata, :PlainText, :TOC, :PlantUML2, :Code, :Macro, :Emoji, :PlantUML, :Render]
+    :filter_chain => [:Metadata, :PlainText, :TOC, :PlantUML2, :Code, :Macro, :PlantUML, :Emoji, :AttributeFilter,:TaskListFilter, :Render]
 }
 
 Precious::App.set(:wiki_options, wiki_options)
@@ -40,7 +42,6 @@ Precious::App.set(:environment, :production)
 # Precious::App.set(:wiki_options, {
 #     :universal_toc => true,
 # }
-
 
 Gollum::Filter::PlantUML.configure do |config|
   config.url = plantuml_srv
@@ -51,7 +52,7 @@ end
 
 if ENV['GOLLUM_AUTOPUSH'] == "true"
   Gollum::Hook.register(:post_commit, :hook_id) do |committer, sha1|
-    system(gpath+'/assets/hooks/post-commit "' + Precious::App.settings.gollum_path + '"')
+    system(gpath + '/assets/hooks/post-commit "' + Precious::App.settings.gollum_path + '"')
   end
 end
 

@@ -201,7 +201,7 @@ $("button#btnResetSearch").click(function (e) {
 }).attr("disabled", true);
 
 function init() {
-  tree.options.filter['hideExpandedCounter'] = false;
+  //tree.options.filter['hideExpandedCounter'] = false;
 
   // Load filter settings
   let qData = localStorage.getItem('filter');

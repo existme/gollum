@@ -28,6 +28,17 @@ sudo gem install gollum gollum-rugged_adapter omnigollum omniauth-ldap --no-ri -
 sudo gem install awsome_print oj --no-ri --no-rdoc
 ```
 
+with github favour:
+
+``` sh
+gem install github-markdown  
+```
+
+with common marker:
+``` sh
+gem install commonmarker  
+```
+
 ## Installing required node packages
 
 ``` bash

@@ -104,12 +104,12 @@ module Gollum
           b = second[0]
 
           # use :: operator because gollum defines its own conflicting File class
-          dir_compare = ::File.dirname(a) <=> ::File.dirname(b)
+          dir_compare = ::File.dirname(a).casecmp(::File.dirname(b))
           # p (dir_compare.inspect)+" : "+::File.dirname(a)+" ? "+::File.dirname(b)
           # Sort based on directory name unless they're equal (0) in
           # which case sort based on file name.
           if dir_compare == 0
-            ::File.basename(a) <=> ::File.basename(b)
+            ::File.basename(a).casecmp(::File.basename(b))
           else
             # if one of them is root page reverse the order
             if a.include?('/') && b.include?('/')

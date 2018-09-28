@@ -12,6 +12,8 @@
     "jquery-contextmenu": "^2.7.0",
     "jquery-ui": "^1.12.1",
     "jquery.fancytree": "^2.30.0",
+    "markdown-it-attrs": "^2.3.1",
+    "markdown-it-emoji": "^1.4.0",
     "split.js": "^1.3.5",
     "tui-color-picker": "^2.2.0",
     "tui-editor": "^1.2.6"
@@ -36,6 +38,7 @@
     "build:css-bundle2": "node-sass --output-style compressed assets/src/scss/editor-bundle.scss > lib/gollum/public/gollum/assets/scripts/editor-bundle.css",
     "build:copy-files": "mkdir -p lib/gollum/public/gollum/assets/webfonts && cp node_modules/@fortawesome/fontawesome-free/webfonts/* lib/gollum/public/gollum/assets/webfonts && cp ./node_modules/tui-editor/dist/tui-editor.png lib/gollum/public/gollum/assets/scripts/",
     "build:dev": "npm run build:copy-files && npm run build:css-tui && npm run build:css-custom && npm run build:css-bundle && npm run build:css-bundle2 && npm run build:js-dev",
+    "build:devq": "( npm run build:copy-files && npm run build:css-tui && npm run build:css-custom && npm run build:css-bundle && npm run build:css-bundle2 && npm run build:js-dev ) >/dev/null 2>&1",
     "build:prod": "npm run build:copy-files && npm run build:css-tui && npm run build:css-custom && npm run build:css-bundle && npm run build:css-bundle2 && npm run build:js-prod"
   },
   "repository": {

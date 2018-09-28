@@ -31,7 +31,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'useragent', '~> 0.16.2'
   s.add_dependency 'gemojione', '~> 3.2'
 
-  s.add_dependency 'github-markdown'
+  # s.add_dependency 'github-markdown'
+  s.add_dependency 'commonmarker'
   s.add_dependency 'gollum-rugged_adapter'
   s.add_dependency 'omniauth-ldap'
   # s.add_dependency 'omnigollum'

@@ -88,8 +88,11 @@ function resizeEditor() {
 
 let editButtons = require("./editor-buttons.js");
 editButtons.init(editor);
-console.log("Editor initialized");
+let emoji = require('markdown-it-emoji');
+let attrs = require('markdown-it-attrs');
+Editor.markdownitHighlight.use(emoji).use(attrs);
 
+console.log("Editor initialized");
 
 $(window).resize(function () {
   resizeEditor();

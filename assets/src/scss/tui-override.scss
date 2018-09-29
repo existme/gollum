@@ -9,10 +9,21 @@ $darkbg-light: #555555;
 $darkestbg: #111111;
 $codebg: #1e2126;
 
+@font-face {
+  font-family: 'SauceCodePro Nerd Font';
+  src: url('SauceCodeProNerd-Regular.eot');
+  src: url('SauceCodeProNerd-Regular.eot?#iefix') format('embedded-opentype'),
+  url('SauceCodeProNerd-Regular.woff2') format('woff2'),
+  url('SauceCodeProNerd-Regular.woff') format('woff'),
+  url('SauceCodeProNerd-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .CodeMirror {
   /* Set height, width, borders, and global font properties here */
   //font-family: "Roboto Mono", monospace;
-  font-family: "Source Code Pro", monospace;
+  font-family: "SauceCodePro Nerd Font", monospace;
 }
 
 .tui-tooltip {

@@ -15,6 +15,7 @@ $fontsizeContent: 18;
 $fontsizeCode: 18;
 
 $darkbg: #333333;
+
 /* Webfont: Lato-Black */
 @font-face {
   font-family: 'LatoWebBlack';
@@ -1104,44 +1105,68 @@ li > p {
 }
 
 // table restyling
-
-.markdown-body table tr,
-.tui-editor table tr {
-  border: 0 !important;
-  background-color: inherit;
-}
-
-.markdown-body tr th,
-.tui-editor tr th {
-  border-bottom-color: black !important;
-  border-left: 0 !important;
-  border-right: 0 !important;
-  border-top: 0 !important;
-  color: black !important;
-  background-color: #e0e0e0 !important;
-  font-weight: bold !important;
-}
-
-.markdown-body td,
-.tui-editor td {
-  border-left: 0 !important;
-  border-bottom: 0 !important;
-}
-
-.markdown-body td:last-child,
-.tui-editor td:last-child {
-  border-right: 0 !important;
-}
+$body-grid-c: #cccccc85;
+$alternate-row-c: #fdfdfd;
+$border-c: black;
 
 .markdown-body table,
 .tui-editor table {
-  box-shadow: 0px 0px 30px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 3px 0px $border-c;
   background-color: #ffffff;
+  border: $border-c solid 0px;
+}
+
+.markdown-body table tr th, .markdown-body table tr td {
+  border: 0;
+}
+
+.markdown-body table tr,
+.tui-editor table tr {
+  border: 0;
+  background-color: inherit;
+}
+
+.markdown-body table tr th,
+.tui-editor table tr th {
+  border-bottom: $border-c solid 1px;
+  border-left: 0;
+  border-right: $border-c dashed 1px;
+  border-top: 0;
+  color: black;
+  background-color: #e0e0e0;
+  font-weight: bold;
+}
+
+.markdown-body table tr th:last-child,
+.tui-editor table tr th:last-child {
+  border-right: 0;
+}
+
+.markdown-body table tbody tr td,
+.tui-editor table tbody tr td {
+  border-left: 0;
+  border-right: $body-grid-c dashed 1px;
+  border-bottom: 0;
+}
+
+.markdown-body table td:last-child,
+.tui-editor table td:last-child {
+  border-right: 0 !important;
+}
+
+.markdown-body table tbody tr,
+.tui-editor table tbody tr {
+  border-bottom: $body-grid-c solid 1px;
+}
+
+.markdown-body table tbody tr:last-child,
+.tui-editor table tbody tr:last-child {
+  border-bottom: $border-c solid 1px;
 }
 
 .markdown-body table tr:nth-child(2n),
 .tui-editor table tr:nth-child(2n) {
-  background-color: #fdfdfd;
+  background-color: $alternate-row-c;
 }
 
 .night #gollum-editor-form {
@@ -1207,9 +1232,67 @@ li > p {
   color: red;
 }
 
+.hl {
+  background-color: #fff199;
+  border-bottom: hsla(52, 100%, 57%, 1) solid 1px;
+  border-top: #fff199 solid 2px;
+}
+
+.info {
+  background-color: #fcfcfc;
+  border: #aab8c6 solid 1px;
+  color: #333;
+  border-radius: 5px;
+  padding: 10px 10px 10px 36px;
+}
+
+.info::before {
+  content: "";
+  font-size: 22px;
+  margin-top: -3px;
+  -webkit-font-smoothing: antialiased;
+  float: left;
+  margin-left: -29px;
+  color: #aab8c6;
+}
+
+.tui-editor-contents .info::before {
+  margin-top: 0px;
+}
+
+.info.ok {
+  border-color: #91c89c;
+  background-color: #f3f9f4;
+}
+
+.info.ok::before {
+  content: "";
+  color: #91c89c;
+}
+
+.info.danger {
+  border-color: #d04437;
+  background-color: #fff8f7;
+}
+
+.info.danger::before {
+  content: "";
+  color: #d04437;
+}
+
+.info.warn {
+  border-color: #ffeaae;
+  background-color: #fffdf6;
+}
+
+.info.warn::before {
+  content: " ";
+  color: #545454;
+  //text-shadow: #f95e02 0px 0px 5px, #170901 0px 0px 1px;
+}
+
 .i-danger {
   background: url("/images/ui/i-danger.png") no-repeat center;
   padding-left: 22px !important;
   background-position-x: 2px;
 }
-

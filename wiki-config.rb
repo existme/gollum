@@ -34,7 +34,7 @@ wiki_options = {
     :show_all => true,
     :latest_changes_count => 500,
     # :filter_chain => [ :PlantUML2, :Metadata, :PlainText, :TOC, :RemoteCode, :Code, :Macro, :Emoji, :Sanitize, :WSD, :PlantUML, :Tags, :Render ]
-    :filter_chain => [:Metadata, :PlainText, :TOC, :PlantUML2, :Code, :Macro, :PlantUML, :Emoji, :AttributeFilter,:TaskListFilter, :Render]
+    :filter_chain => [:Metadata, :PlainText, :TOC, :PlantUML2, :Code, :Macro, :PlantUML, :Emoji,:TaskListFilter,:AttributeFilter, :Render, ]
 }
 
 Precious::App.set(:wiki_options, wiki_options)

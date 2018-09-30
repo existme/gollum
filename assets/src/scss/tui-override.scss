@@ -11,11 +11,11 @@ $codebg: #1e2126;
 
 @font-face {
   font-family: 'SauceCodePro Nerd Font';
-  src: url('SauceCodeProNerd-Regular.eot');
-  src: url('SauceCodeProNerd-Regular.eot?#iefix') format('embedded-opentype'),
-  url('SauceCodeProNerd-Regular.woff2') format('woff2'),
-  url('SauceCodeProNerd-Regular.woff') format('woff'),
-  url('SauceCodeProNerd-Regular.ttf') format('truetype');
+  src: url('/fonts/hinted-SauceCodeProNerdFontCo-Regular.eot');
+  src: url('/fonts/hinted-SauceCodeProNerdFontCo-Regular.eot?#iefix') format('embedded-opentype'),
+  url('/fonts/hinted-SauceCodeProNerdFontCo-Regular.woff2') format('woff2'),
+  url('/fonts/hinted-SauceCodeProNerdFontCo-Regular.woff') format('woff'),
+  url('/fonts/hinted-SauceCodeProNerdFontCo-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -34,6 +34,10 @@ $codebg: #1e2126;
 
 .tui-editor-defaultUI {
   font-family: "LatoWeb"
+}
+
+.tui-popup-body select option {
+  font-family: "LatoWeb";
 }
 
 .te-md-container .CodeMirror,
@@ -380,4 +384,26 @@ body, #gollum-editor {
 .night .tui-editor-defaultUI button.font-button,
 .night .editor-button .font-button {
   color: white;
+}
+
+// glyph table
+#glyph-form {
+  font-size: 25px;
+  max-height: 400px;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+#glyph-selector {
+  border-collapse: collapse;
+  border: 1px solid black;
+}
+#glyph-selector tbody tr td{
+  border: 1px dashed black;
+  padding: 10px;
+  text-align: center;
+  text-shadow: #00000033 2px 2px 1px;
+}
+
+#glyph-selector tbody tr td.selected {
+  background: #ffda94;
 }

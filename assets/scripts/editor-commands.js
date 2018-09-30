@@ -108,6 +108,9 @@ const customCommands = {
   showTemplatePopup: function (editor) {
     editor.eventManager.emit('evtTemplate');
   },
+  showGlyphPopup: function (editor) {
+    editor.eventManager.emit('evtShowGlyphPicker');
+  },
   togglePreviewStyle: TuiEditor.CommandManager.command(
     'markdown', {
       name: 'togglePreviewStyle',
@@ -172,6 +175,15 @@ const customCommands = {
       keyMap: ['CTRL+.', 'META+.'],
       exec(mde) {
         customCommands.showTemplatePopup(mde);
+      }
+    }
+  ),
+  insertGlyph: TuiEditor.CommandManager.command(
+    'global', {
+      name: 'insertGlyph',
+      keyMap: ['CTRL+,', 'META+,'],
+      exec(mde) {
+        customCommands.showGlyphPopup(mde);
       }
     }
   ),

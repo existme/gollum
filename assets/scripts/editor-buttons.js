@@ -110,6 +110,7 @@ const editorButtonService = {
     el.$el.removeClass().addClass('fas fa-keyboard font-button');
 
     editor.commandManager.addCommand(commands.insertTemplate);
+    editor.commandManager.addCommand(commands.insertGlyph);
     editor.commandManager.addCommand(commands.quickSave);
     editor.commandManager.addCommand(commands.duplicate);
     editor.commandManager.addCommand(commands.togglePreviewStyle);

@@ -1,7 +1,9 @@
 import templatePickerExtension from "./popupPickTemplate";
+import glyphPickerExtension from "./popupPickGlyph";
 
 const Editor = require('tui-editor');
 require("./popupPickTemplate");
+require("./popupPickGlyph");
 const urlPaste = require("./popupUrlPaste");
 require('tui-editor/dist/tui-editor-extColorSyntax');
 require('tui-editor/dist/tui-editor-extScrollSync');
@@ -70,6 +72,7 @@ const editor = new Editor({
     'mark',
     'colorSyntax',
     'templatePicker',
+    'popupPickGlyph',
     'scrollSync',
     {
       'name': 'uml',

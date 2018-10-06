@@ -303,11 +303,25 @@ body {
 
 #head h1 {
   width: 50%;
-  height: 50px;
+  height: 172px;
   overflow: hidden;
   transition: all 0.5s;
   transform-origin: center;
   cursor: help;
+  font-size: 28px;
+  margin-top: -17px;
+  padding-top: 24px;
+}
+
+.tui-editor-contents hr,
+.markdown-body hr {
+  background: transparent url(/images/ui/divider.png) no-repeat;
+  border: 0 none;
+  color: #ccc;
+  height: 17px;
+  padding: 0;
+  background-position-y: 0px;
+  /*   background-size: contain; */
 }
 
 #head h1:hover {

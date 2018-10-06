@@ -147,16 +147,17 @@ const customCommands = {
       name: 'savequit',
       keyMap: ['CTRL+SHIFT+S', 'META+SHIFT+S'],
       exec(mde) {
-        let createBtn = $(".action-view-page")[0];
-        if (createBtn) {
-          customCommands.runQuickSave(function () {
-            window.location = $(".action-view-page")[0].href;
-          });
-        } else {
-          customCommands.runQuickSave(function () {
-            window.location = window.location.origin;
-          });
-        }
+        // let createBtn = $(".action-view-page")[0];
+        // if (createBtn) {
+        //   customCommands.runQuickSave(function () {
+        //     window.location = $(".action-view-page")[0].href;
+        //   });
+        // } else {
+        //   customCommands.runQuickSave(function () {
+        //     window.location = window.location.origin;
+        //   });
+        // }
+        $("#gollum-editor-submit").trigger("click");
       }
     }
   ),

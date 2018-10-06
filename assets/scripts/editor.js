@@ -21,7 +21,6 @@ if (editMode === 'create') {
   const title = $("#gollum-editor-page-title").val();
   const mdc = $('#mdContent');
   content =
-    `# ${title}\n` +
     `_Written by: ${author}_\n` +
     `# ${title}\n` +
     `\n` +

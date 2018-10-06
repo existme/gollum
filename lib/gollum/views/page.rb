@@ -164,7 +164,11 @@ module Precious
           when :rest
             doc.css("div#gollum-root > div > div > h1:first-child")
           else
-            doc.css("div#gollum-root > h1:first-child")
+            title = doc.css("div#gollum-root > h1:first-of-type")
+            if  title.length===0
+              title = doc.css("div#gollum-root > h2:first-of-type")
+            end
+            title
         end
       end
 
@@ -183,7 +187,7 @@ module Precious
         doc = build_document(content)
           if @h1_title
             title = find_header_node(doc)
-            title.remove unless title.empty?
+            # title.remove unless title.empty?
           end
         # .inner_html will cause href escaping on UTF-8
         doc.css("div#gollum-root").children.to_xml(@@to_xml)

@@ -1253,10 +1253,12 @@ ol.note::before {
 
 .note.red {
   border-color: red;
+  color: black;
 }
 
 .note.yellow {
   border-color: hsla(52, 100%, 57%, 1);
+  color: black;
 }
 
 .note.yellow::before {
@@ -1265,10 +1267,12 @@ ol.note::before {
 
 .note.green {
   border-color: #91c89c;
+  color: black;
 }
 
 .note.pink {
   border-color: #ebccd1;
+  color: black;
 }
 
 .red {

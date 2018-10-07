@@ -49,7 +49,10 @@ class Gollum::Filter::AttributeFilter < Gollum::Filter
       styling_element = element.parent if styling_element.nil? && element.is_a?(Nokogiri::XML::Text)
       styling_element = element.previous_element if styling_element.nil?
       styling_element = element.parent if styling_element.nil?
+      styling_element = element.parent.previous_element if styling_element.content === token
+
       styling_element.add_css_class(attr)
+
       element.content = element.content.gsub(token, '')
     end
     doc.to_html
@@ -59,7 +62,7 @@ class Gollum::Filter::AttributeFilter < Gollum::Filter
 
   def cache_attribute(attr_name)
     token = "==#{SecureRandom.hex}=="
-    @map[token] = { attr: attr_name }
+    @map[token] = {attr: attr_name}
     token
   end
 end

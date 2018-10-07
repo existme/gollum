@@ -1098,7 +1098,7 @@ ol > li > ol > li > ol > li > ol > li > ol > li {
 
 .tui-editor-contents ul li,
 .markdown-body ul li {
-  text-indent: -0.3em;
+  text-indent: -3px;
 }
 
 li > p {
@@ -1221,8 +1221,6 @@ $border-c: black;
 }
 
 // attributes
-.note-red,
-.note-pink,
 .note {
   margin-bottom: 20px;
   background-color: #fff;
@@ -1235,21 +1233,41 @@ $border-c: black;
   padding: 5px;
 }
 
-.note-red:before,
-.note-pink:before,
+// fix when used with lists
+ul.note::before,
+ol.note::before {
+  text-indent: -1.4em;
+}
+
 .note::before {
-  content: "IMPORTANT";
+  content: " NOTE";
   color: white;
   margin-top: -33px !important;
   float: left;
   margin-left: 4px;
 }
 
-.note-red {
+.note.important::before {
+  content: " IMPORTANT";
+}
+
+.note.red {
   border-color: red;
 }
 
-.note-pink {
+.note.yellow {
+  border-color: hsla(52, 100%, 57%, 1);
+}
+
+.note.yellow::before {
+  color: black;
+}
+
+.note.green {
+  border-color: #91c89c;
+}
+
+.note.pink {
   border-color: #ebccd1;
 }
 
@@ -1279,6 +1297,15 @@ $border-c: black;
   float: left;
   margin-left: -29px;
   color: #aab8c6;
+}
+
+ol.info,
+ul.info {
+  padding-left: 48px !important;
+}
+ol.info::before,
+ul.info::before {
+  margin-left: -41px;
 }
 
 .tui-editor-contents .info::before {

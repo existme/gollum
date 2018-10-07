@@ -9,20 +9,12 @@ $darkbg-light: #555555;
 $darkestbg: #111111;
 $codebg: #1e2126;
 
-@font-face {
-  font-family: 'SauceCodePro Nerd Font';
-  src: url('/fonts/hinted-SauceCodeProNerdFontCo-Regular.eot');
-  src: url('/fonts/hinted-SauceCodeProNerdFontCo-Regular.eot?#iefix') format('embedded-opentype'),
-  url('/fonts/hinted-SauceCodeProNerdFontCo-Regular.woff2') format('woff2'),
-  url('/fonts/hinted-SauceCodeProNerdFontCo-Regular.woff') format('woff'),
-  url('/fonts/hinted-SauceCodeProNerdFontCo-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
 .CodeMirror {
   /* Set height, width, borders, and global font properties here */
   //font-family: "Roboto Mono", monospace;
+  font-family: "SauceCodePro Nerd Font", monospace;
+}
+.tui-editor-contents code, .tui-editor-contents pre{
   font-family: "SauceCodePro Nerd Font", monospace;
 }
 

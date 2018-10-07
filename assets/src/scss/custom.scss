@@ -7,7 +7,7 @@ $fweight6: 600;
 $fontface: LatoWeb;
 $fontfaceHead: LatoWeb;
 $fontfaceContent: LatoWeb;
-$fontfaceCode: Roboto Mono;
+$fontfaceCode: SauceCodePro Nerd Font;
 $fontfaceTree: LatoWeb;
 
 $fontsizeTree: 16;
@@ -274,10 +274,21 @@ body {
   //letter-spacing: 0.025em;
 }
 
+@font-face {
+  font-family: 'SauceCodePro Nerd Font';
+  src: url('/fonts/hinted-SauceCodeProNerdFontCo-Regular.eot');
+  src: url('/fonts/hinted-SauceCodeProNerdFontCo-Regular.eot?#iefix') format('embedded-opentype'),
+  url('/fonts/hinted-SauceCodeProNerdFontCo-Regular.woff2') format('woff2'),
+  url('/fonts/hinted-SauceCodeProNerdFontCo-Regular.woff') format('woff'),
+  url('/fonts/hinted-SauceCodeProNerdFontCo-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .markdown-body code, .markdown-body pre, .markdown-body tt {
   font-family: #{$fontfaceCode};
   font-size: #{$fontsizeCode}px;
-  font-weight: bold;
+  font-weight: normal;
   /*background-color: #E7E7E7;*/
 }
 

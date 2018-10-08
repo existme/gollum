@@ -1106,6 +1106,14 @@ li > p {
   display: inline;
 }
 
+li table {
+  text-indent: 0px;
+}
+
+li blockquote {
+  text-indent: 0;
+}
+
 .markdown-body ol li pre,
 .tui-editor-contents ol li pre {
   padding-top: 5px;

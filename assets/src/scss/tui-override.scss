@@ -8,14 +8,15 @@ $darkbg: #333333;
 $darkbg-light: #555555;
 $darkestbg: #111111;
 $codebg: #1e2126;
-
+$code-font: "SauceCodePro Nerd Font";
 .CodeMirror {
   /* Set height, width, borders, and global font properties here */
   //font-family: "Roboto Mono", monospace;
-  font-family: "SauceCodePro Nerd Font", monospace;
+  font-family: $code-font, monospace;
 }
-.tui-editor-contents code, .tui-editor-contents pre{
-  font-family: "SauceCodePro Nerd Font", monospace;
+
+.tui-editor-contents code, .tui-editor-contents pre {
+  font-family: $code-font, monospace;
 }
 
 .tui-tooltip {
@@ -393,19 +394,64 @@ body, #gollum-editor {
   max-height: 400px;
   overflow: scroll;
   overflow-x: hidden;
+  min-width: 600px;
+  min-height: 50px;
 }
+
 #glyph-selector {
   border-collapse: collapse;
   border: 1px solid black;
 }
-#glyph-selector tbody tr td{
+
+#glyph-selector tbody tr td {
   border: 1px dashed black;
   padding: 10px;
   text-align: center;
   text-shadow: #00000033 2px 2px 1px;
 }
 
+#glyph-selector tbody tr td p {
+  font-size: 10px;
+  background-color: lightyellow;
+  color: black;
+  border: black 1px solid;
+  font-weight: 900;
+  text-shadow: none;
+}
+
 #glyph-selector tbody tr td.selected {
   background: #ffda94;
 }
 
+#glyph-footer {
+  margin-top: 4px;
+  width: 100%;
+  height: 20px;
+  font-weight: bold;
+  vertical-align: middle;
+  font-size: 14px;
+  font-family: $code-font;
+}
+
+#glyph-search {
+  width: 30%;
+  height: 100%;
+  display: inline-block;
+  background-color: #f4f4f4;
+  border: #00000047 dotted 1px;
+  padding-left: 5px;
+}
+
+#glyph-space {
+  height: 100%;
+  display: inline-block;
+}
+
+#glyph-q {
+  width: 50%;
+  height: 100%;
+  margin-left: 50px;
+  display: inline-block;
+  color: #4e4e4e;
+  text-shadow: #37050573 -1px 1px 7px;
+}

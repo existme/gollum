@@ -390,7 +390,7 @@ body, #gollum-editor {
 
 // glyph table
 #glyph-form {
-  font-size: 25px;
+  font-size: 32px;
   max-height: 400px;
   overflow: scroll;
   overflow-x: hidden;
@@ -405,7 +405,7 @@ body, #gollum-editor {
 
 #glyph-selector tbody tr td {
   border: 1px dashed black;
-  padding: 10px;
+  padding: 0 2px 3px 3px;
   text-align: center;
   text-shadow: #00000033 2px 2px 1px;
 }

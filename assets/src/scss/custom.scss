@@ -1229,30 +1229,39 @@ $border-c: black;
 }
 
 // attributes
+.tui-editor-contents .note,
 .note {
   margin-bottom: 20px;
   background-color: #fff;
-  border: 1px solid transparent;
+  border: #337ab7 1px solid;
   border-radius: 4px;
   -webkit-box-shadow: -2px 2px 18px 0px rgba(0, 0, 0, 0.75);
   box-shadow: -2px 2px 18px 0px rgba(0, 0, 0, 0.75);
-  border-color: #337ab7;
   border-top: #337ab7 32px solid;
+  border-left-color: #337ab7;
   padding: 5px;
+  display: block;
 }
 
 // fix when used with lists
-ul.note::before,
-ol.note::before {
-  text-indent: -1.4em;
+li>.note {
+  text-indent: 0.2em;
+}
+
+li>.note::before {
+  text-indent: 0;
 }
 
 .note::before {
+  display: block;
   content: " NOTE";
   color: white;
-  margin-top: -33px !important;
+  margin-top: -35px !important;
   float: left;
   margin-left: 4px;
+  position:relative;
+  font-style:normal;
+  text-indent: 0;
 }
 
 .note.important::before {
@@ -1299,6 +1308,8 @@ ol.note::before {
   color: #333;
   border-radius: 5px;
   padding: 10px 10px 10px 36px;
+  display: block;
+  text-indent: 0;
 }
 
 .info::before {
@@ -1309,6 +1320,12 @@ ol.note::before {
   float: left;
   margin-left: -29px;
   color: #aab8c6;
+  font-style: normal;
+}
+
+// this is only a hack for editor since it's rendered incorrectly
+.tui-editor blockquote.info.warn {
+  padding-left: 34px;
 }
 
 ol.info,

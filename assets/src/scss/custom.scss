@@ -1244,11 +1244,13 @@ $border-c: black;
 }
 
 // fix when used with lists
-li>.note {
+li .note,
+li > .note {
   text-indent: 0.2em;
 }
 
-li>.note::before {
+li .note::before,
+li > .note::before {
   text-indent: 0;
 }
 
@@ -1259,8 +1261,8 @@ li>.note::before {
   margin-top: -35px !important;
   float: left;
   margin-left: 4px;
-  position:relative;
-  font-style:normal;
+  position: relative;
+  font-style: normal;
   text-indent: 0;
 }
 
@@ -1332,6 +1334,7 @@ ol.info,
 ul.info {
   padding-left: 48px !important;
 }
+
 ol.info::before,
 ul.info::before {
   margin-left: -41px;

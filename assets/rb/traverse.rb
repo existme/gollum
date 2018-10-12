@@ -143,7 +143,6 @@ module Gollum
             current_path += '/' unless current_path == ''
             current_path += current_folders_array[index]
             if prev_folders_array[index].nil? || changed
-              changed = false
               html += new_sub_folder(current_folders_array[index], current_path)
               next
             end
@@ -154,6 +153,7 @@ module Gollum
             (prev_folders_array.size - index).times do
               html += end_folder current_folders_array[index]
             end
+            prev_folders_array = current_folders_array
             html += new_sub_folder(current_folders_array[index], current_path)
           end
 

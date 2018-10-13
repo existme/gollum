@@ -41,8 +41,12 @@ function initUI(editor) {
     }
   });
 
-  selectedCell = popup.$el.find('.selected').get()[0];
+  selectedCell = findSelectedCell();
+  bindTableOnClick();
 
+  function findSelectedCell(){
+    return popup.$el.find('.selected').get()[0];
+  }
   function dotheneedful(sibling) {
     if (sibling != null) {
       selectedCell.focus();
@@ -205,7 +209,7 @@ function initUI(editor) {
         }
         break;
       case code === 13:
-        handleSelect();
+        handleSelected();
         break;
       case code === 35: // do nothing for end
       case code === 36: // do nothing for home
@@ -242,8 +246,7 @@ function initUI(editor) {
     table.focus();
   });
 
-  function handleSelect() {
-    let selectedCellChar = popup.$el.find('.selected span').get()[0];
+  function handleSelect(selectedCellChar) {
     if (selectedCellChar !== undefined) {
       common.editorReplace(editor, selectedCellChar.innerHTML, 0, 0, 0);
     }
@@ -251,9 +254,22 @@ function initUI(editor) {
     editor.focus();
   }
 
-  table.on('click', () => {
-    handleSelect();
-  });
+  function handleSelected() {
+    let selectedChar = popup.$el.find('.selected span').get()[0];
+    handleSelect(selectedChar);
+  }
+
+  function bindTableOnClick() {
+    $('#glyph-selector').on('click', 'td', function (e) {
+      selectedCell = findSelectedCell();
+      if (selectedCell !== undefined) {
+        selectedCell.classList.remove('selected');
+      }
+      e.currentTarget.classList.add('selected');
+      handleSelected();
+    });
+  }
+
 }
 
 Editor.defineExtension(extensionName, glyphPickerExtension);

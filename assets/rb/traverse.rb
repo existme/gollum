@@ -27,7 +27,9 @@ module Gollum
       end
 
       def new_sub_folder(path, folder)
-        %(<li class="folder" data-href="#{folder}">#{path}<ul>)
+        p folder
+        f_class = folder.start_with?('img') ? 'folder image-folder' : 'folder'
+        %(<li class="#{f_class}" data-href="#{folder}">#{path}<ul>)
       end
 
       def enclose_tree(string)

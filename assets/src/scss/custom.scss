@@ -588,6 +588,19 @@ span.fancytree-node.fancytree-folder.fancytree-expanded > span.fancytree-icon {
   background-image: url("/images/ui/fatcow-open.png");
 }
 
+span.fancytree-node.fancytree-folder.image-folder > span.fancytree-icon {
+  background-position: 0 0;
+  background-image: url("/images/ui/folder-image.png");
+  width: 32px;
+  height: 32px;
+}
+
+/* https://www.iconfinder.com/iconsets/gloss-basic-icons-by-momentum */
+span.fancytree-node.fancytree-folder.image-folder.fancytree-expanded > span.fancytree-icon {
+  background-position: 0 0;
+  background-image: url("/images/ui/folder-image-open.png");
+}
+
 .fancytree-has-children.fancytree-ico-cf span.fancytree-icon:hover {
   background-position: 0 0 !important;
 }

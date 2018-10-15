@@ -96,15 +96,18 @@ module Gollum
           page = @pages[index]
           path = page.path
           unless ignored_list.match(path) || path.start_with?('"') || path.start_with?('.')
-            sorted_folders += [[path, index]]
+            # replace `-` with 126 which is the highest ascii character for fixing '-' < '<' or 45 < 47
+            sorted_folders += [[path, index, path.tr('-', 126.chr)]]
           end
         end
 
         # http://stackoverflow.com/questions/3482814/sorting-list-of-string-paths-in-vb-net
         sorted_folders.sort! do |first, second|
-          a = first[0]
-          b = second[0]
+          a = first[2]
+          b = second[2]
 
+          c = ::File.dirname(a)
+          d = ::File.dirname(b)
           # use :: operator because gollum defines its own conflicting File class
           dir_compare = ::File.dirname(a).casecmp(::File.dirname(b))
           # p (dir_compare.inspect)+" : "+::File.dirname(a)+" ? "+::File.dirname(b)

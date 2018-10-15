@@ -68,7 +68,7 @@ const commands = {
 
   new_page: function (node, action, options) {
     var dest = "/" + node.data.href;
-    if(!node.isFolder()){
+    if (!node.isFolder()) {
       dest = common.getParentPath(node);
     }
 
@@ -94,7 +94,7 @@ const commands = {
         var name_encoded = [];
 
         // Remove all leading slashes from destination
-        dest = dest.replace(/^\/+/g,'');
+        dest = dest.replace(/^\/+/g, '');
 
         var name_parts = abspath(dest, name).join('/').split('/');
         // Split and encode each component individually.
@@ -107,7 +107,12 @@ const commands = {
     });
     commands.focus_input();
   },
-
+  focus_dialog: function () {
+    setTimeout(function () {
+      $('#gollum-dialog-action-ok').attr('tabindex', 1);
+      $('#gollum-dialog-action-cancel').attr('tabindex', 1).focus();
+    });
+  },
   focus_input: function () {
     setTimeout(function () {
       let txtInput = $('#gollum-dialog-dialog-generated-field-name');
@@ -130,6 +135,7 @@ const commands = {
     var path = window.location.origin + destSpan + title;
     jq172.GollumDialog.init({
       title: '<i class="fas fa-trash-alt"></i>&nbsp;-&nbsp;Delete page</h4>Are you sure you want to delete this page? <br><br> <code class="page-address">' + path + '</code>',
+      fields: [],
       OK: function (res) {
         // var loc = baseUrl + '/delete/' + pageFullPath;
         // window.location = loc;
@@ -137,6 +143,7 @@ const commands = {
         common.post('/rcc/delete-file?file=' + fileToDelete + '&current=' + window.location.pathname, {});
       }
     });
+    commands.focus_dialog();
   },
 
   delete_folder: function (node, action, options) {

@@ -16,6 +16,30 @@ $fontsizeCode: 18;
 
 $darkbg: #333333;
 
+@media print {
+  #wiki-sidebar, #head, .gutter,#user {
+    display: none !important;
+  }
+  .markdown-body {
+    width: 100% !important;
+    float: none !important;
+    height: inherit !important;
+    padding:10px !important;
+    margin: 0 !important;
+    background: #FFFFFF !important;
+  }
+  html {
+    zoom: 75%;
+  }
+  table {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  @page {
+    margin: 2cm;
+  }
+}
+
 /* Webfont: Lato-Black */
 @font-face {
   font-family: 'LatoWebBlack';

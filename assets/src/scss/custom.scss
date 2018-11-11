@@ -17,14 +17,14 @@ $fontsizeCode: 18;
 $darkbg: #333333;
 
 @media print {
-  #wiki-sidebar, #head, .gutter,#user {
+  #wiki-sidebar, #head, .gutter, #user {
     display: none !important;
   }
   .markdown-body {
     width: 100% !important;
     float: none !important;
     height: inherit !important;
-    padding:10px !important;
+    padding: 10px !important;
     margin: 0 !important;
     background: #FFFFFF !important;
   }
@@ -314,6 +314,12 @@ body {
   font-size: #{$fontsizeCode}px;
   font-weight: normal;
   /*background-color: #E7E7E7;*/
+}
+
+.markdown-body pre {
+  margin: 2px 0 8px;
+  padding: 4px 8px 8px;
+  background-color: #f5f7f8
 }
 
 #head {
@@ -1416,4 +1422,44 @@ ul.info::before {
   background: url("/images/ui/i-danger.png") no-repeat center;
   padding-left: 22px !important;
   background-position-x: 2px;
+}
+
+.ct {
+  border: 1px solid black;
+  width: 100%;
+  display: block;
+  margin-bottom: -15px;
+  padding: 0px 0 0px 7px;
+  background-color: #4d4f56;
+  color: #ededed;
+  font-style: normal !important;
+  box-sizing: border-box !important;
+  border-bottom: 0;
+  text-shadow: black -1px 2px 4px;
+  text-indent: 0;
+  height: 26px;
+  line-height: 23px !important;
+  font-size: 16px;
+}
+
+.ct::before {
+  content: " ";
+  font-size: 22px;
+  margin-top: -3px;
+  -webkit-font-smoothing: antialiased;
+  margin-left: -4px;
+  font-style: normal;
+  vertical-align: middle;
+  font-weight: normal;
+  text-shadow: none;
+}
+
+.ct code {
+  background-color: transparent !important;
+  color: #e8e5b5 !important;
+  border: none !important;
+  border-bottom: hsla(0, 0%, 69%, 1) 1px dashed !important;
+  box-sizing: border-box !important;
+  padding-bottom: 0px !important;
+  font-size: inherit;
 }

@@ -518,6 +518,19 @@ module Precious
 
     def show_page_or_file(fullpath)
       wiki = wiki_new
+      # hack to allways pull the git repo
+      gitrepo = wiki.repo.git.instance_variable_get(:@repo)
+      begin
+        res = gitrepo.fetch('origin', wiki.ref)
+        origin_ref = gitrepo.branches["origin/#{wiki.ref}"]
+        # TODO: conflict is not handled
+        if res[:received_objects] > 0
+          p "there are commits ahead in origin... merging back"
+          wiki.repo.git.pull('origin', wiki.ref)
+        end
+      rescue Exception => ex
+        p "Can not fetch the latest commits from the origin"
+      end
 
       name = extract_name(fullpath) || wiki.index_page
       path = extract_path(fullpath) || '/'

@@ -8,7 +8,8 @@ function usage() {
         ${bY}-n/--name$ ${bB}<service name>
         ${bY}-r/--repo$ ${bB}<abs repo path>
         ${bY}-u/--serviceuser ${bB}<service user>
-        ${bY}-au/--autopush$ ${bB}<aut push true/false>${cZ}
+        ${bY}-au/--autopush$ ${bB}<auto push true/false>${cZ}
+        ${bY}-nb/--nobuild$ ${bB}<don't build>${cZ}
     "
     echo "\nSample:\n"
     echo "${bW}bin/add-service -n wiki-notes -r /home/existme/notes -p 8081 -au true -u existme${cz}"
@@ -19,6 +20,9 @@ while [ $# -gt 0 ]; do
     case "$1" in
         -d | --debug) # "-d" or "--debug" parameter?
             DEBUG=1
+        ;;
+        -nb | --nobuild) 
+            NOBUILD=1
         ;;
         -n | --name)
             name="$2"
@@ -76,7 +80,10 @@ elif [ ! $port ]; then
     usage;
     exit 1;
 fi
-./build.sh
+
+if [ -z "$NOBUILD" ]; then
+   ./build.sh
+fi
 [ ! $plantuml ] &&  plantuml="https://www.plantuml.com/plantuml/svg"
 
 service=$name.service
@@ -119,7 +126,7 @@ EOF"
 sudo systemctl daemon-reload
 sudo systemctl enable $service
 sudo systemctl restart $service
-sudo systemctl status $service
+sudo systemctl status $service --no-pager
 #sudo journalctl -u $service
 #sudo journalctl -f $service
 

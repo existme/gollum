@@ -50,11 +50,12 @@ Gollum::Filter::PlantUML.configure do |config|
   config.test = true
 end
 
-wiki = Gollum::Wiki.new(".")
 if ENV['GOLLUM_AUTOPUSH'] == 'true'
   Gollum::Hook.register(:post_commit, :hook_id) do |committer, sha1|
     # look at git_layer_rugged.rb
+    # wiki = Gollum::Wiki.new(".")
     # wiki.repo.git.pull('origin',wiki_options[:ref])
+    # or
     # committer.wiki.repo.git.pull('origin', committer.wiki.ref)
     # committer.wiki.repo.git.push('origin', committer.wiki.ref)
     system(gpath + '/assets/hooks/post-commit "' + Precious::App.settings.gollum_path + '"')

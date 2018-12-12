@@ -1,6 +1,5 @@
 #!/bin/zsh
 
-
 autopush=false
 function usage() {
     echo "Usage:"
@@ -110,7 +109,9 @@ Environment=GLDAP_UID="$ldapuid"
 Environment=GLDAP_FILTER="$ldapfilter"
 Environment=GLDAP_BIND_DN="$binddn"
 Environment=GLDAP_PASSWORD=$ldappass
-Environment=G_PROXY=$gproxy
+Environment=G_PROXY=$http_proxy
+Environment=http_proxy=$http_proxy
+Environment=https_proxy=$https_proxy
 Environment=GOLLUM_AUTOPUSH=$autopush
 User=$user
 ExecStart=/usr/local/bin/gollum $repo --config ${gemroot}/wiki-config.rb --port $port  --adapter rugged

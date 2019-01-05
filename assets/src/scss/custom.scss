@@ -308,7 +308,10 @@ body {
   font-weight: normal;
   font-style: normal;
 }
-
+.markdown-body pre > tt,
+.markdown-body pre > code {
+  white-space: pre-line;
+}
 .markdown-body code, .markdown-body pre, .markdown-body tt {
   font-family: #{$fontfaceCode};
   font-size: #{$fontsizeCode}px;

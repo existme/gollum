@@ -310,7 +310,7 @@ body {
 }
 .markdown-body pre > tt,
 .markdown-body pre > code {
-  white-space: pre-line;
+  white-space: pre-wrap;
 }
 .markdown-body code, .markdown-body pre, .markdown-body tt {
   font-family: #{$fontfaceCode};

@@ -38,8 +38,7 @@ const customCommands = {
             preview.focus();
           });
         }
-      }
-      else if (e.key === "S" && (e.ctrlKey || e.metaKey) && e.shiftKey) {
+      } else if (e.key === "S" && (e.ctrlKey || e.metaKey) && e.shiftKey) {
         // for some reason Control+Shift+S is not captured by the command so we handle it here
         customCommands.savequit.exec(editor.getCurrentModeEditor());
         e.preventDefault();
@@ -51,7 +50,7 @@ const customCommands = {
       const items = ev.data.dataTransfer && ev.data.dataTransfer.files;
 
       for (let file of items) {
-        if (!common.endsWithAny(['.jpg','.jpeg', '.gif', '.tiff', '.bmp', '.png', '.svg'], file.name)) {
+        if (!common.endsWithAny(['.jpg', '.jpeg', '.gif', '.tiff', '.bmp', '.png', '.svg'], file.name)) {
           console.log(file);
           let evData = ev.data;
           evData.preventDefault();
@@ -186,8 +185,7 @@ const customCommands = {
         if (mde.currentMode === 'wysiwyg') {
           const cm = mde.getCurrentModeEditor();
           console.log(cm);
-        }
-        else {
+        } else {
           const cm = mde.getCurrentModeEditor().getEditor();
           const doc = cm.getDoc();
           const range = mde.getRange();
@@ -209,10 +207,50 @@ const customCommands = {
             doc.setCursor(cursor.line, line.length);
             cm.replaceSelection('\n' + line);
             doc.setCursor(cursor.line + 1, cursor.ch);
-          }
-          else {
+          } else {
             // otherwise duplicate the selection
             doc.setCursor(cursor.line, cursor.ch);
+            cm.replaceSelection(text);
+          }
+        }
+      }
+    }
+  ),
+  toggleKeyGlyph: TuiEditor.CommandManager.command(
+    'global', { //wysiwyg
+      name: 'toggleKeyGlyph',
+      keyMap: ['CTRL+K', 'META+K'],
+      exec(mde, wwRange) {
+        if (mde.currentMode === 'wysiwyg') {
+          const cm = mde.getCurrentModeEditor();
+          console.log(cm);
+        } else {
+          const cm = mde.getCurrentModeEditor().getEditor();
+          const doc = cm.getDoc();
+          const range = mde.getRange();
+
+          let from = {
+            line: range.start.line,
+            ch: range.start.ch
+          };
+
+          let to = {
+            line: range.end.line,
+            ch: range.end.ch
+          };
+          let text = cm.getSelection();
+          const cursor = doc.getCursor();
+          if (text === "") {
+            // if nothing is selected, just insert a block
+            cm.replaceSelection('<kbd></kbd>');
+            doc.setCursor(cursor.line, cursor.ch+5);
+          } else {
+            if (text.indexOf("\<kbd\>") === -1) {
+              text = "<kbd>" + text + "</kbd>";
+            } else {
+              text = text.replace("<kbd>", "");
+              text = text.replace("</kbd>", "");
+            }
             cm.replaceSelection(text);
           }
         }

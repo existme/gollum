@@ -28,8 +28,16 @@ const editorButtonService = {
       $el: $('<div class="editor-button"><i class="fa fa-columns font-button"></i></div>')
     }, 1);
 
+    this.toolbar.addButton({
+      name: 'keycode',
+      className: 'fas fa-keyboard font-button',
+      command: 'toggleKeyGlyph',
+      tooltip: makeTooltip('Insert keyboard glyph','<kbd>Ctrl</kbd>+<kbd>k</kbd>'),
+      $el: $('<div class="editor-button"><i class="fa fa-keyboard font-button"></i></div>')
+    }, 16);
 
-    const cntCodeBlock = [
+
+    const helpContent = [
       'Keyboard shortcuts:',
       '===============================================',
       'CTRL+S ___________________ Quick Save',
@@ -42,11 +50,12 @@ const editorButtonService = {
       'ALT+` _____________________ Toggle preview style',
       'CTRL+Shift+P ______________ CodeBlock',
       'CTRL+Shift+C ______________ Code',
+      'CTRL+K ______________ Key glyph',
     ].join('\n');
 
     this.editor.eventManager.addEventType('evtHelp');
     this.editor.eventManager.listen('evtHelp', () => {
-      alert(cntCodeBlock)
+      alert(helpContent)
     });
 
     editorButtonService.setStoredPreviewStyle();
@@ -107,7 +116,8 @@ const editorButtonService = {
 
     el = this.toolbar._items.find(b => b._name === 'codeblock');
     el._tooltip = makeTooltip('Insert codeBlock','<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>p</kbd>');
-    el.$el.removeClass().addClass('fas fa-keyboard font-button');
+    el.$el.removeClass().addClass('fas fa-file-code font-button');
+
 
     editor.commandManager.addCommand(commands.insertTemplate);
     editor.commandManager.addCommand(commands.insertGlyph);
@@ -116,6 +126,7 @@ const editorButtonService = {
     editor.commandManager.addCommand(commands.togglePreviewStyle);
     editor.commandManager.addCommand(commands.quit);
     editor.commandManager.addCommand(commands.savequit);
+    editor.commandManager.addCommand(commands.toggleKeyGlyph);
     // editor.wwEditor.addKeyEventHandler(['CTRL+D','META+D'],commands.duplicate);
   },
 

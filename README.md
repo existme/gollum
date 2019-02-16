@@ -1,5 +1,20 @@
 # Gollum wiki installation
-# Gollum wiki installation
+
+## Running with docker
+
+The docker instance is built on top of `existme/gollum-base:latest`. The source of that image exists in `docker/base-image`. 
+
+To build the docker image from the source run:
+``` sh
+./docker-build.sh
+```
+
+To run the docker instance on a certain repo on a specific port run:
+``` bash
+./docker-run.sh -r <~/my/repo> -p 4545
+```
+
+After the instance is up and running, you should be able to browse to `http://localhost:4545` and edit your wiki!
 
 ## Installing Gollum
 

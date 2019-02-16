@@ -51,6 +51,7 @@ Gollum::Filter::PlantUML.configure do |config|
 end
 
 if ENV['GOLLUM_AUTOPUSH'] == 'true'
+  p '========= AUTO PUSH ENABLED ========='
   Gollum::Hook.register(:post_commit, :hook_id) do |committer, sha1|
     # look at git_layer_rugged.rb
     # wiki = Gollum::Wiki.new(".")
@@ -60,6 +61,8 @@ if ENV['GOLLUM_AUTOPUSH'] == 'true'
     # committer.wiki.repo.git.push('origin', committer.wiki.ref)
     system(gpath + '/assets/hooks/post-commit "' + Precious::App.settings.gollum_path + '"')
   end
+else
+  p '========= AUTO PUSH DISABLED ========='
 end
 
 if ENV['GOLLUM_AUTH'] == 'ldap'

@@ -1,0 +1,3 @@
+#!/bin/zsh
+
+sudo journalctl -u wiki-notes.service -f | lnav

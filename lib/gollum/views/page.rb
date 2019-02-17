@@ -3,7 +3,7 @@ module Precious
     class Page < Layout
       include HasPage
 
-      attr_reader :content, :page, :header, :footer
+      attr_reader :content, :page, :header, :footer, :tree
       DATE_FORMAT    = "%Y-%m-%d %H:%M:%S"
       DEFAULT_AUTHOR = 'you'
       @@to_xml       = { :save_with => Nokogiri::XML::Node::SaveOptions::DEFAULT_XHTML ^ 1, :indent => 0, :encoding => 'UTF-8' }
@@ -95,6 +95,14 @@ module Precious
         @bar_side.to_s
       end
 
+      def tree
+        if @tree
+          @tree
+        else
+          @tree=Gollum::Macro::TraverseMacro.new(@page.wiki ,@page).render()
+          @tree
+        end
+      end
       def has_sidebar
         if @sidebar
           @sidebar.formatted_data.strip.empty? ? false : true

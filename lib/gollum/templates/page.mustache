@@ -48,27 +48,25 @@
         </ul>
     </div>
     <div id="wiki-content">
-        <div class="{{#has_header}}has-header{{/has_header}}{{#has_footer}} has-footer{{/has_footer}}{{#has_sidebar}} has-sidebar has-{{bar_side}}bar{{/has_sidebar}}{{#has_toc}} has-toc{{/has_toc}}">
+        <div class="{{#has_header}}has-header{{/has_header}}{{#has_footer}} has-footer{{/has_footer}} reza has-sidebar has-{{bar_side}}bar{{#has_toc}} has-toc{{/has_toc}}">
             {{#has_toc}}
                 <div id="wiki-toc-main">
                     {{{toc_content}}}
                 </div>
             {{/has_toc}}
             <div class="split">
-                {{#has_sidebar}}
-                    <div id="wiki-sidebar" class="gollum-{{sidebar_format}}-content split split-horizontal">
-                        <div id="sidebar-filter">
-                            <label><i class="fas fa-filter"></i></label>
-                            <input id="treeFilter" name="treeFilter" placeholder="Fuzzy node filter..." autocomplete="off">
-                            <button id="btnResetSearch"><i class="fas fa-eraser"></i></button>
-                            <span id="matches"></span>
-                        </div>
-                        <div id="filter-divider"></div>
-                        <div id="sidebar-content">
-                            {{{sidebar_content}}}
-                        </div>
+                <div id="wiki-sidebar" class="gollum-html-content split split-horizontal">
+                    <div id="sidebar-filter">
+                        <label><i class="fas fa-filter"></i></label>
+                        <input id="treeFilter" name="treeFilter" placeholder="Fuzzy node filter..." autocomplete="off">
+                        <button id="btnResetSearch"><i class="fas fa-eraser"></i></button>
+                        <span id="matches"></span>
                     </div>
-                {{/has_sidebar}}
+                    <div id="filter-divider"></div>
+                    <div id="sidebar-content">
+                        {{{tree}}}
+                    </div>
+                </div>
                 <!--<div id="wiki-body" class="gollum-{{format}}-content">-->
                 <div class="markdown-body split split-horizontal" id="cc1" tabindex="2">
                     {{#has_header}}

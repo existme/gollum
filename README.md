@@ -2,6 +2,14 @@
 
 ## Running with docker
 
+### **If you want to use this wiki without cloning the source:**
+``` bash
+docker run --mount type=bind,source="~/my/repo",target=/repo \
+            -p 127.0.0.1:<myport>:80 -it existme/gollum:0.1
+```
+Then you can browse your wiki at `http://localhost:<myport>`
+
+### **Building the docker image yourself**
 The docker instance is built on top of `existme/gollum-base:latest`. The source of that image exists in `docker/base-image`. 
 
 To build the docker image from the source run:

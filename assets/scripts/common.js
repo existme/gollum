@@ -100,6 +100,15 @@ const service = {
     }
     return dest;
   },
+  editorGetCursor: function (editor) {
+    const mde = editor.getCurrentModeEditor();
+    const cm = mde.getEditor();
+    if (!editor.isWysiwygMode()) {
+      const doc = cm.getDoc();
+      return doc.getCursor();
+    }
+    return null;
+  },
   editorGetSelection: function (editor) {
     const mde = editor.getCurrentModeEditor();
     const cm = mde.getEditor();
@@ -107,12 +116,12 @@ const service = {
       const doc = cm.getDoc();
 
       let enter = "";
-      let cursor=doc.getCursor();
-      let line=doc.getLine(cursor.line);
-      if(line.length!==0 && cursor.ch!==0){
+      let cursor = doc.getCursor();
+      let line = doc.getLine(cursor.line);
+      if (line.length !== 0 && cursor.ch !== 0) {
         enter = "\n";
       }
-      return doc.getSelection()+enter;
+      return doc.getSelection() + enter;
     }
     return "not implemented"
   },
@@ -145,8 +154,7 @@ const service = {
         ch: cursor.ch + cEnd
       };
       doc.setSelection(from, to);
-    }
-    else {
+    } else {
       // wysiwyg mode
       const range = cm.getSelection().cloneRange();
       // let attr = `${CODEBLOCK_ATTR_NAME} class = "${CODEBLOCK_CLASS_PREFIX}${codeBlockID}"`;

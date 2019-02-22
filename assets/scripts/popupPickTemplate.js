@@ -29,6 +29,7 @@ function initUI(editor) {
     '  <option value="java">Java Block</option>\n' +
     '  <option value="js">JavaScript Block</option>\n' +
     '  <option value="json">json Block</option>\n' +
+    '  <option value="python">Python Block</option>\n' +
     '  <option value="picture">Picture Template</option>\n' +
     '  <option value="link">Link Template</option>\n' +
     '  <option value="ref">Reference Template</option>\n' +
@@ -71,6 +72,8 @@ function initUI(editor) {
     let text;
     let lMove = 0, cStart = 0, cEnd = 0;
     let val = listBox.val();
+    let cursor = common.editorGetCursor(editor);
+
     switch (val) {
       case "author":
         text = `Written by: _${author}_ `;
@@ -86,11 +89,12 @@ function initUI(editor) {
       case "sh":
       case "json":
       case "js":
+      case "python":
       case "java":
         let selection = common.editorGetSelection(editor);
         text = "``` " + val + "\n" +
           selection +
-          "```\n";
+          " ".repeat(cursor.ch) + "```\n";
         lMove = -2;
         break;
       case "picture":
@@ -108,15 +112,13 @@ function initUI(editor) {
     }
     common.editorReplace(editor, text, lMove, cStart, cEnd);
     popup.hide();
-    // alert(listBox.val());
   }
 
   popup.$el.keydown(function (e) {
     if (e.which === 13) {
       e.preventDefault();
       handleSelect();
-    }
-    else if (e.which === 27) {
+    } else if (e.which === 27) {
       e.preventDefault();
       popup.hide();
       editor.focus();

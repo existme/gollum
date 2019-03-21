@@ -3,6 +3,7 @@ gpath = File.expand_path('..', __FILE__)
 $LOAD_PATH.unshift gpath
 require 'gollum/app'
 require 'sinatra/base'
+require 'commonmarker'
 load 'assets/rb/plant-filter.rb'
 load 'assets/rb/attribute-filter.rb'
 load 'assets/rb/tasklist-filter.rb'
@@ -35,6 +36,12 @@ wiki_options = {
     latest_changes_count: 500,
     # :filter_chain => [ :PlantUML2, :Metadata, :PlainText, :TOC, :RemoteCode, :Code, :Macro, :Emoji, :Sanitize, :WSD, :PlantUML, :Tags, :Render ]
     filter_chain: %i[Metadata PlainText TOC PlantUML2 Code Macro PlantUML Emoji TaskListFilter AttributeFilter Render]
+}
+
+# Allowing unsafe on commonmarker to let custom html tags appear
+# Also hard breaks allows to have normal enters
+GitHub::Markup::Markdown::MARKDOWN_GEMS['commonmarker'] = proc { |content|
+  CommonMarker.render_html(content, [:GITHUB_PRE_LANG, :UNSAFE, :HARDBREAKS], [:tagfilter, :autolink, :table, :strikethrough])
 }
 
 Precious::App.set(:wiki_options, wiki_options)

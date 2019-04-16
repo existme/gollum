@@ -99,7 +99,7 @@ if ENV['GOLLUM_AUTH'] == 'ldap'
                  :password => ENV['GLDAP_PASSWORD']
       end,
       :dummy_auth => false,
-      :protected_routes => ['/*'],
+      :protected_routes => ['/edit/*'],
       # :author_format => Proc.new { |user| raise user.inspect },
       :author_email => Proc.new {|user| user.email},
       :authorized_users => nil

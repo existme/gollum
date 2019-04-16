@@ -1467,3 +1467,7 @@ ul.info::before {
   padding-bottom: 0px !important;
   font-size: inherit;
 }
+
+.ct + br {
+  display: none !important;
+}

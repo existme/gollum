@@ -9,6 +9,7 @@ function usage() {
         ${bY}-u/--serviceuser ${bB}<service user>
         ${bY}-au/--autopush$ ${bB}<auto push true/false>${cZ}
         ${bY}-nb/--nobuild$ ${bB}<don't build>${cZ}
+        ${bY}-gs/--gitsource$ ${bB}<source of git pages include variable PATH>${cZ}
     "
     echo "\nSample:\n"
     echo "${bW}bin/add-service -n wiki-notes -r /home/existme/notes -p 8081 -au true -u existme${cz}"
@@ -46,6 +47,11 @@ while [ $# -gt 0 ]; do
         -u | --serviceuser)
             user="$2"
             echo "${bG}--serviceuser:${cZ} $2"
+            shift
+        ;;
+        -gs | --gitsource)
+            git_source="$2"
+            echo "${bG}--gitsource:${cZ} $2"
             shift
         ;;
         -r | --repo)
@@ -112,6 +118,7 @@ Environment=GLDAP_PASSWORD=$ldappass
 Environment=G_PROXY=$http_proxy
 Environment=http_proxy=$http_proxy
 Environment=https_proxy=$https_proxy
+Environment=GIT_SOURCE=$git_source
 Environment=GOLLUM_AUTOPUSH=$autopush
 User=$user
 ExecStart=/usr/local/bin/gollum $repo --config ${gemroot}/wiki-config.rb --port $port  --adapter rugged

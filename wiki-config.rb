@@ -11,6 +11,7 @@ load 'assets/rb/traverse.rb'
 load 'assets/rb/extended-endpoints.rb'
 
 plantuml_srv = ENV['PLANTUML_SRV']
+git_source = ENV['GIT_SOURCE']
 
 if (plantuml_srv == nil)
   plantuml_srv = 'http://www.plantuml.com/plantuml/png'
@@ -19,7 +20,7 @@ end
 p 'Starting up gollum-custom-template'
 p '=================================='
 p "Using PlantUML server [PLANTUML_SRV]: #{plantuml_srv}"
-
+p "Using gitsource pattern [GIT_SOURCE]: #{git_source}"
 wiki_options = {
     allow_uploads: true,
     per_page_uploads: true,
@@ -35,7 +36,8 @@ wiki_options = {
     show_all: true,
     latest_changes_count: 500,
     # :filter_chain => [ :PlantUML2, :Metadata, :PlainText, :TOC, :RemoteCode, :Code, :Macro, :Emoji, :Sanitize, :WSD, :PlantUML, :Tags, :Render ]
-    filter_chain: %i[Metadata PlainText TOC PlantUML2 Code Macro PlantUML Emoji TaskListFilter AttributeFilter Render]
+    filter_chain: %i[Metadata PlainText TOC PlantUML2 Code Macro PlantUML Emoji TaskListFilter AttributeFilter Render],
+    git_source: git_source
 }
 
 # Allowing unsafe on commonmarker to let custom html tags appear

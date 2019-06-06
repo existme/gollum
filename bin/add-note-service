@@ -1,12 +1,12 @@
 #!/bin/zsh
 
 echo "${cy}Setting-up note service${cz}"
-bin/add-service -n wiki-notes -r /home/$USER/notes -p 8091 -au true -u $USER 
+bin/add-service -n wiki-notes -r /home/$USER/notes -p 8091 -au true -u $USER -gs https://github.com/existme/notes/blob/master/PATH
 sudo systemctl restart wiki-notes.service
 sudo journalctl -e -u wiki-notes.service -n 50 --no-pager
 
 echo "${cy}Setting-up private note service${cz}"
-bin/add-service -n wiki-private -r /home/$USER/git/privatewiki -p 8090 -au true -u $USER -nb
+bin/add-service -n wiki-private -r /home/$USER/git/privatewiki -p 8090 -au true -u $USER -nb -gs https://gitlab.com/existme/privatewiki/blob/master/PATH
 sudo systemctl restart wiki-private.service
 sudo journalctl -e -u wiki-private.service -n 50 --no-pager
 

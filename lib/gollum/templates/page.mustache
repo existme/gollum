@@ -39,6 +39,9 @@
                                               class="action-edit-page"><i class="fas fa-pen-nib mini-icon-2"></i>Edit</a></li>
                 {{/editable}}
             {{/allow_editing}}
+            {{#git_path}}
+                <li class="minibutton"><a href="{{git_path}}" class="action-home-page"><i class="fab fa-github mini-icon-2"></i>Source</a></li>
+            {{/git_path}}
             {{#page_exists}}
                 <li class="minibutton"><a href="{{base_url}}/history/{{escaped_url_path}}"
                                           class="action-page-history"><i class="fas fa-history mini-icon-2"></i>History</a></li>

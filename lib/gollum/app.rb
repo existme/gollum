@@ -530,6 +530,8 @@ module Precious
         end
       rescue Exception => ex
         p "Can not fetch the latest commits from the origin"
+        p "Make sure git origin is using https and not ssh"
+        p ex.inspect
       end
 
       name = extract_name(fullpath) || wiki.index_page

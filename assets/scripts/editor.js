@@ -133,5 +133,6 @@ commands.init(editor);
 
 $(document).ready(function () {
   editor.focus();
+  editor.getCodeMirror().options.tabSize = 3;
   urlPaste.initUI(editor);
 });

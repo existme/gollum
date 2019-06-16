@@ -31,6 +31,9 @@ function initUI(editor) {
     '  <option value="json">json Block</option>\n' +
     '  <option value="python">Python Block</option>\n' +
     '  <option value="picture">Picture Template</option>\n' +
+    '  <option value="titlefont1">Title Font 1: \'Grudge BRK\'</option>\n' +
+    '  <option value="titlefont2">Title Font 2: \'Hillock BRK\'</option>\n' +
+    '  <option value="titlefont3">Title Font 3: \'DirtyBakersDozen\'</option>\n' +
     '  <option value="link">Link Template</option>\n' +
     '  <option value="ref">Reference Template</option>\n' +
     '  <option value="date">Date</option>\n' +
@@ -96,6 +99,16 @@ function initUI(editor) {
           selection +
           " ".repeat(cursor.ch) + "```\n";
         lMove = -2;
+        break;
+      case "titlefont1":
+      case "titlefont2":
+      case "titlefont3":
+      case "titlefont_all":
+        let num = val.charAt(val.length - 1);
+        let textToChangeFont = common.editorGetSelection(editor, true).trim();
+        text = `_${textToChangeFont}_{.f${num}}`;
+        cStart = -textToChangeFont.length - 6;
+        cEnd = -6;
         break;
       case "picture":
         text = "![Title](/img/pic.png#3dt)";

@@ -40,6 +40,56 @@ $darkbg: #333333;
   }
 }
 
+// Grudge BRK converted using https://onlinefontconverter.com/
+@font-face {
+  font-family: 'Grudge BRK';
+  src: url('/fonts/Grudge BRK.eot');
+  src: url('/fonts/Grudge BRK.eot?#iefix') format('embedded-opentype'),
+  url('/fonts/Grudge BRK.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'GrudgeBRK';
+  src: url('/fonts/GrudgeBRK.svg#GrudgeBRK') format('svg'),
+  url('/fonts/GrudgeBRK.ttf') format('truetype'),
+  url('/fonts/GrudgeBRK.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+// HillockBRK converted using https://onlinefontconverter.com/
+@font-face {
+  font-family: 'Hillock BRK';
+  src: url('hillock.eot');
+  src: url('hillock.eot?#iefix') format('embedded-opentype'),
+  url('hillock.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'HillockBRK';
+  src: url('HillockBRK.svg#HillockBRK') format('svg'),
+  url('HillockBRK.ttf') format('truetype'),
+  url('HillockBRK.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+// DirtyBakersDozen converted using https://onlinefontconverter.com/
+@font-face {
+  font-family: 'DirtyBakersDozen';
+  src: url('DirtyBakersDozen.eot');
+  src: url('DirtyBakersDozen.eot?#iefix') format('embedded-opentype'),
+  url('DirtyBakersDozen.svg#DirtyBakersDozen') format('svg'),
+  url('DirtyBakersDozen.ttf') format('truetype'),
+  url('DirtyBakersDozen.woff') format('woff'),
+  url('DirtyBakersDozen.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 /* Webfont: Lato-Black */
 @font-face {
   font-family: 'LatoWebBlack';
@@ -287,6 +337,8 @@ $darkbg: #333333;
   font-weight: #{$fweight6};
   src: url('/fonts/RobotoMono-Bold.woff') format('woff');
 }
+
+
 
 body {
   font-smoothing: subpixel-antialiased !important;
@@ -1390,6 +1442,28 @@ ul.info::before {
   margin-top: 0px;
 }
 
+// Other good ones:
+//  American Participants
+//  Embossing Tape 3 BRK
+//  Strenuous
+
+.f1 {
+  font-family:  "Hillock BRK";
+}
+
+.f2 {
+  font-family:  "DirtyBakersDozen";
+  font-weight: bolder;
+}
+
+.f3 {
+  font-family:  "Grudge BRK";
+}
+
+.f1, .f2, .f3 {
+  font-style: normal !important;
+  font-size: larger;
+}
 .info.ok {
   border-color: #91c89c;
   background-color: #f3f9f4;

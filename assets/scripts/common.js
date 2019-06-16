@@ -109,7 +109,7 @@ const service = {
     }
     return null;
   },
-  editorGetSelection: function (editor) {
+  editorGetSelection: function (editor, noenter) {
     const mde = editor.getCurrentModeEditor();
     const cm = mde.getEditor();
     if (!editor.isWysiwygMode()) {
@@ -118,7 +118,7 @@ const service = {
       let enter = "";
       let cursor = doc.getCursor();
       let line = doc.getLine(cursor.line);
-      if (line.length !== 0 && cursor.ch !== 0) {
+      if (noenter !== true && line.length !== 0 && cursor.ch !== 0) {
         enter = "\n";
       }
       return doc.getSelection() + enter;

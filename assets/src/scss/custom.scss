@@ -61,17 +61,17 @@ $darkbg: #333333;
 // HillockBRK converted using https://onlinefontconverter.com/
 @font-face {
   font-family: 'Hillock BRK';
-  src: url('hillock.eot');
-  src: url('hillock.eot?#iefix') format('embedded-opentype'),
-  url('hillock.woff2') format('woff2');
+  src: url('/fonts/hillock.eot');
+  src: url('/fonts/hillock.eot?#iefix') format('embedded-opentype'),
+  url('/fonts/hillock.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: 'HillockBRK';
-  src: url('HillockBRK.svg#HillockBRK') format('svg'),
-  url('HillockBRK.ttf') format('truetype'),
-  url('HillockBRK.woff') format('woff');
+  src: url('/fonts/HillockBRK.svg#HillockBRK') format('svg'),
+  url('/fonts/HillockBRK.ttf') format('truetype'),
+  url('/fonts/HillockBRK.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -79,12 +79,12 @@ $darkbg: #333333;
 // DirtyBakersDozen converted using https://onlinefontconverter.com/
 @font-face {
   font-family: 'DirtyBakersDozen';
-  src: url('DirtyBakersDozen.eot');
-  src: url('DirtyBakersDozen.eot?#iefix') format('embedded-opentype'),
-  url('DirtyBakersDozen.svg#DirtyBakersDozen') format('svg'),
-  url('DirtyBakersDozen.ttf') format('truetype'),
-  url('DirtyBakersDozen.woff') format('woff'),
-  url('DirtyBakersDozen.woff2') format('woff2');
+  src: url('/fonts/DirtyBakersDozen.eot');
+  src: url('/fonts/DirtyBakersDozen.eot?#iefix') format('embedded-opentype'),
+  url('/fonts/DirtyBakersDozen.svg#DirtyBakersDozen') format('svg'),
+  url('/fonts/DirtyBakersDozen.ttf') format('truetype'),
+  url('/fonts/DirtyBakersDozen.woff') format('woff'),
+  url('/fonts/DirtyBakersDozen.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
 }

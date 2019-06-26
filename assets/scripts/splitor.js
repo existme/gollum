@@ -24,7 +24,7 @@ function splitWidthConfig() {
   }
 }
 
-var split = Splitor(['#wiki-sidebar', '#cc1'], {
+var split = Splitor.default(['#wiki-sidebar', '#cc1'], {
   direction: 'horizontal',
   sizes: sizes,
   minSize: [0, 500],

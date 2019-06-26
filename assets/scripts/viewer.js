@@ -40,8 +40,8 @@ function scrollToNode(activeNode) {
   t.options.scrollParent = $('#sidebar-content');
   let n = t.getNodeByKey(activeNode);
   if (n != null) {
-    n.setActive();
     n.selected = true;
+    n.setActive();
     n.scrollIntoView(false);
   }
 }
@@ -85,10 +85,8 @@ $("#tree").fancytree({
     }
   },
 
-  loadChildren: function () {
-    scrollToNode(activeNode);
-  },
   init: function () {
+    scrollToNode(activeNode);
   },
   keydown: function (event, data) {
     switch (event.which) {

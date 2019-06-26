@@ -132,7 +132,9 @@ setNightMode(localStorage.getItem('nightmode') === "true"?"true":"false");
 commands.init(editor);
 
 $(document).ready(function () {
+  const mdc = $('#mdContent');
   editor.focus();
   editor.getCodeMirror().options.tabSize = 3;
+  editor.getCodeMirror().setValue(mdc.val());
   urlPaste.initUI(editor);
 });

@@ -37,7 +37,7 @@
     "build:css-bundle": "node-sass --output-style compressed assets/src/scss/bundle.scss > lib/gollum/public/gollum/assets/scripts/bundle.css",
     "build:css-bundle2": "node-sass --output-style compressed assets/src/scss/editor-bundle.scss > lib/gollum/public/gollum/assets/scripts/editor-bundle.css",
     "build:copy-files": "mkdir -p lib/gollum/public/gollum/assets/webfonts && cp node_modules/@fortawesome/fontawesome-free/webfonts/* lib/gollum/public/gollum/assets/webfonts && cp ./node_modules/tui-editor/dist/tui-editor.png lib/gollum/public/gollum/assets/scripts/",
-    "build:dev": "npm run build:copy-files && npm run build:css-tui && npm run build:css-custom && npm run build:css-bundle && npm run build:css-bundle2 && npm run build:js-dev",
+    "build:dev": "npm rebuild node-sass && npm run build:copy-files && npm run build:css-tui && npm run build:css-custom && npm run build:css-bundle && npm run build:css-bundle2 && npm run build:js-dev",
     "build:devq": "( npm run build:copy-files && npm run build:css-tui && npm run build:css-custom && npm run build:css-bundle && npm run build:css-bundle2 && npm run build:js-dev ) >/dev/null 2>&1",
     "build:prod": "npm run build:copy-files && npm run build:css-tui && npm run build:css-custom && npm run build:css-bundle && npm run build:css-bundle2 && npm run build:js-prod"
   },

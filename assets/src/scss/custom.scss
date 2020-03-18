@@ -1519,6 +1519,15 @@ ul.info::before {
   font-size: 16px;
 }
 
+.farsi {
+  direction: rtl;
+  text-align: right;
+}
+
+.farsi ul {
+  margin-right: 41px;
+}
+
 .ct::before {
   content: " ";
   font-size: 22px;

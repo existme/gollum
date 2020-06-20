@@ -12,6 +12,7 @@ load 'assets/rb/extended-endpoints.rb'
 
 plantuml_srv = ENV['PLANTUML_SRV']
 git_source = ENV['GIT_SOURCE']
+proxy = ENV['https_proxy']
 
 if (plantuml_srv == nil)
   plantuml_srv = 'http://www.plantuml.com/plantuml/png'
@@ -21,6 +22,7 @@ p 'Starting up gollum-custom-template'
 p '=================================='
 p "Using PlantUML server [PLANTUML_SRV]: #{plantuml_srv}"
 p "Using gitsource pattern [GIT_SOURCE]: #{git_source}"
+p "Proxy: #{proxy}"
 wiki_options = {
     allow_uploads: true,
     per_page_uploads: true,

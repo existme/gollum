@@ -154,3 +154,15 @@ Gollum is using an old version of jQuery (1.7.2) which is locate in `/var/lib/ge
 
 # ToastUI editor configuration
 ToastUI editor configuration is located in: 'assets/scripts/editor.js'
+
+# Trouble shootings
+
+- Make sure you have the right environment: `nvm use v13.5.0`
+- Make sure webpack is working properly:  `webpack --env dev --progress --profile --colors`
+- Make sure bundler works properly:
+   ``` sh
+   sudo -H gem install bundler
+   bundle update --bundler
+   sudo -H bundle update
+   ```
+- Try running with `bundle exec bin/gollum --config wiki-config.rb ~/git/privatewiki --port 8090  --adapter rugged`
